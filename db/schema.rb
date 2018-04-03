@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403110841) do
+ActiveRecord::Schema.define(version: 20180403205019) do
 
   create_table "matches", force: :cascade do |t|
     t.boolean "prolongations"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "pseudo"
+    t.integer "points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -25,7 +32,9 @@ ActiveRecord::Schema.define(version: 20180403110841) do
     t.integer "match_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "player_id"
     t.index ["match_id"], name: "index_teams_on_match_id"
+    t.index ["player_id"], name: "index_teams_on_player_id"
   end
 
 end

@@ -25,8 +25,8 @@ class MatchesController < ApplicationController
 
   def show
     @match = Match.find(params[:id])
-#    @home_team = Team.where(match_id = params[:id]).first
-#    @visiting_team = Team.where(match_id = params[:id]).last
+    @home_team = Match.find(params[:id]).teams.first
+    @visiting_team = Match.find(params[:id]).teams.last
   end
 
   def destroy
@@ -38,7 +38,6 @@ class MatchesController < ApplicationController
   private
   def match_params
     params.require(:match).permit(:id, :prolongations,
-      home_team_attributes: [:id, :score, :name, :match_id],
-      visiting_team_attributes: [:id, :score, :name, :match_id])
+      teams_attributes: [:id, :score, :name, :match_id])
   end
 end

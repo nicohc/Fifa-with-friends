@@ -21,15 +21,14 @@
     <% @matches.each do |match| %>
       <tr>
         <td><%= match.id %></td>
-        <td><%= match.home_team.name %> </td>
-        <td><%= match.home_team.score %></td>
-        <td><%= match.visiting_team.score %></td>
-        <td><%= match.visiting_team.name %> </td>
+        <td><%= match.teams.first.name %> </td>
+        <td><%= match.teams.first.score %></td>
+        <td><%= match.teams.last.score %></td>
+        <td><%= match.teams.last.name %> </td>
         <td><%= match.prolongations ? "Prolongations" : "" %>
         <td><%= link_to "Détails", match_path(match)%></td>
-<!--        <td><%= link_to 'Supprimer', match, method: :delete ,
+        <td><%= link_to 'Supprimer', match, method: :delete ,
                 data: { confirm: 'Etes vous sur ?' }%></td>
--->
       </tr>
     <% end %>
   <% end %>
