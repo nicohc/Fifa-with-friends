@@ -1,0 +1,39 @@
+<h1>Matches#new</h1>
+<p>Find me in app/views/matches/new.html.erb</p>
+
+
+<%= form_for(@match) do |f| %>
+  <%= render 'shared/error_new_match', object: @match %>
+  <%= f.fields_for :home_team, Team.new do |ht| %>
+    <div>
+      <%= ht.label :"Nom de l'équipe 1" %>
+      <%= ht.text_field :name, class: 'form-control'%>
+    </div>
+    <div>
+      <%= ht.label :"Score de l'équipe" %>
+      <%= ht.number_field :score, class: 'form-control'%>
+    </div>
+  <% end %>
+
+  <br>
+  <%= f.fields_for :visiting_team, Team.new do |vt| %>
+    <div>
+      <%= vt.label :"Nom de l'équipe 2" %>
+      <%= vt.text_field :name, class: 'form-control'%>
+    </div>
+    <div>
+      <%= vt.label :"Score de l'équipe" %>
+      <%= vt.number_field :score, class: 'form-control' %>
+    </div>
+  <% end %>
+  <br>
+
+  <%= f.check_box :prolongations, class: 'form-control' %>
+  <%= f.label :"Prolongations" %>
+  <br><br>
+
+  <%= f.submit "Valider", class: "btn btn-primary" %>
+<% end %>
+
+<br><br>
+<%= link_to "Accueil", root_path %>

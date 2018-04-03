@@ -1,0 +1,36 @@
+<h1>Home#index</h1>
+
+<%= link_to "Nouveau match", new_match_path %>
+
+<p> Liste des matchs créés </p>
+
+
+<table>
+  <tr>
+    <th>ID du match</th>
+    <th>Team 1</th>
+    <th>Score t1</th>
+    <th>Score t2</th>
+    <th>Team 2</th>
+    <th>Prolongations</th>
+  </tr>
+  <br>
+  <% if @matches.count == 0 %>
+    <tr> <td> Pas de match enregistré </td> </tr>
+  <% else %>
+    <% @matches.each do |match| %>
+      <tr>
+        <td><%= match.id %></td>
+        <td><%= match.home_team.name %> </td>
+        <td><%= match.home_team.score %></td>
+        <td><%= match.visiting_team.score %></td>
+        <td><%= match.visiting_team.name %> </td>
+        <td><%= match.prolongations ? "Prolongations" : "" %>
+        <td><%= link_to "Détails", match_path(match)%></td>
+<!--        <td><%= link_to 'Supprimer', match, method: :delete ,
+                data: { confirm: 'Etes vous sur ?' }%></td>
+-->
+      </tr>
+    <% end %>
+  <% end %>
+</table>

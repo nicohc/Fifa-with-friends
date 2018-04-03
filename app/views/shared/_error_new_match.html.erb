@@ -1,0 +1,12 @@
+<% if @match.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      Le formulaire contient <%= pluralize(@match.errors.count, "error") %>.
+    </div>
+    <ul>
+    <% @match.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
