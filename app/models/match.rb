@@ -12,7 +12,6 @@ class Match < ApplicationRecord
     :reject_if     => :all_blank
 
   has_many :players, :through => :teams
-  accepts_nested_attributes_for :teams,
-      :allow_destroy => true
+  accepts_nested_attributes_for :players
 
 end

@@ -1,0 +1,16 @@
+<p> Créer un nouveau joueur </p>
+
+<%= form_for(@player) do |f| %>
+
+  <div class="field">
+    <%= f.label :Pseudo %>
+    <%= f.text_field :pseudo %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<%= link_to "Accueil", root_path %>

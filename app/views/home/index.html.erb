@@ -1,6 +1,8 @@
 <h1>Home#index</h1>
 
 <%= link_to "Nouveau match", new_match_path %>
+<br>
+<%= link_to "Nouveau Joueur", new_player_path %>
 
 <p> Liste des matchs créés </p>
 
@@ -8,10 +10,14 @@
 <table>
   <tr>
     <th>ID du match</th>
+    <th>Joueur 1</th>
     <th>Team 1</th>
     <th>Score t1</th>
+    <th>Score penalties1</th>
+    <th>Score penalties2</th>
     <th>Score t2</th>
     <th>Team 2</th>
+    <th>Joueur 2</th>
     <th>Prolongations</th>
   </tr>
   <br>
@@ -19,17 +25,33 @@
     <tr> <td> Pas de match enregistré </td> </tr>
   <% else %>
     <% @matches.each do |match| %>
+      <% if match.teams.empty? %>
       <tr>
         <td><%= match.id %></td>
+        <td>....</td>
+        <td>....</td>
+        <td>....</td>
+        <td>....</td>
+        <td>....</td>
+      </tr>
+      <% else %>
+      <tr>
+        <td><%= match.id %></td>
+        <td><%= match.teams.first.player_id %> </td>
         <td><%= match.teams.first.name %> </td>
         <td><%= match.teams.first.score %></td>
+        <td><%= match.teams.first.prol_score %></td>
+        <td><%= match.teams.last.prol_score %></td>
         <td><%= match.teams.last.score %></td>
         <td><%= match.teams.last.name %> </td>
+        <td><%= match.teams.last.player_id %> </td>
+
         <td><%= match.prolongations ? "Prolongations" : "" %>
         <td><%= link_to "Détails", match_path(match)%></td>
         <td><%= link_to 'Supprimer', match, method: :delete ,
                 data: { confirm: 'Etes vous sur ?' }%></td>
       </tr>
+      <% end %>
     <% end %>
   <% end %>
 </table>

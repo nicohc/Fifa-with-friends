@@ -4,28 +4,26 @@
 
 <%= form_for(@match) do |f| %>
   <%= render 'shared/error_new_match', object: @match %>
-  <%= f.fields_for :home_team, Team.new do |ht| %>
+  <%= f.fields_for :teams do |t| %>
     <div>
-      <%= ht.label :"Nom de l'équipe 1" %>
-      <%= ht.text_field :name, class: 'form-control'%>
+      <%= t.label :"Joueur" %>
+      <%= t.collection_select :player_id, Player.all, :id, :pseudo, class: 'form-control' %>
     </div>
     <div>
-      <%= ht.label :"Score de l'équipe" %>
-      <%= ht.number_field :score, class: 'form-control'%>
+      <%= t.label :"Nom de l'équipe" %>
+      <%= t.text_field :name, class: 'form-control'%>
     </div>
+    <div>
+      <%= t.label :"Score de l'équipe" %>
+      <%= t.number_field :score, class: 'form-control'%>
+    </div>
+    <div>
+      <%= t.label :"Score penalties" %>
+      <%= t.number_field :prol_score, class: 'form-control'%>
+    </div>
+    <br>
   <% end %>
 
-  <br>
-  <%= f.fields_for :visiting_team, Team.new do |vt| %>
-    <div>
-      <%= vt.label :"Nom de l'équipe 2" %>
-      <%= vt.text_field :name, class: 'form-control'%>
-    </div>
-    <div>
-      <%= vt.label :"Score de l'équipe" %>
-      <%= vt.number_field :score, class: 'form-control' %>
-    </div>
-  <% end %>
   <br>
 
   <%= f.check_box :prolongations, class: 'form-control' %>

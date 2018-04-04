@@ -1,14 +1,13 @@
 class MatchesController < ApplicationController
   def new
     @match = Match.new
-    @match.build_home_team
-    @match.build_visiting_team
+    2.times do
+      team = @match.teams.build
+    end
   end
 
   def create
     @match = Match.new(match_params)
-    @match.home_team.save
-    @match.visiting_team.save
 
       if @match.save
         flash[:success] = "Votre match a bien été créé !"
@@ -38,6 +37,6 @@ class MatchesController < ApplicationController
   private
   def match_params
     params.require(:match).permit(:id, :prolongations,
-      teams_attributes: [:id, :score, :name, :match_id])
+      teams_attributes: [:id, :score, :prol_score, :name, :match_id, :player_id])
   end
 end
