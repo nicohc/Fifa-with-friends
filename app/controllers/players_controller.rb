@@ -5,6 +5,7 @@ class PlayersController < ApplicationController
 
   def create
     @player = Player.new(players_params)
+    @player.points = 0
     if @player.save
       redirect_to @player
     else
@@ -14,7 +15,7 @@ class PlayersController < ApplicationController
 
   def edit
   end
-  
+
   def show
     @player = Player.find(params[:id])
     @teams = Team.all
