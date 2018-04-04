@@ -29,7 +29,7 @@ class PlayersController < ApplicationController
 
   private
   def players_params
-      params.require(:player).permit(:pseudo)
+      params.require(:player).permit(:pseudo, :points)
   end
 
 
