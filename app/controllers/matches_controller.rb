@@ -64,42 +64,11 @@ class MatchesController < ApplicationController
     @match = Match.find(params[:id])
     @playerone = Player.find(@match.teams.first.player_id)
     @playertwo = Player.find(@match.teams.last.player_id)
+    @home_team_old_score = @match.teams.first.score
+    @visiting_team_old_score = @match.teams.last.score
+    @match_prol_old = @match.prolongations
 
-    if ((@match.teams.first.score > @match.teams.last.score) && !@match.prolongations)
-        @playerone.points -= 3
-        p "Retrait points J1 a gagné"
-        @playerone.save
-    elsif ((@match.teams.first.score < @match.teams.last.score) && !@match.prolongations)
-        @playertwo.points -= 3
-        p "Retrait points J2 a gagné"
-        @playertwo.save
-
-    elsif @match.prolongations && (@match.teams.first.score > @match.teams.last.score)
-        @playerone.points -= 2
-        p "Retrait points : J1 a gagné après prolongations"
-        @playerone.save
-    elsif @match.prolongations && (@match.teams.first.score < @match.teams.last.score)
-        @playertwo.points -= 2
-        flash[:notice] = "Retrait points : J2 a gagné après prolongations"
-        @playertwo.save
-
-    elsif @match.prolongations && (@match.teams.first.score = @match.teams.last.score) && (@match.teams.first.prol_score > @match.teams.last.prol_score)
-        @playerone.points -= 1
-        @playerone.save
-        flash[:notice] = "Retrait points : J1 a gagné aux tirs au buts."
-    elsif @match.prolongations && (@match.teams.first.score = @match.teams.last.score) && (@match.teams.first.prol_score < @match.teams.last.prol_score)
-        @playertwo.points -= 1
-        flash[:notice] = "Retrait points : J2 a gagné aux tirs au buts."
-        @playertwo.save
-    else
-        p "Autre chose"
-    end
-
-    if (@match.teams.first.player_id = @match.teams.last.player_id) || ((@match.teams.first.score = @match.teams.last.score) && @match.teams.first.prol_score.nil?)
-          flash[:danger] = "Match non valide, veuillez vérifier les données indiquées !"
-          render :action => 'edit'
-
-    elsif @match.update(match_params)
+    if @match.update(match_params)
 
       if ((@match.teams.first.score > @match.teams.last.score) && !@match.prolongations)
           @playerone.points =+ 3
@@ -130,6 +99,37 @@ class MatchesController < ApplicationController
       else
           p "Autre chose"
       end
+
+      if ((@home_team_old_score > @visiting_team_old_score ) && !@match_prol_old)
+          @playerone.points -= 3
+          p "Retrait points J1 a gagné"
+          @playerone.save
+      elsif ((@home_team_old_score < @visiting_team_old_score ) && !@match_prol_old)
+          @playertwo.points -= 3
+          p "Retrait points J2 a gagné"
+          @playertwo.save
+
+      elsif @match_prol_old && (@home_team_old_score > @visiting_team_old_score )
+          @playerone.points -= 2
+          p "Retrait points : J1 a gagné après prolongations"
+          @playerone.save
+      elsif @match_prol_old && (@home_team_old_score < @visiting_team_old_score )
+          @playertwo.points -= 2
+          flash[:notice] = "Retrait points : J2 a gagné après prolongations"
+          @playertwo.save
+
+      elsif @match_prol_old && (@home_team_old_score = @visiting_team_old_score ) && (@match.teams.first.prol_score > @match.teams.last.prol_score)
+          @playerone.points -= 1
+          @playerone.save
+          flash[:notice] = "Retrait points : J1 a gagné aux tirs au buts."
+      elsif @match_prol_old && (@home_team_old_score = @visiting_team_old_score ) && (@match.teams.first.prol_score < @match.teams.last.prol_score)
+          @playertwo.points -= 1
+          flash[:notice] = "Retrait points : J2 a gagné aux tirs au buts."
+          @playertwo.save
+      else
+          p "Autre chose"
+      end
+
 
       redirect_to root_path
     else
