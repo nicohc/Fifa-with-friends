@@ -29,10 +29,9 @@
       <tr>
         <td><%= match.id %></td>
         <td>....</td>
-        <td>....</td>
-        <td>....</td>
-        <td>....</td>
-        <td>....</td>
+        <td><%= link_to 'Supprimer', match_path(match), method: :delete,
+                data: { confirm: 'Etes vous sur ?' }%></td>
+
       </tr>
       <% else %>
       <tr>
@@ -46,12 +45,37 @@
         <td><%= match.teams.last.name %> </td>
         <td><%= match.teams.last.player_id %> </td>
 
-        <td><%= match.prolongations ? "Prolongations" : "" %>
+        <td><%= match.prolongations ? "a.p" : "" %>
         <td><%= link_to "Détails", match_path(match)%></td>
-        <td><%= link_to 'Supprimer', match, method: :delete ,
+        <td><%= link_to "Modifier", edit_match_path(match)%></td>
+        <td><%= link_to 'Supprimer', match_path(match), method: :delete,
                 data: { confirm: 'Etes vous sur ?' }%></td>
       </tr>
       <% end %>
     <% end %>
   <% end %>
+</table>
+
+<br>
+
+<p> Liste des joueurs </p>
+
+<table>
+  <tr>
+    <th>ID du joueur</th>
+    <th>Pseudo</th>
+    <th>Matchs joués</th>
+    <th>points</th>
+  </tr>
+  <br>
+
+  <% @players.each do |player| %>
+  <tr>
+    <td><%= player.id %></td>
+    <td><%= player.pseudo %></td>
+    <td><%= player.teams.count %> </td>
+  </tr>
+  <% end %>
+
+
 </table>

@@ -1,2 +1,41 @@
 <h1>Matches#edit</h1>
 <p>Find me in app/views/matches/edit.html.erb</p>
+
+<%= form_for(@match) do |f| %>
+  <%= render 'shared/error_new_match', object: @match %>
+  <%= f.fields_for :teams do |t| %>
+    <div>
+      <%= t.label :"Joueur" %>
+      <%= t.collection_select :player_id, Player.all, :id, :pseudo, class: 'form-control' %>
+    </div>
+    <div>
+      <%= t.label :"Nom de l'équipe" %>
+      <%= t.text_field :name, class: 'form-control'%>
+    </div>
+    <div>
+      <%= t.label :"Score de l'équipe" %>
+      <%= t.number_field :score, class: 'form-control'%>
+    </div>
+    <div>
+      <%= t.label :"Score penalties" %>
+      <%= t.number_field :prol_score, class: 'form-control'%>
+    </div>
+
+    <br>
+  <% end %>
+
+  <br>
+
+  <%= f.check_box :prolongations, class: 'form-control' %>
+  <%= f.label :"Prolongations" %>
+
+  <br><br>
+  <%= f.submit "Valider", class: "btn btn-primary" %>
+<% end %>
+
+<br><br>
+
+<%= link_to 'Supprimer', @match, method: :delete,
+        data: { confirm: 'Etes vous sur ?' }%>
+<br>
+<%= link_to "Accueil", root_path %>

@@ -1,5 +1,8 @@
 class Player < ApplicationRecord
-  has_one :team
-  
+
+  has_many :teams
+  has_many :matches
+
+  validates :pseudo, uniqueness: true
 
 end
