@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403205019) do
+ActiveRecord::Schema.define(version: 20180405171227) do
 
   create_table "matches", force: :cascade do |t|
     t.boolean "prolongations"
@@ -23,6 +23,12 @@ ActiveRecord::Schema.define(version: 20180403205019) do
     t.integer "points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "win"
+    t.integer "win_prol"
+    t.integer "win_peno"
+    t.integer "lose"
+    t.integer "lose_prol"
+    t.integer "lose_peno"
   end
 
   create_table "teams", force: :cascade do |t|

@@ -1,4 +1,4 @@
-<p> Créer un nouveau joueur </p>
+<h1> Créer un nouveau joueur </h1>
 
 <%= form_for(@player) do |f| %>
 
@@ -6,11 +6,8 @@
     <%= f.label :Pseudo %>
     <%= f.text_field :pseudo %>
   </div>
-
+  <br>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
-
-
-<%= link_to "Accueil", root_path %>

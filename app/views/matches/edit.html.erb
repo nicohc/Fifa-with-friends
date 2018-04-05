@@ -1,5 +1,4 @@
-<h1>Matches#edit</h1>
-<p>Find me in app/views/matches/edit.html.erb</p>
+<h1>Edition du match #<%= @match.id%></h1>
 
 <%= form_for(@match) do |f| %>
   <%= render 'shared/error_new_match', object: @match %>
