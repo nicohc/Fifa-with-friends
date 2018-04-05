@@ -9,7 +9,7 @@
     </div>
     <div>
       <%= t.label :"Nom de l'équipe" %>
-      <%= t.text_field :name, class: 'form-control'%>
+      <%= t.collection_select :club_id, Club.all, :id, :name, class: 'form-control', include_blank: "Choisir une équipe"%>
     </div>
     <div>
       <%= t.label :"Score de l'équipe" %>

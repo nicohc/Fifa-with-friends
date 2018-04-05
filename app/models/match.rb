@@ -8,4 +8,7 @@ class Match < ApplicationRecord
   has_many :players, :through => :teams
   accepts_nested_attributes_for :players
 
+  has_many :clubs, :through => :teams
+  accepts_nested_attributes_for :clubs
+
 end

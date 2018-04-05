@@ -4,13 +4,11 @@
 
 <table class="scoreboard">
   <tr>
-    <th>ID</th>
     <th>Joueur 1</th>
     <th>Team 1</th>
     <th>Score</th>
     <th>Team 2</th>
     <th>Joueur 2</th>
-    <th>Prolongations</th>
   </tr>
   <br>
   <% if @matches.count == 0 %>
@@ -27,22 +25,27 @@
       </tr>
       <% else %>
       <tr>
-        <td><%= match.id %></td>
-        <td><%= link_to Player.find(match.teams.first.player_id).pseudo, player_path(match.teams.first.player_id) %> </td>
-        <td><%= match.teams.first.name %> </td>
-        <td><%= match.teams.first.score %> - <%= match.teams.last.score %>
-            <br>
-            <span class="tab_score"><%= match.teams.first.prol_score %><%= match.teams.first.prol_score == nil ? '' : ' tab ' %><%= match.teams.last.prol_score %></span>
+        <td><span class="tab_player">
+          <%= link_to Player.find(match.teams.first.player_id).pseudo, player_path(match.teams.first.player_id) %> </td>
+        </span></td>
+        <td><%= match.teams.first.club.name %> </td>
+        <td><div class="tab_score">
+              <%= match.teams.first.score %> - <%= match.teams.last.score %>
+            </div>
+            <span class="tab_score_prol">
+            <%= (match.prolongations && !match.teams.first.prol_score) ? "a.p" : "" %>
+            <%= match.teams.first.prol_score %><%= match.teams.first.prol_score == nil ? '' : ' tab ' %><%= match.teams.last.prol_score %>
+            </span>
         </td>
 
-        <td><%= match.teams.last.name %> </td>
-        <td><%= link_to Player.find(match.teams.last.player_id).pseudo, player_path(match.teams.last.player_id) %> </td>
+        <td><%= match.teams.last.club.name %></td>
+        <td><span class="tab_player">
+            <%= link_to Player.find(match.teams.last.player_id).pseudo, player_path(match.teams.last.player_id) %>
+            </span>
+        </td>
 
-        <td><%= match.prolongations ? "a.p" : "" %>
         <td><%= link_to "Détails", match_path(match)%></td>
         <td><%= link_to "Modifier", edit_match_path(match)%></td>
-        <td><%= link_to 'Supprimer', match_path(match), method: :delete,
-                data: { confirm: 'Etes vous sur ?' }%></td>
       </tr>
       <% end %>
     <% end %>

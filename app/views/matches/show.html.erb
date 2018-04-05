@@ -4,27 +4,24 @@
 <% if !@match.teams.first.player_id.nil? %>
   Joueur 1: <%= @home_team.player.pseudo %>
 <% end %>
-<br>Equipe 1: <%= @home_team.name %>
-<br>Score : <%= @home_team.score %>
+<br>Equipe 1: <%= @home_team.club.name %>
+<br>Score : <%= @home_team.score %><% @match.prolongations ? "après prolongations" : "" %>
 <br>
 <% if @match.prolongations? %>
   Score penalties : <%= @home_team.prol_score %>
 <% end %>
-<br>Total points : <%= @playerone.points %>
 </p>
 <br>
 <p>
 <% if !@match.teams.last.player_id.nil? %>
   Joueur 2: <%= @visiting_team.player.pseudo %>
 <% end %>
-<br>Equipe 2: <%= @visiting_team.name %>
-<br>Score : <%= @visiting_team.score %>
+<br>Equipe 2: <%= @visiting_team.club.name %>
+<br>Score : <%= @visiting_team.score %><% @match.prolongations ? "après prolongations" : "" %>
 <br>
 <% if @match.prolongations? %>
   Score penalties : <%= @visiting_team.prol_score %>
 <% end %>
-
-<br>Total points : <%= @playertwo.points %>
 
 </p>
 <br>

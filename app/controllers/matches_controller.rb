@@ -213,7 +213,7 @@ class MatchesController < ApplicationController
   private
   def match_params
     params.require(:match).permit(:id, :prolongations,
-      teams_attributes: [:id, :score, :prol_score, :name, :match_id, :player_id],
+      teams_attributes: [:id, :score, :prol_score, :club_id, :match_id, :player_id],
       )
   end
 end

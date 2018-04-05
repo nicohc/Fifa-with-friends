@@ -98,11 +98,40 @@ footer a{
 }
 
 /* Tableau des rencontres */
+.scoreboard{
+  min-width: 600px;
+}
+.scoreboard tr{
+  text-align: center;
+}
 .scoreboard tr:not(:first-child){
   height: 50px;
 }
 .scoreboard tr:nth-child(even) {
   background-color: #f2f2f2;
+}
+
+
+.tab_score {
+  padding: 5px 10px 5px;
+  font-size: 24px;
+  color: white;
+  background-color: black;
+  text-align: center;
+  font-weight: bold;
+
+}
+.tab_score_prol {
+  padding-top: 5px;
+  font-size: 15px;
+}
+.tab_player {
+
+}
+.tab_player a {
+  text-decoration: none;
+  font-weight: bold;
+  color: black
 }
 
 /* Tableau - Classement des joueurs */
@@ -130,7 +159,4 @@ footer a{
   font-weight: bold;
   font-size: 15px;
   text-align: left;
-}
-.tab_score {
-  font-size: 11px;
 }
