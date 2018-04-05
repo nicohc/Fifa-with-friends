@@ -1,10 +1,5 @@
 class HomeController < ApplicationController
 
-  def index
-    @matches = Match.all
-    @players = Player.all
-  end
-
   def reset_points
     @players = Player.all
     @players.each do |p|
@@ -12,5 +7,16 @@ class HomeController < ApplicationController
       p.save
     end
   end
-  
+
+  def reset_matches
+    Match.all.destroy_all
+  end
+
+  def index
+    @matches = Match.all
+    @players = Player.all
+    # reset_points()
+    # reset_matches()
+  end
+
 end

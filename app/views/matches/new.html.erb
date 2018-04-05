@@ -7,7 +7,7 @@
   <%= f.fields_for :teams do |t| %>
     <div>
       <%= t.label :"Joueur" %>
-      <%= t.collection_select :player_id, Player.all, :id, :pseudo, class: 'form-control' %>
+      <%= t.collection_select :player_id, Player.all, :id, :pseudo, class: 'form-control', include_blank: "Choisir un joueur" %>
     </div>
     <div>
       <%= t.label :"Nom de l'équipe" %>
