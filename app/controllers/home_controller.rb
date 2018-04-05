@@ -29,8 +29,8 @@ class HomeController < ApplicationController
     @players = Player.all
   end
 
-  def goal_count  
-
+  def goal_count
+    @player.goals = Team.all.where("player_id='#{@player.id}'").sum(:score)
   end
 
 end

@@ -97,6 +97,7 @@ footer a{
   display: inline-block;
 }
 
+/* Tableau des rencontres */
 .scoreboard tr:not(:first-child){
   height: 50px;
 }
@@ -104,12 +105,14 @@ footer a{
   background-color: #f2f2f2;
 }
 
+/* Tableau - Classement des joueurs */
 .leaderboard tr:not(:first-child){
   height: 40px;
 }
 .leaderboard th{
   font-weight: normal;
 }
+
 .leaderboard td, .leaderboard tr{
   border-bottom: 1px lightgrey solid;
 }
@@ -117,6 +120,12 @@ footer a{
   min-width: 30px;
   text-align: center;
 }
+.leaderboard td:nth-child(2){ width: 100px; }
+.leaderboard td:nth-child(3){ width: 50px; }
+.leaderboard td:nth-child(7),
+.leaderboard td:nth-child(10){ padding-right: 20px; }
+
+
 .leaderboard .lead_team{
   font-weight: bold;
   font-size: 15px;

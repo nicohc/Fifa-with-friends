@@ -56,7 +56,8 @@
 <table class="leaderboard">
   <tr>
     <th> </th>
-    <th>Pseudo</th>
+    <th> </th>
+    <th>Pts</th>
     <th>J.</th>
     <th>G.</th>
     <th>G.pr</th>
@@ -64,7 +65,7 @@
     <th>D.</th>
     <th>D.pr</th>
     <th>D.pn.</th>
-    <th>Pts</th>
+    <th>p</th>
   </tr>
   <br>
 
@@ -75,6 +76,7 @@
     <tr>
       <td><%= i %></td>
       <td class="lead_team"><%= player.pseudo %></td>
+      <td><b><%= player.points %></b></td>
       <td><%= player.teams.count %> </td>
       <td><%= player.win %> </td>
       <td><%= player.win_prol %> </td>
@@ -82,7 +84,8 @@
       <td><%= player.lose %> </td>
       <td><%= player.lose_prol %> </td>
       <td><%= player.lose_peno %> </td>
-      <td><b><%= player.points %></b></td>
+      <td><%= Team.all.where("player_id= '#{player.id}'").sum(:score) %></td>
+
     </tr>
   <% end %>
 
