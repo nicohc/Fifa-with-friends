@@ -14,8 +14,6 @@ WIP :
 
 - Gestion des résultats des rencontres et décompte de points pour les joueurs  
 
-Soon :
-
 - Classement des joueurs
 
 ////////// (Particularités) /////////////

@@ -100,6 +100,7 @@ footer a{
 /* Tableau des rencontres */
 .scoreboard{
   min-width: 600px;
+  padding-bottom: 30px;
 }
 .scoreboard tr{
   text-align: center;
@@ -135,6 +136,9 @@ footer a{
 }
 
 /* Tableau - Classement des joueurs */
+.leaderboard{
+  padding-bottom: 30px;
+}
 .leaderboard tr:not(:first-child){
   height: 40px;
 }
@@ -159,4 +163,13 @@ footer a{
   font-weight: bold;
   font-size: 15px;
   text-align: left;
+}
+
+
+ul.list_rules{
+  padding: 0;
+}
+
+.list_rules li{
+  list-style: none;
 }
