@@ -65,7 +65,7 @@
     <tr>
       <td><%= i %></td>
       <td class="lead_team"><%= player.pseudo %></td>
-      <td class="lb_br"><b><%= player.points / player.teams.count %></b></td>
+      <td class="lb_br"><b><%= (player.points.to_f/ player.teams.count).round(2)%></b></td>
       <td class="lb_br"><%= player.teams.count %> </td>
 
       <td>              <%= number_to_percentage(((100 * player.win) / player.teams.count), precision: 0) %> </td>
@@ -74,7 +74,7 @@
       <td>              <%= number_to_percentage(((100 * player.lose) / player.teams.count), precision: 0) %> </td>
       <td>              <%= number_to_percentage(((100 * player.lose_prol) / player.teams.count), precision: 0) %> </td>
       <td class="lb_br"><%= number_to_percentage(((100 * player.lose_peno) / player.teams.count), precision: 0) %> </td>
-      <td class="lb_br"><%= Team.all.where("player_id= '#{player.id}'").sum(:score) / player.teams.count %></td>
+      <td class="lb_br"><%= (Team.all.where("player_id= '#{player.id}'").sum(:score).to_f / player.teams.count).round(2) %></td>
     </tr>
   <% end %>
 
