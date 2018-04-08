@@ -15,8 +15,9 @@ WIP :
 - Gestion des résultats des rencontres et décompte de points pour les joueurs  
 
 - Classement des joueurs
+- Ratios par matchs joués
 
-////////// (Particularités) /////////////
+////////// (Particularités de ce système) /////////////
 
 Décompte des points actuel :
   - Match gagné : +3
@@ -27,4 +28,4 @@ Décompte des points actuel :
 
 /////////////////////////
 
- #FIFA #PES
+ #FIFA #PES #ranking #matches #players

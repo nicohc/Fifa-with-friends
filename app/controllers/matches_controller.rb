@@ -210,6 +210,11 @@ class MatchesController < ApplicationController
     redirect_to root_path
   end
 
+
+
+
+
+
   private
   def match_params
     params.require(:match).permit(:id, :prolongations,

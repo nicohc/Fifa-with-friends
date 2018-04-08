@@ -68,7 +68,7 @@
     <th>D.</th>
     <th>D.pr</th>
     <th>D.pn.</th>
-    <th>p</th>
+    <th class="lb_br">buts</th>
   </tr>
   <br>
 
@@ -80,18 +80,16 @@
       <td><%= i %></td>
       <td class="lead_team"><%= player.pseudo %></td>
       <td><b><%= player.points %></b></td>
-      <td><%= player.teams.count %> </td>
+      <td class="lb_br"><%= player.teams.count %> </td>
       <td><%= player.win %> </td>
       <td><%= player.win_prol %> </td>
-      <td><%= player.win_peno %> </td>
+      <td class="lb_br"><%= player.win_peno %> </td>
       <td><%= player.lose %> </td>
       <td><%= player.lose_prol %> </td>
-      <td><%= player.lose_peno %> </td>
-      <td><%= Team.all.where("player_id= '#{player.id}'").sum(:score) %></td>
-
+      <td class="lb_br"><%= player.lose_peno %> </td>
+      <td class="lb_br"><%= Team.all.where("player_id= '#{player.id}'").sum(:score) %></td>
     </tr>
   <% end %>
-
 
 </table>
 

@@ -156,7 +156,18 @@ footer a{
 .leaderboard td:nth-child(2){ width: 100px; }
 .leaderboard td:nth-child(3){ width: 50px; }
 .leaderboard td:nth-child(7),
-.leaderboard td:nth-child(10){ padding-right: 20px; }
+.leaderboard td:nth-child(10){
+  padding-right: 20px;
+}
+
+.leaderboard .lb_br {
+  border-right : 1px lightgrey solid;
+}
+.leaderboard .lb_br_big {
+  border-right : 4px grey solid;
+  padding-right: 10px;
+  margin-right: 10px;
+}
 
 
 .leaderboard .lead_team{

@@ -29,8 +29,22 @@ class HomeController < ApplicationController
     @players = Player.all
   end
 
+  def leaderboard
+    @matches = Match.all
+    @players = Player.all
+  end
+
+=begin
+
   def goal_count
     @player.goals = Team.all.where("player_id='#{@player.id}'").sum(:score)
   end
+
+  def pourcent_games(value)
+    new_value = (value /= player.teams.count)
+    new_value *= 100
+  end
+
+=end
 
 end
