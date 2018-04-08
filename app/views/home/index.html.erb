@@ -45,7 +45,7 @@
         </td>
 
         <td><%= link_to "Détails", match_path(match)%></td>
-        <td><%= link_to "Modifier", edit_match_path(match)%></td>
+        <% if user_signed_in? %><td><%= link_to "Modifier", edit_match_path(match)%></td><% end %>
       </tr>
       <% end %>
     <% end %>
