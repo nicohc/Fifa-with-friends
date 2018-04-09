@@ -1,0 +1,14 @@
+<h1>Comments#new</h1>
+<p>Find me in app/views/comments/new.html.erb</p>
+
+<% if user_signed_in? %>
+    <%= form_for(@comment) do |com| %>
+      <div class="field">
+        <%= com.label :Commentaire %>
+        <%= com.text_field :content %>
+      </div>
+      <div class="actions">
+        <%= com.submit %>
+      </div>
+    <% end %>
+<% end %>

@@ -1,104 +1,146 @@
 <h1>FIFA 18</h1>
 
-<div class="title_w_bg">Les 5 derniers matchs</div>
+<div class="main_content_4_8">
+  <div class="main_left">
+    <div class="title_w_bg">A la une </div>
 
-<table class="scoreboard">
-  <tr>
-    <th>Joueur 1</th>
-    <th>Team 1</th>
-    <th>Score</th>
-    <th>Team 2</th>
-    <th>Joueur 2</th>
-  </tr>
-  <br>
-  <% if @matches.count == 0 %>
-    <tr> <td> Pas de match enregistré </td> </tr>
-  <% else %>
-    <% @matches.order(id: :desc).first(5).each do |match| %>
-      <% if match.teams.empty? %>
+    <br>
+    <br>
+
+    <div class="title_w_bg">Les 5 derniers matchs</div>
+
+    <table class="scoreboard">
       <tr>
-        <td><%= match.id %></td>
-        <td>....</td>
-        <td><%= link_to 'Supprimer', match_path(match), method: :delete,
-                data: { confirm: 'Etes vous sur ?' }%></td>
-
+        <th>Joueur 1</th>
+        <th>Team 1</th>
+        <th>Score</th>
+        <th>Team 2</th>
+        <th>Joueur 2</th>
       </tr>
+      <br>
+      <% if @matches.count == 0 %>
+        <tr> <td> Pas de match enregistré </td> </tr>
       <% else %>
-      <tr>
-        <td><span class="tab_player">
-          <%= link_to Player.find(match.teams.first.player_id).pseudo, player_path(match.teams.first.player_id) %> </td>
-        </span></td>
-        <td><%= match.teams.first.club.name %> </td>
-        <td><div class="tab_score">
-              <%= match.teams.first.score %> - <%= match.teams.last.score %>
-            </div>
-            <span class="tab_score_prol">
-            <%= (match.prolongations && !match.teams.first.prol_score) ? "a.p" : "" %>
-            <%= match.teams.first.prol_score %><%= match.teams.first.prol_score == nil ? '' : ' tab ' %><%= match.teams.last.prol_score %>
-            </span>
-        </td>
+        <% @matches.order(id: :desc).first(5).each do |match| %>
+          <% if match.teams.empty? %>
+          <tr>
+            <td><%= match.id %></td>
+            <td>....</td>
+            <td><%= link_to 'Supprimer', match_path(match), method: :delete,
+                    data: { confirm: 'Etes vous sur ?' }%></td>
 
-        <td><%= match.teams.last.club.name %></td>
-        <td><span class="tab_player">
-            <%= link_to Player.find(match.teams.last.player_id).pseudo, player_path(match.teams.last.player_id) %>
-            </span>
-        </td>
+          </tr>
+          <% else %>
+          <tr>
+            <td><span class="tab_player">
+              <%= link_to Player.find(match.teams.first.player_id).pseudo, player_path(match.teams.first.player_id) %> </td>
+            </span></td>
+            <td><%= match.teams.first.club.name %> </td>
+            <td><div class="tab_score">
+                  <%= match.teams.first.score %> - <%= match.teams.last.score %>
+                </div>
+                <span class="tab_score_prol">
+                <%= (match.prolongations && !match.teams.first.prol_score) ? "a.p" : "" %>
+                <%= match.teams.first.prol_score %><%= match.teams.first.prol_score == nil ? '' : ' tab ' %><%= match.teams.last.prol_score %>
+                </span>
+            </td>
 
-        <td><%= link_to "Détails", match_path(match)%></td>
-        <% if user_signed_in? %><td><%= link_to "Modifier", edit_match_path(match)%></td><% end %>
-      </tr>
+            <td><%= match.teams.last.club.name %></td>
+            <td><span class="tab_player">
+                <%= link_to Player.find(match.teams.last.player_id).pseudo, player_path(match.teams.last.player_id) %>
+                </span>
+            </td>
+
+            <td><%= link_to "Détails", match_path(match)%></td>
+            <% if user_signed_in? %><td><%= link_to "Modifier", edit_match_path(match)%></td><% end %>
+          </tr>
+          <% end %>
+        <% end %>
       <% end %>
-    <% end %>
-  <% end %>
-</table>
+    </table>
 
-<br>
+    <br>
 
-<div class="title_w_bg">Classement </div>
+    <div class="title_w_bg">Classement </div>
 
-<table class="leaderboard">
-  <tr>
-    <th> </th>
-    <th> </th>
-    <th>Pts</th>
-    <th>J.</th>
-    <th>G.</th>
-    <th>G.pr</th>
-    <th>G.pn.</th>
-    <th>D.</th>
-    <th>D.pr</th>
-    <th>D.pn.</th>
-    <th class="lb_br">buts</th>
-  </tr>
-  <br>
+    <table class="leaderboard">
+      <tr>
+        <th> </th>
+        <th> </th>
+        <th>Pts</th>
+        <th>J.</th>
+        <th>G.</th>
+        <th>G.pr</th>
+        <th>G.pn.</th>
+        <th>D.</th>
+        <th>D.pr</th>
+        <th>D.pn.</th>
+        <th class="lb_br">buts</th>
+      </tr>
+      <br>
 
-  <% i = 0
-    @players.order(points: :desc).each do |player|
-    i = i+1.to_i
-  %>
-    <tr>
-      <td><%= i %></td>
-      <td class="lead_team"><%= player.pseudo %></td>
-      <td><b><%= player.points %></b></td>
-      <td class="lb_br"><%= player.teams.count %> </td>
-      <td><%= player.win %> </td>
-      <td><%= player.win_prol %> </td>
-      <td class="lb_br"><%= player.win_peno %> </td>
-      <td><%= player.lose %> </td>
-      <td><%= player.lose_prol %> </td>
-      <td class="lb_br"><%= player.lose_peno %> </td>
-      <td class="lb_br"><%= Team.all.where("player_id= '#{player.id}'").sum(:score) %></td>
-    </tr>
-  <% end %>
+      <% i = 0
+        @players.order(points: :desc).each do |player|
+        i = i+1.to_i
+      %>
+        <tr>
+          <td><%= i %></td>
+          <td class="lead_team"><%= player.pseudo %></td>
+          <td><b><%= player.points %></b></td>
+          <td class="lb_br"><%= player.teams.count %> </td>
+          <td><%= player.win %> </td>
+          <td><%= player.win_prol %> </td>
+          <td class="lb_br"><%= player.win_peno %> </td>
+          <td><%= player.lose %> </td>
+          <td><%= player.lose_prol %> </td>
+          <td class="lb_br"><%= player.lose_peno %> </td>
+          <td class="lb_br"><%= Team.all.where("player_id= '#{player.id}'").sum(:score) %></td>
+        </tr>
+      <% end %>
 
-</table>
+    </table>
 
-<br>
+    <br>
 
-<div class="title_w_bg">Reglement en vigueur </div>
-<ul class="list_rules">
-  <li>Match gagné : +3
-  <li>Match gagné après prolongations : +2
-  <li>Match gagné aux penalties : +1
-  <li>Pas de point pour le perdant.
-</ul>
+    <div class="title_w_bg">Reglement en vigueur </div>
+    <ul class="list_rules">
+      <li>Match gagné : +3
+      <li>Match gagné après prolongations : +2
+      <li>Match gagné aux penalties : +1
+      <li>Pas de point pour le perdant.
+    </ul>
+  </div>
+
+  <div class="main_right">
+    <div class="title_w_bg">Le vestiaire </div>
+    <br>
+    <div class="new_comment">
+      <% if user_signed_in? %>
+          <%= form_for(Comment.new) do |com| %>
+            <div class="field">
+              <%= com.text_field :content, placeholder: "Commentaire" %>
+            </div>
+            <div class="actions">
+              <%= com.submit "Envoyer" %>
+            </div>
+          <% end %>
+      <% else %>
+          <i>Vous devez être connecté pour pouvoir commenter.</i>
+      <% end %>
+    </div>
+
+    <table class="commentboard">
+      <% if @comments.count == 0 %>
+        Pas de commentaire
+      <% else %>
+        <% @comments.order("created_at DESC").each do |comment| %>
+          <tr>
+            <td class="comment_time"><%= comment.created_at.strftime("%H:%M") %></td>
+            <td class="comment_content"><span class="comment_user"><%= comment.user.username %></span> : <%= comment.content %> </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+
+</div>
