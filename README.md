@@ -25,6 +25,9 @@ Décompte des points actuel :
   - Match gagné aux penalties : +1
   - Pas de point pour le perdant.
 
+/////////////////////////
+
+N.B : L'ensemble des images utilisées pour ce projet sont utilisées à visée purement illustrative et sont la propriété de leurs auteurs.
 
 /////////////////////////
 

@@ -18,12 +18,14 @@ class HomeController < ApplicationController
 
   def index
     @matches = Match.all
+    @match_une = Match.last
     @players = Player.all
     @comments = Comment.all
     #reset_points()
     #reset_matches()
     #reset_players()
   end
+
 
   def all_matches
     @matches = Match.all

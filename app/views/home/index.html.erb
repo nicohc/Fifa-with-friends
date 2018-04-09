@@ -2,7 +2,46 @@
 
 <div class="main_content_4_8">
   <div class="main_left">
-    <div class="title_w_bg">A la une </div>
+    <div class="title_w_bg title_une">A la une
+      <div class="title_journee"><%= @match_une.id %>e journée</div>
+    </div>
+
+    <div class="image_une">
+      <%= image_tag("clubs/marseille.jpg", size: "624x416", alt: "Illustration") %>
+    </div>
+    <div class="score_une">
+        <tr>
+          <td><span class="tab_player">
+            <%= @match_une.teams.first.player.pseudo %> </td>
+          </span></td>
+          <td><%= @match_une.teams.first.club.name %> </td>
+
+          <td>
+            <div class="tab_score_une">
+                <div class="tab_score_one">
+                  <%= @match_une.teams.first.score %>
+                </div>
+                <div class="tab_score_two">
+                  <%= @match_une.teams.last.score %>
+                </div>
+            </div>
+
+          </td>
+
+          <td><%= @match_une.teams.last.club.name %></td>
+          <td><span class="tab_player">
+              <%= @match_une.teams.last.player.pseudo %>
+              </span>
+          </td>
+
+        </tr>
+    </div>
+
+
+
+
+
+
 
     <br>
     <br>
@@ -114,6 +153,20 @@
   <div class="main_right">
     <div class="title_w_bg">Le vestiaire </div>
     <br>
+
+    <table class="commentboard">
+      <% if @comments.count == 0 %>
+        Pas de commentaire
+      <% else %>
+        <% @comments.order("created_at DESC").each do |comment| %>
+          <tr>
+            <td class="comment_time"><%= comment.created_at.strftime("%H:%M") %></td>
+            <td class="comment_content"><span class="comment_user"><%= comment.user.username %></span> : <%= comment.content %> </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+    <br>
     <div class="new_comment">
       <% if user_signed_in? %>
           <%= form_for(Comment.new) do |com| %>
@@ -128,19 +181,6 @@
           <i>Vous devez être connecté pour pouvoir commenter.</i>
       <% end %>
     </div>
-
-    <table class="commentboard">
-      <% if @comments.count == 0 %>
-        Pas de commentaire
-      <% else %>
-        <% @comments.order("created_at DESC").each do |comment| %>
-          <tr>
-            <td class="comment_time"><%= comment.created_at.strftime("%H:%M") %></td>
-            <td class="comment_content"><span class="comment_user"><%= comment.user.username %></span> : <%= comment.content %> </td>
-          </tr>
-        <% end %>
-      <% end %>
-    </table>
   </div>
 
 </div>

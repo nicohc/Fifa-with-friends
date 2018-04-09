@@ -90,12 +90,13 @@ footer a{
 
 .main_left{
   width: 65%;
-  min-height: 500px;
+  min-width: 700px;
 }
 
 .main_right{
   width: 35%;
-  min-height: 100px;
+  min-width: 300px;
+  padding-left: 20px;
 }
 
 
@@ -112,6 +113,69 @@ footer a{
   margin-bottom: 15px;
   display: inline-block;
 }
+
+/* Image a la Une */
+
+.title_une {
+  position: absolute;
+  margin: auto;
+  padding: 0px 0px 5px 9px;
+  line-height: 33px;
+}
+.title_journee{
+  padding: 0 35px 0 10px;
+  display: inline-block;
+  margin-left: 25px;
+  background-color: grey;
+}
+
+.image_une {
+  height: 400px;
+  width: 700px;
+  overflow: hidden;
+}
+.image_une img {
+  width: inherit;
+  height: auto;
+}
+.score_une {
+  height: 60px;
+  width: 700px;
+  padding: 0 50px;
+  box-sizing: border-box;
+
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.score_une .tab_player{
+  font-weight: bold;
+  font-size: 20px;
+}
+.score_une .tab_score_une {
+  display: inline-flex;
+}
+.score_une .tab_score_une div{
+  padding: 20px;
+  font-size: 26px;
+  font-weight: bold;
+}
+.score_une .winner {
+  background-color: white;
+  color: black;
+}
+.score_une .loser {
+  background-color: grey;
+  color: white;
+}
+
+
+
+
+
 
 /* Tableau des rencontres */
 .scoreboard{
@@ -202,8 +266,9 @@ ul.list_rules{
 }
 
 .commentboard {
-  width:100%;
-  max-width:500px;
+    width: 100%;
+    max-width: 400px;
+    word-break: break-all;
 }
 .commentboard tr{
   height: 30px;
@@ -221,6 +286,7 @@ ul.list_rules{
 }
 .comment_user{
   font-weight: bold;
+  font-size: 14px;
 }
 
 .new_comment { padding-bottom: 10px; }

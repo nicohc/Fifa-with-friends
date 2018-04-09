@@ -31,6 +31,7 @@ class MatchesController < ApplicationController
   def points_conditions
     if ((@match.teams.first.score > @match.teams.last.score) && !@match.prolongations)
         flash[:notice] = "J1 a gagné"
+        @match.winner_club = @match.teams.first.club_id
         @playerone.points += 3
         @playerone.win += 1
         @playerone.save
