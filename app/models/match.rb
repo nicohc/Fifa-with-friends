@@ -11,7 +11,4 @@ class Match < ApplicationRecord
   has_many :clubs, :through => :teams
   accepts_nested_attributes_for :clubs
 
-  has_one :winner_club , as: :club, foreign_key: "club_id"
-  has_one :loser_club , as: :club, foreign_key: "club_id"
-
 end

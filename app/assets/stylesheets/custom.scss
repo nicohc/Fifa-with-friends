@@ -45,7 +45,7 @@ nav ul{
 
 nav ul li{
   list-style: none;
-  padding: 10px;
+  padding: 15px 10px;
 }
 
 nav ul li a{
@@ -53,6 +53,21 @@ nav ul li a{
     text-decoration: none;
 }
 nav ul li a:hover { color: grey;}
+
+.dropdown-menu{
+		display: none;
+}
+.dropdown:hover{
+  .dropdown-menu{
+    right: 8px;
+    position: absolute;
+    display: block;
+    top: 50px;
+    height: auto;
+    background-color: whitesmoke;
+    padding: 10px;
+  }
+}
 
 
 /* ------ FOOTER ------ */
