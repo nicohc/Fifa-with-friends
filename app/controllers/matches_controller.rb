@@ -1,4 +1,5 @@
 class MatchesController < ApplicationController
+
   def new
     @match = Match.new
     2.times do
@@ -28,9 +29,79 @@ class MatchesController < ApplicationController
     return true
   end
 
+
+  def winning_conditions
+      if ((@match.teams.first.score > @match.teams.last.score) && !@match.prolongations)
+          flash[:notice] = "J1 a gagné"
+          @match.teams.first[:status] = "winner"
+          @match.teams.last[:status] = "loser"
+      elsif ((@match.teams.first.score < @match.teams.last.score) && !@match.prolongations)
+          flash[:notice] = "J2 a gagné"
+          @match.teams.first[:status] = "loser"
+          @match.teams.last[:status] = "winner"
+
+      elsif @match.prolongations && (@match.teams.first.score > @match.teams.last.score)
+          flash[:notice] = "J1 a gagné après prolongations"
+          @match.teams.first.status = "winner"
+          @match.teams.last.status = "loser"
+      elsif @match.prolongations && (@match.teams.first.score < @match.teams.last.score)
+          flash[:notice] = "J2 a gagné après prolongations"
+          @match.teams.first.status = "loser"
+          @match.teams.last.status = "winner"
+      elsif (@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score > @match.teams.last.prol_score)
+          flash[:notice] = "J1 a gagné aux tirs au buts."
+          @match.prolongations = true
+          @match.teams.first.status = "winner"
+          @match.teams.last.status = "loser"
+          @match.save
+      elsif (@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score < @match.teams.last.prol_score)
+          flash[:notice] = "J2 a gagné aux tirs au buts."
+          @match.prolongations = true
+          @match.teams.first.status = "loser"
+          @match.teams.last.status = "winner"
+          @match.save
+      end
+  end
+
+  def update_winning_conditions
+      if ((@match.teams.first.score > @match.teams.last.score) && !@match.prolongations)
+          flash[:notice] = "J1 a gagné"
+          @match.teams.first.update_columns(status: "winner")
+          @match.teams.last.update_columns(status: "loser")
+      elsif ((@match.teams.first.score < @match.teams.last.score) && !@match.prolongations)
+          flash[:notice] = "J2 a gagné"
+          @match.teams.first.update_columns(status: "loser")
+          @match.teams.last.update_columns(status: "winner")
+
+      elsif @match.prolongations && (@match.teams.first.score > @match.teams.last.score)
+          flash[:notice] = "J1 a gagné après prolongations"
+          @match.teams.first.update_columns(status: "winner")
+          @match.teams.last.update_columns(status: "loser")
+      elsif @match.prolongations && (@match.teams.first.score < @match.teams.last.score)
+          flash[:notice] = "J2 a gagné après prolongations"
+          @match.teams.first.update_columns(status: "loser")
+          @match.teams.last.update_columns(status: "winner")
+      elsif (@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score > @match.teams.last.prol_score)
+          flash[:notice] = "J1 a gagné aux tirs au buts."
+          @match.prolongations = true
+          @match.teams.first.update_columns(status: "winner")
+          @match.teams.last.update_columns(status: "loser")
+          @match.save
+      elsif (@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score < @match.teams.last.prol_score)
+          flash[:notice] = "J2 a gagné aux tirs au buts."
+          @match.prolongations = true
+          @match.teams.first.update_columns(status: "loser")
+          @match.teams.last.update_columns(status: "winner")
+          @match.save
+      end
+  end
+
+
+
+
   def points_conditions
     if ((@match.teams.first.score > @match.teams.last.score) && !@match.prolongations)
-        flash[:notice] = "J1 a gagné"
+        flash[:notice] = "+3 points pour J1"
         @playerone.points += 3
         @playerone.win += 1
         @playerone.save
@@ -38,7 +109,7 @@ class MatchesController < ApplicationController
         @playertwo.save
 
     elsif ((@match.teams.first.score < @match.teams.last.score) && !@match.prolongations)
-        flash[:notice] = "J2 a gagné"
+        flash[:notice] = "+3 points pour J2"
         @playertwo.points += 3
         @playertwo.win += 1
         @playertwo.save
@@ -46,7 +117,7 @@ class MatchesController < ApplicationController
         @playerone.save
 
     elsif @match.prolongations && (@match.teams.first.score > @match.teams.last.score)
-        flash[:notice] = "J1 a gagné après prolongations"
+        flash[:notice] = "+2 points pour J1"
         @playerone.points += 2
         @playerone.win_prol += 1
         @playerone.save
@@ -54,7 +125,7 @@ class MatchesController < ApplicationController
         @playertwo.save
 
     elsif @match.prolongations && (@match.teams.first.score < @match.teams.last.score)
-        flash[:notice] = "J2 a gagné après prolongations"
+        flash[:notice] = "+2 points pour J2"
         @playertwo.points += 2
         @playertwo.win_prol += 1
         @playertwo.save
@@ -62,9 +133,7 @@ class MatchesController < ApplicationController
         @playerone.save
 
     elsif (@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score > @match.teams.last.prol_score)
-        flash[:notice] = "J1 a gagné aux tirs au buts."
-        @match.prolongations = true
-        @match.save
+        flash[:notice] = "+1 point pour J1"
         @playerone.points += 1
         @playerone.win_peno += 1
         @playerone.save
@@ -72,9 +141,7 @@ class MatchesController < ApplicationController
         @playertwo.save
 
     elsif (@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score < @match.teams.last.prol_score)
-        flash[:notice] = "J2 a gagné aux tirs au buts."
-        @match.prolongations = true
-        @match.save
+        flash[:notice] = "+1 point pour J2"
         @playertwo.points += 1
         @playertwo.win_peno += 1
         @playertwo.save
@@ -140,12 +207,15 @@ class MatchesController < ApplicationController
     end
   end
 
+
+
   def create
     @match = Match.new(match_params)
     if matches_good_conditions
 
     @playerone = Player.find(@match.teams.first.player_id)
     @playertwo = Player.find(@match.teams.last.player_id)
+    winning_conditions()
 
         if @match.save
           points_conditions()
@@ -175,6 +245,7 @@ class MatchesController < ApplicationController
     if @match.update(match_params)
       #Retraits points sur anciens reusltats
       matches_update_remove_points()
+      update_winning_conditions()
       #Nouveaux resultats
       points_conditions()
 

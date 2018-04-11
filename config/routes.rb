@@ -2,13 +2,14 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get '/touslesmatchs', to: 'home#all_matches', as: 'all_matches'
+  get '/touslesclubs', to: 'clubs#all_clubs', as: 'all_clubs'
   get '/classement', to: 'home#leaderboard', as: 'leaderboard'
 
   resources :matches
   resources :teams
   resources :players
   resources :clubs
-    resources :comments
+  resources :comments
 
   devise_for :users,
       path: '',

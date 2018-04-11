@@ -19,6 +19,8 @@ class HomeController < ApplicationController
   def index
     @matches = Match.all
     @match_une = Match.last
+    #Match.last.teams.first.update_columns(status: "winner")
+    image_a_la_une()
     @players = Player.all
     @comments = Comment.all
     #reset_points()
@@ -36,6 +38,18 @@ class HomeController < ApplicationController
     @matches = Match.all
     @players = Player.all
   end
+
+  def image_a_la_une
+    if !@matches.first.nil?
+      if @match_une.teams.where("status='winner'").first.club.image_url.nil?
+        @image_a_la_une = 'clubs/noclub.jpg'
+      else
+        @image_a_la_une = @match_une.teams.where("status = 'winner'").first.club.image_url
+      end
+    end
+  end
+
+
 
 =begin
 

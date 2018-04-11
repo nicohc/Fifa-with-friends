@@ -1,4 +1,8 @@
 class ClubsController < ApplicationController
+  def all_clubs
+    @clubs = Club.all
+  end
+
   def new
     @club = Club.new
   end
@@ -19,6 +23,12 @@ class ClubsController < ApplicationController
   end
 
   def update
+    @club = Club.find(params[:id])
+    if @club.update(club_params)
+      redirect_to club_path(@club)
+  	else
+      render 'edit'
+    end
   end
 
   def show
@@ -27,6 +37,6 @@ class ClubsController < ApplicationController
 
   private
   def club_params
-    params.require(:club).permit(:id, :name)
+    params.require(:club).permit(:id, :name, :image_url)
   end
 end

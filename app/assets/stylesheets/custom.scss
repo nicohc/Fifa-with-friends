@@ -152,6 +152,7 @@ footer a{
 .image_une img {
   width: inherit;
   height: auto;
+  min-height: 400px;
 }
 .score_une {
   height: 60px;
@@ -172,19 +173,20 @@ footer a{
 }
 .score_une .tab_score_une {
   display: inline-flex;
+  position: relative;
 }
 .score_une .tab_score_une div{
-  padding: 20px;
+  padding: 10px 20px;
+  margin: 0 2px;
   font-size: 26px;
   font-weight: bold;
-}
-.score_une .winner {
-  background-color: white;
-  color: black;
-}
-.score_une .loser {
-  background-color: grey;
+  background-color: #404040;
   color: white;
+}
+
+.score_une .winner {
+  background-color: #fffaf2 !important;
+  color: black !important;
 }
 
 

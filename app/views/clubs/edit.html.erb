@@ -1,2 +1,16 @@
-<h1>Clubs#edit</h1>
-<p>Find me in app/views/clubs/edit.html.erb</p>
+<h1>Edition du club #<%= @club.id%></h1>
+
+<%= form_for(@club) do |c| %>
+
+  <%= c.label :"Nom du club" %>
+  <%= c.text_field :name, class: 'form-control'%>
+
+  <%= c.label :"Image victorieuse du club" %>
+  <%= c.text_field :image_url, class: 'form-control'%>
+
+  <%= c.submit "Valider", class: "btn btn-primary" %>
+<% end %>
+
+<br><br>
+
+<%= link_to "Accueil", root_path %>

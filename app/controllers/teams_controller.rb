@@ -11,4 +11,8 @@ class TeamsController < ApplicationController
   def show
   end
 
+  def status
+    @team.status
+  end
+
 end

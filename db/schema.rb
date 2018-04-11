@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180408221536) do
+ActiveRecord::Schema.define(version: 20180411125740) do
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_url"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -30,6 +31,8 @@ ActiveRecord::Schema.define(version: 20180408221536) do
     t.boolean "prolongations"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "club_id"
+    t.index ["club_id"], name: "index_matches_on_club_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -54,6 +57,7 @@ ActiveRecord::Schema.define(version: 20180408221536) do
     t.datetime "updated_at", null: false
     t.integer "player_id"
     t.integer "club_id"
+    t.string "status"
     t.index ["club_id"], name: "index_teams_on_club_id"
     t.index ["match_id"], name: "index_teams_on_match_id"
     t.index ["player_id"], name: "index_teams_on_player_id"

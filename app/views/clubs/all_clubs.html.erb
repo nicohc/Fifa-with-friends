@@ -1,0 +1,25 @@
+<h1>FIFA 18 - Tous les clubs</h1>
+
+<div class="title_w_bg">Liste des clubs référencés</div>
+
+
+<table class="scoreboard">
+  <tr>
+    <th>ID du club</th>
+    <th>Nom</th>
+    <th>Url image</th>
+  </tr>
+  <br>
+  <% if @clubs.count == 0 %>
+    <tr> <td> Pas de club enregistré </td> </tr>
+  <% else %>
+    <% @clubs.each do |club| %>
+    <tr>
+        <td><%= club.id %></td>
+        <td><%= club.name %> </td>
+        <td><%= club.image_url %> </td>
+        <td><%= link_to "Modifier", edit_club_path(club)%></td>
+    </tr>
+    <% end %>
+  <% end %>
+</table>

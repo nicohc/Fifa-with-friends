@@ -2,42 +2,42 @@
 
 <div class="main_content_4_8">
   <div class="main_left">
-    <div class="title_w_bg title_une">A la une
-      <div class="title_journee"><%= @match_une.id %>e journée</div>
-    </div>
+    <% if @matches.count != 0 %>
+      <div class="title_w_bg title_une">A la une
+        <div class="title_journee"><%= @match_une.id %>e journée</div>
+      </div>
 
-    <div class="image_une">
-      <%= image_tag("clubs/marseille.jpg", size: "624x416", alt: "Illustration") %>
-    </div>
-    <div class="score_une">
-        <tr>
-          <td><span class="tab_player">
-            <%= @match_une.teams.first.player.pseudo %> </td>
-          </span></td>
-          <td><%= @match_une.teams.first.club.name %> </td>
+      <div class="image_une">
+        <%= image_tag(@image_a_la_une, size: "624x416", alt: "Illustration") %>
+      </div>
+      <div class="score_une">
+          <tr>
+            <td><span class="tab_player">
+              <%= @match_une.teams.first.player.pseudo %> </td>
+            </span></td>
+            <td><%= @match_une.teams.first.club.name %> </td>
 
-          <td>
-            <div class="tab_score_une">
-                <div class="tab_score_one">
-                  <%= @match_une.teams.first.score %>
-                </div>
-                <div class="tab_score_two">
-                  <%= @match_une.teams.last.score %>
-                </div>
-            </div>
+            <td>
+              <div class="tab_score_une">
+                  <div class="tab_score_one <%= 'winner' if @match_une.teams.first.status == 'winner' %>">
+                    <%= @match_une.teams.first.score %>
+                  </div>
+                  <div class="tab_score_two <%= 'winner' if @match_une.teams.last.status == 'winner' %>">
+                    <%= @match_une.teams.last.score %>
+                  </div>
+              </div>
 
-          </td>
+            </td>
 
-          <td><%= @match_une.teams.last.club.name %></td>
-          <td><span class="tab_player">
-              <%= @match_une.teams.last.player.pseudo %>
-              </span>
-          </td>
+            <td><%= @match_une.teams.last.club.name %></td>
+            <td><span class="tab_player">
+                <%= @match_une.teams.last.player.pseudo %>
+                </span>
+            </td>
 
-        </tr>
-    </div>
-
-
+          </tr>
+      </div>
+    <% end %>
 
 
 

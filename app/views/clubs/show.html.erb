@@ -1,2 +1,13 @@
-<h1>Clubs#show</h1>
-<p>Find me in app/views/clubs/show.html.erb</p>
+<h1>Club : <%= @club.name %></h1>
+
+
+Image de référence : <%= @club.image_url %>
+<br><br>
+<%= image_tag(image_path(@club.image_url), size: "624x416") %>
+
+
+<br><br>
+
+<% if user_signed_in? %>
+  <%= link_to "Modifier", edit_club_path(@club) %>
+<% end %>
