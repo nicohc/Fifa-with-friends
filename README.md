@@ -17,6 +17,8 @@ WIP :
 - Classement des joueurs
 - Ratios par matchs joués
 
+- Mise en avant du dernier match (A la Une) avec image personnalisée liée à l'équipe gagnante et score différencié visuellement. 
+
 ////////// (Particularités de ce système) /////////////
 
 Décompte des points actuel :
