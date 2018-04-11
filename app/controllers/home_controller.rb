@@ -19,7 +19,9 @@ class HomeController < ApplicationController
   def index
     @matches = Match.all
     @match_une = Match.last
-    #Match.last.teams.first.update_columns(status: "winner")
+
+    maj_status_last_match()
+
     image_a_la_une()
     @players = Player.all
     @comments = Comment.all
@@ -38,6 +40,43 @@ class HomeController < ApplicationController
     @matches = Match.all
     @players = Player.all
   end
+
+  def maj_status_last_match
+    if Match.last.teams.first.status.nil?
+          if ((@match_une.teams.first.score > @match_une.teams.last.score) && !@match_une.prolongations)
+              flash[:notice] = "J1 a gagné"
+              @match_une.teams.first.update_columns(status: "winner")
+              @match_une.teams.last.update_columns(status: "loser")
+          elsif ((@match_une.teams.first.score < @match_une.teams.last.score) && !@match_une.prolongations)
+              flash[:notice] = "J2 a gagné"
+              @match_une.teams.first.update_columns(status: "loser")
+              @match_une.teams.last.update_columns(status: "winner")
+
+          elsif @match_une.prolongations && (@match_une.teams.first.score > @match_une.teams.last.score)
+              flash[:notice] = "J1 a gagné après prolongations"
+              @match_une.teams.first.update_columns(status: "winner")
+              @match_une.teams.last.update_columns(status: "loser")
+          elsif @match_une.prolongations && (@match_une.teams.first.score < @match_une.teams.last.score)
+              flash[:notice] = "J2 a gagné après prolongations"
+              @match_une.teams.first.update_columns(status: "loser")
+              @match_une.teams.last.update_columns(status: "winner")
+          elsif (@match_une.teams.first.score == @match_une.teams.last.score) && (@match_une.teams.first.prol_score > @match_une.teams.last.prol_score)
+              flash[:notice] = "J1 a gagné aux tirs au buts."
+              @match_une.prolongations = true
+              @match_une.teams.first.update_columns(status: "winner")
+              @match_une.teams.last.update_columns(status: "loser")
+              @match_une.save
+          elsif (@match_une.teams.first.score == @match_une.teams.last.score) && (@match_une.teams.first.prol_score < @match_une.teams.last.prol_score)
+              flash[:notice] = "J2 a gagné aux tirs au buts."
+              @match_une.prolongations = true
+              @match_une.teams.first.update_columns(status: "loser")
+              @match_une.teams.last.update_columns(status: "winner")
+              @match_une.save
+          end
+    end
+  end
+
+
 
   def image_a_la_une
     if !@matches.first.nil?
