@@ -14,6 +14,7 @@
     <th>D.</th>
     <th>D.pr</th>
     <th>D.pn.</th>
+    <th>Diff.</th>
     <th>bp.</th>
     <th class="lb_br">bc.</th>
   </tr>
@@ -34,6 +35,7 @@
       <td><%= player.lose %> </td>
       <td><%= player.lose_prol %> </td>
       <td class="lb_br"><%= player.lose_peno %> </td>
+      <td><%= (Team.all.where("player_id= '#{player.id}'").sum(:score))-((Team.where("player_id= '#{player.id}'").collect{|a| a.match.teams.collect{|b| b.score}.sum }.sum)-(Team.all.where("player_id= '#{player.id}'").sum(:score))) %>
       <td><%= Team.all.where("player_id= '#{player.id}'").sum(:score) %></td>
       <td class="lb_br"><%= (Team.where("player_id= '#{player.id}'").collect{|a| a.match.teams.collect{|b| b.score}.sum }.sum)-(Team.all.where("player_id= '#{player.id}'").sum(:score)) %></td>
     </tr>
@@ -91,5 +93,6 @@
 <br> G.pr = Matchs gagnés après prolongations
 <br> G.pn = Matchs gagnés aux penalties
 <br>
+<br> Diff. = Différence de buts
 <br> bp. = Buts pour
 <br> bc. = Buts contre
