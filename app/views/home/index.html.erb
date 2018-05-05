@@ -13,10 +13,15 @@
       <div class="score_une">
           <tr>
             <div class="mobile-player_une">
+              <% if mobile_device? %><!-- Afficher d'abord l'equipe sur mobile -->
+                <td><%= @match_une.teams.first.club.name %> </td>
+              <% end %>
               <td><span class="tab_player">
                 <%= @match_une.teams.first.player.pseudo %> </td>
               </span></td>
-              <td><%= @match_une.teams.first.club.name %> </td>
+              <% if !mobile_device? %><!-- Afficher l'equipe après le joueur sur ordi -->
+                <td><%= @match_une.teams.first.club.name %> </td>
+              <% end %>
             </div>
             <td>
               <div class="tab_score_une">
@@ -29,16 +34,11 @@
               </div>
             </td>
             <div class="mobile-player_une">
-              <% if mobile_device? %><!-- Afficher d'abord l'equipe sur mobile -->
-                <td><%= @match_une.teams.last.club.name %></td>
-              <% end %>
+              <td><%= @match_une.teams.last.club.name %></td>
               <td><span class="tab_player">
                   <%= @match_une.teams.last.player.pseudo %>
                   </span>
               </td>
-              <% if !mobile_device? %><!-- Afficher l'equipe après le joueur sur ordi -->
-                <td><%= @match_une.teams.last.club.name %></td>
-              <% end %>
             </div>
 
           </tr>
