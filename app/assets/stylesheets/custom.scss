@@ -46,6 +46,10 @@ nav ul{
   margin: 0;
 }
 
+.mobile-menu, .menu-symbol{
+  display: none;
+}
+
 nav ul li{
   list-style: none;
   padding: 15px 10px;
@@ -72,6 +76,42 @@ nav ul li a:hover { color: grey;}
   }
 }
 
+
+/* Menu on mobile */
+
+@media only screen and (max-width: 600px) {
+  .main-menu{
+    display: none;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .menu-symbol{
+    display: block;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: large;
+  }
+
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 50px;
+    margin: 0;
+    padding: 0 10px;
+    z-index: 10;
+    background-color: #e6cecce6;
+    height: auto;
+    position: absolute;
+    width: 100%;
+    top: 57px;
+    right: 0;
+  }
+
+}
 
 /* ------ FOOTER ------ */
 
@@ -110,31 +150,36 @@ footer a{
   display: flex;
 }
 
-.main_left{
-  width: 65%;
-  min-width: 700px;
-}
+@media only screen and (min-width: 601px) {
+  .main_left{
+    width: 65%;
+    min-width: 700px;
+  }
 
-.main_right{
-  width: 35%;
-  min-width: 300px;
-  padding-left: 20px;
+  .main_right{
+    width: 35%;
+    min-width: 300px;
+    padding-left: 20px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
   .main_content {
-    width: 100vw;
     margin: auto;
     padding: 0px 5px;
     margin-top: 50px;
   }
+  .main_content_4_8 {
+    display: flex;
+    flex-direction: column;
+  }
 
   .main_left{
-    width: 100%;
+    width: 100vw;
   }
 
   .main_right{
-    width: 100%;
+    width: 100vw;
   }
 }
 
@@ -240,19 +285,25 @@ footer a{
 
 
 /* Tableau des rencontres */
-.scoreboard{
-  min-width: 600px;
-  padding-bottom: 30px;
+@media only screen and (min-width: 980px) {
+  .scoreboard{
+    min-width: 600px;
+  }
 }
-.scoreboard tr{
-  text-align: center;
-}
-.scoreboard tr:not(:first-child){
-  height: 50px;
-}
-.scoreboard tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
+
+  .scoreboard{
+    padding-bottom: 30px;
+  }
+  .scoreboard tr{
+    text-align: center;
+  }
+  .scoreboard tr:not(:first-child){
+    height: 50px;
+  }
+  .scoreboard tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
 
 
 .tab_score {
@@ -281,6 +332,12 @@ footer a{
 .leaderboard{
   padding-bottom: 30px;
 }
+@media only screen and (max-width: 600px) {
+  .leaderboard{
+    width: 98vw;
+  }
+}
+
 .leaderboard tr:not(:first-child){
   height: 40px;
 }
@@ -291,15 +348,18 @@ footer a{
 .leaderboard td, .leaderboard tr{
   border-bottom: 1px lightgrey solid;
 }
-.leaderboard td{
-  min-width: 30px;
-  text-align: center;
-}
-.leaderboard td:nth-child(2){ width: 100px; }
-.leaderboard td:nth-child(3){ width: 50px; }
-.leaderboard td:nth-child(7),
-.leaderboard td:nth-child(10){
-  padding-right: 20px;
+
+.leaderboard td{ text-align: center; }
+
+@media only screen and (min-width: 601px) {
+  .leaderboard td{ min-width: 30px; }
+
+  .leaderboard td:nth-child(2){ width: 100px; }
+  .leaderboard td:nth-child(3){ width: 50px; }
+  .leaderboard td:nth-child(7),
+  .leaderboard td:nth-child(10){
+    padding-right: 20px;
+  }
 }
 
 .leaderboard .lb_br {

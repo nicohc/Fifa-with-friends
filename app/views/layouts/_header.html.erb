@@ -2,7 +2,7 @@
     <div class="site_title">Matchs entre potes
     </div>
     <nav>
-      <ul class="">
+      <ul class="main-menu"><!-- Menu principal normal -->
         <li><%= link_to "Accueil", '/' %></li>
         <li><%= link_to "Liste des Matchs", all_matches_path %> </li>
         <li><%= link_to "Classement", leaderboard_path %> </li>
@@ -29,5 +29,30 @@
 
 
       </ul>
+      <div class="menu-symbol">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="mobile-menu" style="display:none;"><!-- Menu mobile -->
+        <li><%= link_to "Accueil", '/' %></li>
+        <li><%= link_to "Liste des Matchs", all_matches_path %> </li>
+        <li><%= link_to "Classement", leaderboard_path %> </li>
+        <li class="divider"></li>
+        <li><%= link_to "Nouveau match", new_match_path %> </li>
+        <% if user_signed_in? %>
+          <li class="dropdown">Paramètres
+              <li><%= link_to "Nouveau joueur", new_player_path %> </li>
+              <li><%= link_to "Nouveau club", new_club_path %> </li>
+              <li><%= link_to "Liste des clubs", all_clubs_path %> </li>
+              <li><%= link_to "Modifier mon compte", edit_user_registration_path %>
+              </li>
+              <li><%= link_to "Se déconnecter", destroy_user_session_path, method: :delete  %>
+              </li>
+          </li>
+
+        <% else%>
+            <li><%= link_to "Se connecter", new_user_session_path %>
+            </li>
+        <% end %>
+      </ul> <!-- FIN Menu mobile -->
     </nav>
 </header>
