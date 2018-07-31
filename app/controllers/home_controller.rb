@@ -42,7 +42,10 @@ class HomeController < ApplicationController
   end
 
   def maj_status_last_match
-    if Match.last.teams.first.status.nil?
+    if Match.last.nil?
+      p "Pas de last match"
+    else
+      if Match.last.teams.first.status.nil?
           if ((@match_une.teams.first.score > @match_une.teams.last.score) && !@match_une.prolongations)
               flash[:notice] = "J1 a gagné"
               @match_une.teams.first.update_columns(status: "winner")
@@ -73,6 +76,7 @@ class HomeController < ApplicationController
               @match_une.teams.last.update_columns(status: "winner")
               @match_une.save
           end
+      end
     end
   end
 
