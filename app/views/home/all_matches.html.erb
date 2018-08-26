@@ -16,7 +16,7 @@
   <% if @matches.count == 0 %>
     <tr> <td> Pas de match enregistré </td> </tr>
   <% else %>
-    <% @matches.each do |match| %>
+    <% @matches.order('id DESC').each do |match| %>
       <% if match.teams.empty? %>
       <tr>
         <td><%= match.id %></td>

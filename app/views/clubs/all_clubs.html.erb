@@ -13,12 +13,17 @@
   <% if @clubs.count == 0 %>
     <tr> <td> Pas de club enregistré </td> </tr>
   <% else %>
-    <% @clubs.each do |club| %>
+    <% @clubs.order('name ASC').each do |club| %>
     <tr>
         <td><%= club.id %></td>
         <td><%= club.name %> </td>
         <td><%= club.image_url %> </td>
         <td><%= link_to "Modifier", edit_club_path(club)%></td>
+        <td><% if Team.includes(:clubs).where("club_id = ?", club.id).empty? %>
+                <%= link_to 'Supprimer', club_path(club), method: :delete, data: { confirm: 'Etes vous sur ?' }%>
+            <% end%>
+        </td>
+
     </tr>
     <% end %>
   <% end %>
