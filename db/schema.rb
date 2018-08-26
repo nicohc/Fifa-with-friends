@@ -31,8 +31,6 @@ ActiveRecord::Schema.define(version: 20180411125740) do
     t.boolean "prolongations"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "club_id"
-    t.index ["club_id"], name: "index_matches_on_club_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -40,12 +38,12 @@ ActiveRecord::Schema.define(version: 20180411125740) do
     t.integer "points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "win"
-    t.integer "win_prol"
-    t.integer "win_peno"
-    t.integer "lose"
-    t.integer "lose_prol"
-    t.integer "lose_peno"
+    t.integer "win", default: 0
+    t.integer "win_prol", default: 0
+    t.integer "win_peno", default: 0
+    t.integer "lose", default: 0
+    t.integer "lose_prol", default: 0
+    t.integer "lose_peno", default: 0
   end
 
   create_table "teams", force: :cascade do |t|
