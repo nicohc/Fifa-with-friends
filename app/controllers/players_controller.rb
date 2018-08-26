@@ -27,6 +27,7 @@ class PlayersController < ApplicationController
   def show
     @player = Player.find(params[:id])
     @teams = Team.all
+
   end
 
   def destroy
@@ -34,6 +35,7 @@ class PlayersController < ApplicationController
     @player.destroy
     redirect_to root_path
   end
+
 
   private
   def players_params
