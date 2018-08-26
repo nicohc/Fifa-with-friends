@@ -83,7 +83,7 @@
 
       <td><%= match.teams.last.club.name %> </td>
       <td><%= link_to Player.find(match.teams.last.player_id).pseudo, player_path(match.teams.last.player_id) %> </td>
-      <td><% if @player.id == match.teams.where('status = "winner"').first.player_id %>
+      <td><% if @player.id == match.teams.where("status='winner'").first.player_id %>
               Victoire
           <% else %>
               Défaite
