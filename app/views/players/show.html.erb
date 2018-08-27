@@ -96,14 +96,7 @@
         <td><%= match.teams.last.club.name %></td>
       <% end %>
       <td><%= link_to Player.find(match.teams.last.player_id).pseudo, player_path(match.teams.last.player_id) %> </td>
-<!-- Heroku bloquant
-      <td><% if match.teams.where("status='winner'").first.player == @player %>
-              Victoire
-          <% else %>
-              Défaite
-          <% end %>
-      </td>
--->
+
     </tr>
   <% end %>
   <% } %>
