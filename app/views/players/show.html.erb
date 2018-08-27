@@ -44,7 +44,12 @@
 
   </tr>
 </table>
-
+<div class="title_w_bg">Rencontres directes </div>
+<br>
+<% Match.includes(:players).where("players.id = ?", [@player.id, Player.find(2).id]).each { |match| %>
+  <td><%= match.id %></td>
+<% } %>
+<br>
 
 <div class="title_w_bg">Matchs </div>
 
