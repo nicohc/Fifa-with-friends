@@ -4,5 +4,8 @@ class Player < ApplicationRecord
   has_many :matches
 
   validates :pseudo, uniqueness: true
- 
+
+
+
+
 end

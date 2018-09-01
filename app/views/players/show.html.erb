@@ -46,17 +46,24 @@
 </table>
 <div class="title_w_bg">Rencontres directes </div>
 <br>
-<% result = {} %>
 
-<%= Match.includes(:teams).where("teams.player_id": [2, @player.id]).references(:teams).ids.each_with_object(Hash.new(0)) { |rencontre,counts| counts[rencontre] += 1 }%>
+<%= Match.includes(:teams).where("teams.player_id": [2, @player.id]).references(:teams).ids.each_with_object(Hash.new(0)) { |rencontre,counts| counts[rencontre] += 1 }.select{|k,v| v == 2}.keys
+%>
 <br>
-<%= Match.includes(:teams).where("teams.player_id": [2, @player.id]).references(:teams).ids%>
+<% @players.each { |pl|  %>
+  <%= pl.id %>
+<% } %>
 <br>
-<%= Match.includes(:teams).where("teams.player_id": [2 || @player.id]).references(:teams).ids%>
-<BR> <%= Match.includes(:teams).where("teams.player_id": [2 && @player.id]).references(:teams).ids%>
+<div id="country">
+<%= select_tag :player, options_for_select(@players.collect{|p| [p.pseudo, p.id]},
+    selected: params[:player]), prompt: "Select player", class: "form-control" %>
+</div>
 <br>
+
+
 
 <%= p "Début liste matchs" %>
+<br>
 <div class="title_w_bg">Matchs </div>
 
 <br>
@@ -111,3 +118,17 @@
 
 <br><br>
 <%= link_to "Accueil", root_path %>
+
+
+<script type="text/javascript">
+
+$(document).on("change", "#country select", function(){
+  var country = $(this).val();
+  $.ajax({},
+    success: function (response) {
+      console.log(response);
+    }
+  });
+});
+
+</script>

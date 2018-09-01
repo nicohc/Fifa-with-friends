@@ -15,3 +15,5 @@ club_un = Club.create(name: "O.M", image_url:'https://i.eurosport.com/2017/04/30
 club_deux = Club.create(name: "Lille", image_url:'http://www.footmercato.net/images/a/de-nombreux-departs-sont-a-prevoir-a-lille_202620.jpg')
 club_trois = Club.create(name: "Niort", image_url: 'http://www.allezredstar.com/images2012/m2848_NIORT.jpg')
 club_quatre = Club.create(name: "Charenton", image_url:"https://static.ladepeche.fr/content/media/image/large/2017/07/03/201707031303-full.jpg")
+
+user_nico = User.create(username: "Nico", email:"nico@gmail.com", password: "coucou")
