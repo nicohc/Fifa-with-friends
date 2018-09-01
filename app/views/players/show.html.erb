@@ -49,9 +49,14 @@
 <% result = {} %>
 
 <%= Match.includes(:teams).where("teams.player_id": [2, @player.id]).references(:teams).ids.each_with_object(Hash.new(0)) { |rencontre,counts| counts[rencontre] += 1 }%>
-
+<br>
+<%= Match.includes(:teams).where("teams.player_id": [2, @player.id]).references(:teams).ids%>
+<br>
+<%= Match.includes(:teams).where("teams.player_id": [2 || @player.id]).references(:teams).ids%>
+<BR> <%= Match.includes(:teams).where("teams.player_id": [2 && @player.id]).references(:teams).ids%>
 <br>
 
+<%= p "Début liste matchs" %>
 <div class="title_w_bg">Matchs </div>
 
 <br>
