@@ -41,14 +41,11 @@
     <td colspan = 3><%= @player.win + @player.win_prol + @player.win_peno %> Victoires </td>
     <td colspan = 3><%= @player.lose + @player.lose_prol + @player.lose_peno %> Défaites </td>
     <td colspan = 3></td>
-
   </tr>
 
   <tr>
     <td colspan = 2>Rencontres directes</td>
     <td colspan = 11>... à partir du match n°82</td>
-
-
   </tr>
 
   <% @players.ids.each { |pl|  %>
@@ -84,6 +81,15 @@
     onchange: 'your_onchange_handler()' %>
 </div>
 -->
+
+<div class="title_w_bg">Equipes les plus utilisées </div>
+<br>
+<% club = @player.teams.each_with_object(Hash.new(0)) do |tm,counts| counts[tm.club.name]+= 1 end %>
+<% sortcountclub = club.sort_by{|k,v| v}.reverse%>
+<% sortcountclub.take(5).each{ |a,b| %>
+  <%= a %>, <%= b %> fois.
+  <br>
+<% } %>
 
 <br>
 <div class="title_w_bg">Matchs </div>
