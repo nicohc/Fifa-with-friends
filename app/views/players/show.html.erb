@@ -43,26 +43,47 @@
     <td colspan = 3></td>
 
   </tr>
+
+  <tr>
+    <td colspan = 2>Rencontres directes</td>
+    <td colspan = 11></td>
+
+  </tr>
+
+  <% @players.ids.each { |pl|  %>
+    <% if !(@player.id == pl) %>
+    <tr>
+        <td></td>
+        <td class="lead_team" colspan = 3 > vs. <%= Player.find(pl).pseudo %> : </td>
+        <% rencontre = Match.includes(:teams).where("teams.player_id": [pl, @player.id]).references(:teams).ids.each_with_object(Hash.new(0)) { |rencontre,counts| counts[rencontre] += 1 }.select{|k,v| v == 2}.keys %>
+        <% if rencontre.empty? %>
+          <td colspan = 6>Pas de rencontre entre ces deux joueurs.</td>
+          <td colspan = 3></td>
+
+        <% else %>
+          <% mixmatches = rencontre.each_with_object(Hash.new(0)) { |r,counts| counts[@player.teams.where(match_id:r).first.status] += 1 } %>
+          <td colspan = 3><%= mixmatches["winner"] %> Victoire(s) </td>
+          <td colspan = 3><%= mixmatches["loser"] %> Défaite(s) </td>
+          <td colspan = 3></td>
+        <% end %>
+    </tr>
+    <% end %>
+  <% } %>
+
 </table>
+
+<!--
 <div class="title_w_bg">Rencontres directes </div>
 <br>
-
-<%= Match.includes(:teams).where("teams.player_id": [2, @player.id]).references(:teams).ids.each_with_object(Hash.new(0)) { |rencontre,counts| counts[rencontre] += 1 }.select{|k,v| v == 2}.keys
-%>
-<br>
-<% @players.each { |pl|  %>
-  <%= pl.id %>
-<% } %>
-<br>
 <div id="country">
-<%= select_tag :player, options_for_select(@players.collect{|p| [p.pseudo, p.id]},
-    selected: params[:player]), prompt: "Select player", class: "form-control" %>
+<%= select_tag :player,
+    options_for_select(@players.collect{|p| [p.pseudo, p.id]},
+    selected: params[:player]),
+    prompt: "Selectionner un adversaire", class: "form-control",
+    onchange: 'your_onchange_handler()' %>
 </div>
-<br>
+-->
 
-
-
-<%= p "Début liste matchs" %>
 <br>
 <div class="title_w_bg">Matchs </div>
 
