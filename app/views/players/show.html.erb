@@ -97,7 +97,9 @@
     <th>Score</th>
     <th>Team 2</th>
     <th>Joueur 2</th>
+    <!--
     <th>Résultat</th>
+    -->
   </tr>
   <br>
   <% Match.includes(:players).where("players.id = ?", @player.id).references(:players).each { |match| %>
