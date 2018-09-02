@@ -23,6 +23,8 @@ class HomeController < ApplicationController
     maj_status_last_match()
 
     image_a_la_une()
+    gros_titre_a_la_une()
+
     @players = Player.all
     @comments = Comment.all
     #reset_points()
@@ -88,6 +90,16 @@ class HomeController < ApplicationController
         @image_a_la_une = 'clubs/noclub.jpg'
       else
         @image_a_la_une = @match_une.teams.where("status = 'winner'").first.club.image_url
+      end
+    end
+  end
+
+  def gros_titre_a_la_une
+    if !@matches.first.nil?
+      if @match_une.teams.first.status ='winner'
+        @team_grostitre = @match_une.teams.first.club.name
+      else
+        @team_grostitre = @match_une.teams.second.club.name
       end
     end
   end

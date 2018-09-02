@@ -1,11 +1,15 @@
-<h1>FIFA 18</h1>
+<% if !mobile_device? %>
+<h1 class="mobile-content_une">FIFA 18</h1>
+<% end %>
 
 <div class="main_content_4_8">
   <div class="main_left">
     <% if @matches.count != 0 %>
+      <% if !mobile_device? %>
       <div class="title_w_bg title_une">A la une
         <div class="title_journee"><%= @match_une.id %>e journée</div>
       </div>
+      <% end %>
 
       <div class="image_une">
         <%= link_to image_tag(@image_a_la_une, size: "700x416", alt: "Illustration"), match_path(@match_une)%>
@@ -43,13 +47,21 @@
 
           </tr>
       </div>
+      <% if mobile_device? %>
+        <div class="grostitre_une">
+          <% if mobile_device? %>
+            A la une | <%= @match_une.id %>e journée
+          <% end %>
+          <div class="grostitre">
+            <%= @team_grostitre %> l'emporte
+          </div>
+        </div>
+      <% end %>
+
     <% end %>
 
-
-
-
-
     <br>
+
     <br>
 
     <div class="title_w_bg">Les 5 derniers matchs</div>
@@ -108,7 +120,7 @@
 
     <div class="title_w_bg">Classement </div>
 
-    <table class="leaderboard">
+    <table class="leaderboard mobile-content_une">
       <tr>
         <th> </th>
         <th> </th>
@@ -144,11 +156,9 @@
       <% end %>
 
     </table>
-
     <br>
-
     <div class="title_w_bg">Reglement en vigueur </div>
-    <ul class="list_rules">
+    <ul class="list_rules mobile-content_une">
       <li>Match gagné : +3
       <li>Match gagné après prolongations : +2
       <li>Match gagné aux penalties : +1
@@ -160,7 +170,7 @@
     <div class="title_w_bg">Le vestiaire </div>
     <br>
 
-    <table class="commentboard">
+    <table class="commentboard mobile-content_une">
       <% if @comments.count == 0 %>
         Pas de commentaire
       <% else %>
@@ -173,7 +183,7 @@
       <% end %>
     </table>
     <br>
-    <div class="new_comment">
+    <div class="new_comment mobile-content_une">
       <% if user_signed_in? %>
           <%= form_for(Comment.new) do |com| %>
             <div class="field">

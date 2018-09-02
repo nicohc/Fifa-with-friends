@@ -14,8 +14,8 @@ body {
   font-size: 25px;
   font-weight: bold;
   font-style: italic;
-  color: #D61E00;
   line-height: 50px;
+  a { color: #D61E00; text-decoration: none;}
 }
 
 .navbar {
@@ -166,10 +166,11 @@ footer a{
   }
 }
 
+/* ------ UNE Mobile ------ */
 @media only screen and (max-width: 600px) {
   .main_content {
     margin: auto;
-    padding: 0px 5px;
+    padding: 0px;
   }
   .main_content_4_8 {
     display: flex;
@@ -177,12 +178,17 @@ footer a{
   }
 
   .main_left{
-    width: 98vw;
+    width: 100vw;
   }
 
   .main_right{
     width: 98vw;
   }
+
+  .mobile-content_une{
+      padding: 0 10px 0 5px !important;
+  }
+
 }
 
 .title_w_bg{
@@ -237,18 +243,37 @@ footer a{
   align-items: center;
 }
 
+.grostitre_une{
+  background-color: #202020;
+  position: relative;
+  display: block;
+  padding: 12px;
+  min-height: 60px;
+  color: rgb(144, 144, 144);
+  text-align: center;
+}
+ .grostitre{
+   color: white;
+   font-size: 22px;
+   font-family: "Sans";
+   line-height: 22px;
+   font-weight: 700;
+   margin-top: 10px;
+   text-transform: uppercase;
+ }
 
+/* ------ UNE Mobile ------ */
 @media only screen and (max-width: 600px) {
    .image_une {
-     height: 200px;
-     width: 95vw;
+     height: 235px;
+     width: 100vw;
    }
    .image_une img {
      min-height: 200px;
    }
    .score_une {
      height: 60px;
-     width: 95vw;
+     width: 100vw;
      padding: 0 5px;
      box-sizing: border-box;
 
@@ -283,7 +308,7 @@ footer a{
   padding: 0 2px;
 }
 .score_une .tab_score_une div{
-  padding: 10px 20px;
+  padding: 15px 20px;
   margin: 0 2px;
   font-size: 26px;
   font-weight: bold;
@@ -339,6 +364,10 @@ footer a{
     padding: 5px 2px 5px;
     font-size: initial !important;
   }
+  .scoreboard {
+    width: 100vw;
+    padding: 0 10px 0 0px;
+  }
 }
 .scoreboard .tab_score_prol {
   padding-top: 5px;
@@ -360,7 +389,8 @@ footer a{
 }
 @media only screen and (max-width: 600px) {
   .leaderboard{
-    width: 98vw;
+    width: 100vw;
+
   }
 }
 
@@ -408,6 +438,7 @@ footer a{
 
 ul.list_rules{
   padding: 0;
+  margin-top: 0;
 }
 
 .list_rules li{
