@@ -6,6 +6,7 @@
 <table class="scoreboard">
   <tr>
     <th>ID du club</th>
+    <th>Det.</th>
     <th>Nom</th>
     <th>Url image</th>
   </tr>
@@ -16,6 +17,7 @@
     <% @clubs.order('name ASC').each do |club| %>
     <tr>
         <td><%= club.id %></td>
+        <td><%= club.denominateur %> </td>
         <td><%= club.name %> </td>
         <td><%= club.image_url %> </td>
         <td><%= link_to "Modifier", edit_club_path(club)%></td>
