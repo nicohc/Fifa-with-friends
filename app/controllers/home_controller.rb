@@ -113,7 +113,7 @@ class HomeController < ApplicationController
     @team_grostitre_loser = @match_une.teams.where("status = 'loser'").first.club.name
 
     @grostitre = "La Belgique a le seum" if @team_grostitre_loser === "Belgique"
-    @grostitre = "La Suède victorieuse sans Zlatan !" if @team_grostitre === 'Suede'
+    @grostitre = "La Suède victorieuse sans Zlatan !" if @team_grostitre === "Suède"
   end
 
   def special_score
