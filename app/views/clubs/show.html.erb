@@ -10,4 +10,7 @@ Image de référence : <%= @club.image_url %>
 
 <% if user_signed_in? %>
   <%= link_to "Modifier", edit_club_path(@club) %>
+  <br>
+  <%= link_to "Retour à la liste des clubs", all_clubs_path %>
+
 <% end %>

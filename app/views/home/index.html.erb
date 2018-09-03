@@ -53,7 +53,11 @@
             A la une | <%= @match_une.id %>e journée
           <% end %>
           <div class="grostitre">
-            <%= @team_grostitre_denominateur.nil? ? "" : @team_grostitre_denominateur %> <%= @team_grostitre %> l'emporte
+            <% if !@grostitre.nil? %>
+              <%= @grostitre %>
+            <% else  %>
+              <%= @team_grostitre_denominateur.nil? ? "" : @team_grostitre_denominateur %> <%= @team_grostitre %> l'emporte
+            <% end %>
           </div>
         </div>
       <% end %>

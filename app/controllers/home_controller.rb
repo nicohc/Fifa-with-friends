@@ -24,6 +24,8 @@ class HomeController < ApplicationController
 
     image_a_la_une()
     gros_titre_a_la_une()
+    special_teams()
+    special_score()
 
     @players = Player.all
     @comments = Comment.all
@@ -106,7 +108,22 @@ class HomeController < ApplicationController
     end
   end
 
+  def special_teams
+    @team_grostitre = @match_une.teams.where("status = 'winner'").first.club.name
+    @team_grostitre_loser = @match_une.teams.where("status = 'loser'").first.club.name
 
+    @grostitre = "La Belgique a le seum" if @team_grostitre_loser === "Belgique"
+    @grostitre = "La Suède victorieuse sans Zlatan !" if @team_grostitre === 'Suede'
+  end
+
+  def special_score
+    @difference_buts = (@match_une.teams.first.score - @match_une.teams.last.score).abs
+    p @difference_buts
+
+    if @difference_buts > 5
+      @grostitre = "Ca pique !"
+    end
+  end
 
 =begin
 
