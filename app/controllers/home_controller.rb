@@ -98,8 +98,10 @@ class HomeController < ApplicationController
     if !@matches.first.nil?
       if @match_une.teams.first.status ='winner'
         @team_grostitre = @match_une.teams.first.club.name
+        @team_grostitre_denominateur = @match_une.teams.first.club.denominateur
       else
         @team_grostitre = @match_une.teams.second.club.name
+        @team_grostitre_denominateur = @match_une.teams.second.club.denominateur
       end
     end
   end

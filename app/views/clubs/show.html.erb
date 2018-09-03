@@ -1,4 +1,4 @@
-<h1>Club : <%= @club.name %></h1>
+<h1>Club : <%= @club.denominateur.nil? ? "" :  @club.denominateur %> <%= @club.name %></h1>
 
 
 Image de référence : <%= @club.image_url %>
