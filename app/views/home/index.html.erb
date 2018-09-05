@@ -96,7 +96,11 @@
             <td><span class="tab_player">
               <%= link_to Player.find(match.teams.first.player_id).pseudo, player_path(match.teams.first.player_id) %> </td>
             </span></td>
-            <td><%= match.teams.first.club.name %> </td>
+
+            <% if match.teams.first.status == "winner" %><td class="statuswinner">
+              <% else %><td>
+            <% end %>
+            <%= match.teams.first.club.name %> </td>
             <td><div class="tab_score">
                   <%= match.teams.first.score %> - <%= match.teams.last.score %>
                 </div>
@@ -105,8 +109,10 @@
                 <%= match.teams.first.prol_score %><%= match.teams.first.prol_score == nil ? '' : ' tab ' %><%= match.teams.last.prol_score %>
                 </span>
             </td>
-
-            <td><%= match.teams.last.club.name %></td>
+            <% if match.teams.last.status == "winner" %><td class="statuswinner">
+              <% else %><td>
+            <% end %>
+            <%= match.teams.last.club.name %></td>
             <td><span class="tab_player">
                 <%= link_to Player.find(match.teams.last.player_id).pseudo, player_path(match.teams.last.player_id) %>
                 </span>
@@ -146,7 +152,7 @@
       %>
         <tr>
           <td><%= i %></td>
-          <td class="lead_team"><%= player.pseudo %></td>
+          <td class="lead_team"><%= link_to player.pseudo, player_path(player) %></td>
           <td><b><%= player.points %></b></td>
           <td class="lb_br"><%= player.teams.count %> </td>
           <td><%= player.win %> </td>

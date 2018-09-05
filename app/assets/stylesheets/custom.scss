@@ -265,7 +265,7 @@ footer a{
 /* ------ UNE Mobile ------ */
 @media only screen and (max-width: 600px) {
    .image_une {
-     height: 235px;
+     height: 205px;
      width: 100vw;
    }
    .image_une img {
@@ -432,6 +432,7 @@ footer a{
   font-weight: bold;
   font-size: 15px;
   text-align: left;
+  a {text-decoration: none; color: inherit;}
 }
 
 
