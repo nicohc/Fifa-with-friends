@@ -92,9 +92,49 @@
 <% } %>
 
 <br>
-<div class="title_w_bg">Matchs </div>
-
+<div class="title_w_bg">Records et chiffres </div>
+<br>- Record de buts marqués en un match : <%= maxgoal = @player.teams.maximum("score") %>
 <br>
+<table class="scoreboard">
+  <tr>
+    <th>ID du match</th>
+    <th>Joueur 1</th>
+    <th>Team 1</th>
+    <th>Score</th>
+    <th>Team 2</th>
+    <th>Joueur 2</th>
+  </tr>
+  <br>
+  <% match_maxgoal = @player.teams.where(score: maxgoal).first.match %>
+  <tr>
+    <td><%= match_maxgoal.id %></td>
+    <td><%= link_to Player.find(match_maxgoal.teams.first.player_id).pseudo, player_path(match_maxgoal.teams.first.player_id) %> </td>
+    <% if match_maxgoal.teams.first.status == "winner" %>
+      <td class="statuswinner"><%= match_maxgoal.teams.first.club.name %></td>
+      <% else %>
+      <td><%= match_maxgoal.teams.first.club.name %></td>
+    <% end %>
+    <td><div class="tab_score">
+          <%= match_maxgoal.teams.first.score %> - <%= match_maxgoal.teams.last.score %>
+        </div>
+        <span class="tab_score_prol">
+        <%= (match_maxgoal.prolongations && !match_maxgoal.teams.first.prol_score) ? "a.p" : "" %>
+        <%= match_maxgoal.teams.first.prol_score %><%= match_maxgoal.teams.first.prol_score == nil ? '' : ' tab ' %><%= match_maxgoal.teams.last.prol_score %>
+        </span>
+    </td>
+
+    <% if match_maxgoal.teams.last.status == "winner" %>
+      <td class="statuswinner"><%= match_maxgoal.teams.last.club.name %></td>
+      <% else %>
+      <td><%= match_maxgoal.teams.last.club.name %></td>
+    <% end %>
+    <td><%= link_to Player.find(match_maxgoal.teams.last.player_id).pseudo, player_path(match_maxgoal.teams.last.player_id) %> </td>
+
+  </tr>
+</table>
+
+
+<div class="title_w_bg">Matchs </div>
 <table class="scoreboard">
   <tr>
     <th>ID du match</th>
@@ -148,17 +188,3 @@
 
 <br><br>
 <%= link_to "Accueil", root_path %>
-
-
-<script type="text/javascript">
-
-$(document).on("change", "#country select", function(){
-  var country = $(this).val();
-  $.ajax({},
-    success: function (response) {
-      console.log(response);
-    }
-  });
-});
-
-</script>
