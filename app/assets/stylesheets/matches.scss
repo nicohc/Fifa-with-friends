@@ -1,3 +1,34 @@
 // Place all the styles related to the matches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* Entete profil match */
+.match_entete{
+  font-size: 10px;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+.match_entete_teams{
+  width: 100%;
+  display: flex;
+}
+.match_entete_team_one, .match_entete_team_two{
+  height: 75px;
+  width: 50%;
+  color: white;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+.match_entete_bas{
+  text-align: center;
+  padding-top: 10px;
+  font-size: 10px;
+  img{
+    padding-top: 10px;
+    width: 100%;
+  }
+}

@@ -7,6 +7,9 @@
   <br>
   <%= c.label :"Nom du club" %>
   <%= c.text_field :name, class: 'form-control'%>
+  <br>
+  <%= c.label :"Couleur principale du club" %>
+  <%= c.text_field :color, class: 'form-control'%>
   <br><br>
 
   <%= c.label :"Image victorieuse du club" %>
@@ -17,5 +20,5 @@
 <% end %>
 
 <br><br>
-
-<%= link_to "Accueil", root_path %>
+<%= link_to "Retour à la liste des clubs", all_clubs_path %>
+<br><%= link_to "Accueil", root_path %>

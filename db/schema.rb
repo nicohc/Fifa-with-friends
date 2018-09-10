@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180903175141) do
+ActiveRecord::Schema.define(version: 20180910210650) do
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20180903175141) do
     t.datetime "updated_at", null: false
     t.string "image_url"
     t.string "denominateur"
+    t.string "color"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -32,6 +33,8 @@ ActiveRecord::Schema.define(version: 20180903175141) do
     t.boolean "prolongations"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "title"
+    t.string "image_une_url"
   end
 
   create_table "players", force: :cascade do |t|

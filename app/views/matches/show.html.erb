@@ -1,4 +1,21 @@
-<h1>Match #<%= @match.id%></h1>
+<div class="match_entete">
+  <h1><%= @match.id%>e journée</h1>
+</div>
+<div class="match_entete_teams">
+  <div class="match_entete_team_one" style="background-color:<%= @home_team.club.color.nil? ? "black" : @home_team.club.color %>">
+    <%= @home_team.club.name %>
+  </div>
+
+  <div class="match_entete_team_two" style="background-color:<%= @visiting_team.club.color.nil? ? "black" : @visiting_team.club.color %>">
+    <%= @visiting_team.club.name %>
+  </div>
+</div>
+<% if !@match.image_une_url.nil? %>
+  <div class="match_entete_bas">
+    <%= @match.created_at.strftime("%A %d %B %Y") %>
+    <br><%= image_tag(image_path(@match.image_une_url), size: "624x416")%>
+  </div>
+<% end%>
 
 <p>
 <% if !@match.teams.first.player_id.nil? %>
@@ -11,7 +28,6 @@
   Score penalties : <%= @home_team.prol_score %>
 <% end %>
 </p>
-<br>
 <p>
 <% if !@match.teams.last.player_id.nil? %>
   Joueur 2: <%= @visiting_team.player.pseudo %>

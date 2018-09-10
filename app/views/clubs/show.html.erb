@@ -1,10 +1,14 @@
-<h1>Club : <%= @club.denominateur.nil? ? "" :  @club.denominateur %> <%= @club.name %></h1>
-
+<div class="entete_club" style="background-color:<%= @club.color%>">
+  <h1><%= @club.denominateur.nil? ? "" :  @club.denominateur %> <%= @club.name %></h1>
+</div>
 
 Image de référence : <%= @club.image_url %>
 <br><br>
-<%= image_tag(image_path(@club.image_url), size: "624x416") %>
-
+<% if @club.image_url.empty? %>
+  Aucune image
+<% else %>
+  <%= image_tag(image_path(@club.image_url), size: "624x416") %>
+<% end %>
 
 <br><br>
 

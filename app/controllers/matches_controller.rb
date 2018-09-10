@@ -97,6 +97,14 @@ class MatchesController < ApplicationController
   end
 
 
+  def image_illustration
+    if @match.teams.first.status = "winner"
+      @match.image_une_url = @match.teams.first.club.image_url
+    else
+      @match.image_une_url = @match.teams.last.club.image_url
+    end
+    @match.save
+  end
 
 
   def points_conditions
@@ -218,6 +226,7 @@ class MatchesController < ApplicationController
     winning_conditions()
 
         if @match.save
+          image_illustration()
           points_conditions()
           flash[:success] = "Votre match a bien été créé !"
           redirect_to @match
@@ -288,7 +297,7 @@ class MatchesController < ApplicationController
 
   private
   def match_params
-    params.require(:match).permit(:id, :prolongations,
+    params.require(:match).permit(:id, :prolongations, :image_une_url,
       teams_attributes: [:id, :score, :prol_score, :club_id, :match_id, :player_id],
       )
   end

@@ -8,6 +8,7 @@
     <th>ID du club</th>
     <th>Det.</th>
     <th>Nom</th>
+    <th>Couleur</th>
     <th>Url image</th>
   </tr>
   <br>
@@ -16,9 +17,10 @@
   <% else %>
     <% @clubs.order('name ASC').each do |club| %>
     <tr>
-        <td><%= club.id %></td>
+        <td><%= link_to club.id, club_path(club) %></td>
         <td><%= club.denominateur %> </td>
         <td><%= club.name %> </td>
+        <td style="background-color:<%= club.color%>"></td>
         <td><%= club.image_url %> </td>
         <td><%= link_to "Modifier", edit_club_path(club)%></td>
         <td><% if Team.includes(:clubs).where("club_id = ?", club.id).empty? %>
