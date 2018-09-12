@@ -1,11 +1,15 @@
 <header class="navbar">
-    <div class="site_title"><%= link_to "Matchs entre potes", root_path %>
+    <div id="site_title"><%= link_to "La compète", root_path %>
     </div>
     <nav>
       <ul class="main-menu"><!-- Menu principal normal -->
-        <li><%= link_to "Accueil", '/' %></li>
-        <li><%= link_to "Liste des Matchs", all_matches_path %> </li>
-        <li><%= link_to "Classement", leaderboard_path %> </li>
+        <div>
+          <li><%= link_to content_tag(:i, nil, class: 'fas fa-home'), root_path %></li>
+          <li id="site_title_fixed"><%= link_to "La compète", root_path %></li>
+          <li><%= link_to "Liste des Matchs", all_matches_path %> </li>
+          <li><%= link_to "Classement", leaderboard_path %> </li>
+        </div>
+        <div>
         <li class="divider"></li>
         <li><%= link_to "Nouveau match", new_match_path %> </li>
         <% if user_signed_in? %>
@@ -21,9 +25,9 @@
               </li>
             </ul>
           </li>
-
+        </div>
         <% else%>
-            <li><%= link_to "Se connecter", new_user_session_path %>
+            <li><%= link_to content_tag(:i, nil, class: 'far fa-user'), new_user_session_path %>
             </li>
         <% end %>
 

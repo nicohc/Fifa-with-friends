@@ -10,42 +10,78 @@ body {
 }
 
 /* ------ HEADER ------ */
-
-.site_title{
-  position: absolute;
-  font-size: 25px;
-  font-weight: bold;
-  font-style: italic;
-  line-height: 50px;
-  a { color: #D61E00; text-decoration: none;}
-}
-
 .navbar {
   background-color: white;
-  border-bottom: #D61E00 7px solid;
   position: relative;
   top: 0px;
   right: 0;
   left: 0;
-  height: 50px;
+  height: 160px;
   margin: auto;
   padding: 0 1%;
   z-index: 9;
-  position: sticky;
+  border-bottom: #D61E00 7px solid;
+
+}
+.navbar-fixed {
+  background-color: white;
+  border-bottom: #D61E00 7px solid;
+}
+
+#site_title{
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 80px;
+  line-height: 100px;
+  width: 100%;
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out ;
+  padding-top: 10px;
+  a { color: #D61E00; text-decoration: none;}
+}
+
+#site_title_fixed{
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 15px;
+  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out ;
+  a { color: #D61E00; text-decoration: none;}
 }
 
 nav {
   display: inline-block;
   float: right;
+  width: 100%;
 }
 
 nav ul{
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 50px;
   margin: 0;
+  padding-left: 0;
+}
+
+nav ul div{
+  display: inline-flex;
+}
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 98%;
+  padding: 0 1%;
 }
 
 .mobile-menu, .menu-symbol{
@@ -71,7 +107,7 @@ nav ul li a:hover { color: grey;}
     right: 8px;
     position: absolute;
     display: block;
-    top: 50px;
+    margin-top: 15px;
     height: auto;
     background-color: whitesmoke;
     padding: 10px;
@@ -87,6 +123,13 @@ nav ul li a:hover { color: grey;}
   }
 }
 @media only screen and (max-width: 600px) {
+  .navbar {
+    height: 50px;
+  }
+  #site_title{
+    font-size: 22px;
+    line-height: 30px;
+  }
   .menu-symbol{
     display: block;
     height: 50px;
