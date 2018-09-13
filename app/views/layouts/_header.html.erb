@@ -1,6 +1,8 @@
 <header class="navbar">
+    <% if !mobile_device? %>
     <div id="site_title"><%= link_to "La compète", root_path %>
     </div>
+    <% end %>
     <nav>
       <ul class="main-menu"><!-- Menu principal normal -->
         <div>
@@ -12,6 +14,7 @@
         <div>
         <li class="divider"></li>
         <li><%= link_to "Nouveau match", new_match_path %> </li>
+        <li><%= link_to "Créateur de match", alea_match_path %> </li>
         <% if user_signed_in? %>
           <li class="dropdown">Paramètres
 
@@ -33,30 +36,36 @@
 
 
       </ul>
-      <div class="menu-symbol">
-        <i class="fas fa-bars"></i>
-      </div>
-      <ul class="mobile-menu" style="display:none;"><!-- Menu mobile -->
-        <li><%= link_to "Accueil", '/' %></li>
-        <li><%= link_to "Liste des Matchs", all_matches_path %> </li>
-        <li><%= link_to "Classement", leaderboard_path %> </li>
-        <li class="divider"></li>
-        <li><%= link_to "Nouveau match", new_match_path %> </li>
-        <% if user_signed_in? %>
-          <li class="dropdown">Paramètres
-              <li><%= link_to "Nouveau joueur", new_player_path %> </li>
-              <li><%= link_to "Nouveau club", new_club_path %> </li>
-              <li><%= link_to "Liste des clubs", all_clubs_path %> </li>
-              <li><%= link_to "Modifier mon compte", edit_user_registration_path %>
-              </li>
-              <li><%= link_to "Se déconnecter", destroy_user_session_path, method: :delete  %>
-              </li>
-          </li>
+      <% if mobile_device? %>
 
-        <% else%>
-            <li><%= link_to "Se connecter", new_user_session_path %>
+        <div id="site_title_mobile"><%= link_to "La compète", root_path %>
+        <div class="menu-symbol">
+          <i class="fas fa-bars"></i>
+        </div>
+        <ul class="mobile-menu" style="display:none;"><!-- Menu mobile -->
+          <li><%= link_to "Accueil", '/' %></li>
+          <li><%= link_to "Liste des Matchs", all_matches_path %> </li>
+          <li><%= link_to "Classement", leaderboard_path %> </li>
+          <li class="divider"></li>
+          <li><%= link_to "Nouveau match", new_match_path %> </li>
+          <li><%= link_to "Créateur de match", alea_match_path %> </li>
+          <% if user_signed_in? %>
+            <li class="dropdown">Paramètres
+                <li><%= link_to "Nouveau joueur", new_player_path %> </li>
+                <li><%= link_to "Nouveau club", new_club_path %> </li>
+                <li><%= link_to "Liste des clubs", all_clubs_path %> </li>
+                <li><%= link_to "Modifier mon compte", edit_user_registration_path %>
+                </li>
+                <li><%= link_to "Se déconnecter", destroy_user_session_path, method: :delete  %>
+                </li>
             </li>
-        <% end %>
-      </ul> <!-- FIN Menu mobile -->
+
+          <% else%>
+              <li><%= link_to "Se connecter", new_user_session_path %>
+              </li>
+          <% end %>
+        </ul> <!-- FIN Menu mobile -->
+      <% end %>
+
     </nav>
 </header>

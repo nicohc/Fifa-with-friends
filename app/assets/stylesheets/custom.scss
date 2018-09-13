@@ -126,9 +126,29 @@ nav ul li a:hover { color: grey;}
   .navbar {
     height: 50px;
   }
-  #site_title{
+  #site_title_mobile{
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-style: italic;
     font-size: 22px;
     line-height: 30px;
+    width: 100%;
+    text-align: center;
+    padding-left: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    border-bottom: #D61E00 7px solid;
+    background-color: white;
+    a { color: #D61E00; text-decoration: none;}
+    li { font-size: 16px;
+      a {
+        color: white;
+      }
+    }
   }
   .menu-symbol{
     display: block;
@@ -297,7 +317,16 @@ footer a{
   color: rgb(144, 144, 144);
   text-align: center;
 }
- .grostitre{
+.grostitre{
+  font-size: 28px;
+  font-family: "Sans";
+  line-height: 28px;
+  font-weight: 800;
+  margin-top: 10px;
+  text-transform: uppercase;
+  padding-bottom: 7px;
+}
+ .grostitre_mobile{
    color: white;
    font-size: 22px;
    font-family: "Sans";

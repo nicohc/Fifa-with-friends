@@ -5,7 +5,18 @@
 <div class="main_content_4_8">
   <div class="main_left">
     <% if @matches.count != 0 %>
+
       <% if !mobile_device? %>
+
+          <div class="grostitre">
+            <% if !@grostitre.nil? %>
+              <%= @grostitre %>
+            <% else  %>
+              <%= @team_grostitre_denominateur.nil? ? "" : @team_grostitre_denominateur %> <%= @team_grostitre %> l'emporte
+            <% end %>
+          </div>
+
+
       <div class="title_w_bg title_une">A la une
         <div class="title_journee"><%= @match_une.id %>e journée</div>
       </div>
@@ -52,7 +63,7 @@
           <% if mobile_device? %>
             A la une | <%= @match_une.id %>e journée
           <% end %>
-          <div class="grostitre">
+          <div class="grostitre_mobile">
             <% if !@grostitre.nil? %>
               <%= @grostitre %>
             <% else  %>

@@ -273,6 +273,15 @@ class MatchesController < ApplicationController
     @playertwo = Player.find(@match.teams.last.player_id)
   end
 
+  def randomiser
+    clubs = Club.all
+    mode = ["Normal", "Sans règle", "Survie", "Distance", "Premier à...", "Têtes et volées" ]
+    @modealeatoire = mode.sample(1)
+    @club_alea1 = clubs.sample.name
+    @club_alea2 = clubs.sample.name
+
+  end
+
   def destroy
     @match = Match.find(params[:id])
     @playerone = Player.find(@match.teams.first.player_id)
