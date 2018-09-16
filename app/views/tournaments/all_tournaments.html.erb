@@ -1,0 +1,8 @@
+<h1>Liste des compétitions réalisées </h1>
+
+<div class="title_w_bg">Compétitions</div>
+
+<% @tournaments.each do |tounament| %>
+  <%= tournament.name %>
+  <br><%= tournament.finished %>
+<% end %>  

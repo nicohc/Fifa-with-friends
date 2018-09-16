@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'seasons/new'
+
+  get 'seasons/show'
+
   root 'home#index'
   get '/touslesmatchs', to: 'home#all_matches', as: 'all_matches'
   get '/touslesclubs', to: 'clubs#all_clubs', as: 'all_clubs'
@@ -7,6 +11,10 @@ Rails.application.routes.draw do
   get '/randomiser', to: 'matches#randomiser', as: 'alea_match'
 
   resources :matches
+  resources :tournaments
+  get '/competitions', to: 'tournaments#all_tournaments', as: 'all_tournaments'
+
+
   resources :teams
   resources :players
   resources :clubs

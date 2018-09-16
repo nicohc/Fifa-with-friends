@@ -5,7 +5,6 @@ class Player < ApplicationRecord
 
   validates :pseudo, uniqueness: true
 
-
-
+  has_many :seasons
 
 end

@@ -11,4 +11,5 @@ class Match < ApplicationRecord
   has_many :clubs, :through => :teams
   accepts_nested_attributes_for :clubs
 
+  belongs_to :tournament, foreign_key: "tournament_id"
 end

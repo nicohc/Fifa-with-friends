@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180910210650) do
+ActiveRecord::Schema.define(version: 20180916225447) do
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20180910210650) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.string "image_une_url"
+    t.integer "tournament_id"
+    t.index ["tournament_id"], name: "index_matches_on_tournament_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -50,6 +52,20 @@ ActiveRecord::Schema.define(version: 20180910210650) do
     t.integer "lose_peno", default: 0
   end
 
+  create_table "seasons", force: :cascade do |t|
+    t.integer "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "points", default: 0
+    t.integer "win", default: 0
+    t.integer "win_prol", default: 0
+    t.integer "win_peno", default: 0
+    t.integer "lose", default: 0
+    t.integer "lose_prol", default: 0
+    t.integer "lose_peno", default: 0
+    t.index ["player_id"], name: "index_seasons_on_player_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.integer "score"
@@ -63,6 +79,20 @@ ActiveRecord::Schema.define(version: 20180910210650) do
     t.index ["club_id"], name: "index_teams_on_club_id"
     t.index ["match_id"], name: "index_teams_on_match_id"
     t.index ["player_id"], name: "index_teams_on_player_id"
+  end
+
+  create_table "tournaments", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "win_regular_points"
+    t.integer "win_prol_points"
+    t.integer "win_peno_points"
+    t.integer "lose_regular_points"
+    t.integer "lose_prol_points"
+    t.integer "lose_peno_points"
+    t.integer "draw_regular_points"
+    t.boolean "finished"
   end
 
   create_table "users", force: :cascade do |t|

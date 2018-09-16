@@ -8,6 +8,7 @@
         <div>
           <li><%= link_to content_tag(:i, nil, class: 'fas fa-home'), root_path %></li>
           <li id="site_title_fixed"><%= link_to "La compète", root_path %></li>
+          <li><%= link_to "Liste des Compétitions", all_tournaments_path %> </li>
           <li><%= link_to "Liste des Matchs", all_matches_path %> </li>
           <li><%= link_to "Classement", leaderboard_path %> </li>
         </div>
