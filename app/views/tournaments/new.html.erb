@@ -1,2 +1,47 @@
-<h1>Tournaments#new</h1>
-<p>Find me in app/views/tournaments/new.html.erb</p>
+<h1>Créer une nouvelle compétition</h1>
+
+<%= form_for(@tournament) do |t| %>
+
+  <div class="field">
+    <%= t.label :"Nom du tournoi" %>
+    <%= t.text_field :name %>
+  </div>
+  <br><br>
+  <div class="title_w_bg">Règles de la compétition</div>
+  <div class="tab_tournament_rules">
+    <div class="field">
+      <%= t.label :"Points pour une victoire (90mn)" %>
+      <%= t.text_field :win_regular_points %>
+    </div>
+    <div class="field">
+      <%= t.label :"Points pour une victoire après prolongations" %>
+      <%= t.text_field :win_prol_points %>
+    </div>
+    <div class="field">
+      <%= t.label :"Points pour une victoire aux pénalties"  %>
+      <%= t.text_field :win_peno_points %>
+    </div>
+    <br>
+    <div class="field">
+      <%= t.label :"Points pour une défaite(90mn)" %>
+      <%= t.text_field :lose_regular_points %>
+    </div>
+    <div class="field">
+      <%= t.label :"Points pour une défaite après prolongations" %>
+      <%= t.text_field :lose_prol_points %>
+    </div>
+    <div class="field">
+      <%= t.label :"Points pour une défaite aux pénaltys"  %>
+      <%= t.text_field :lose_peno_points %>
+    </div>
+    <br>
+    <div class="field">
+      <%= t.label :"Points pour un match nul" %>
+      <%= t.text_field :draw_regular_points %>
+    </div>
+  </div>
+  <br>
+  <div class="actions">
+    <%= t.submit %>
+  </div>
+<% end %>

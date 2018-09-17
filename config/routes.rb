@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   resources :matches
   resources :tournaments
   get '/competitions', to: 'tournaments#all_tournaments', as: 'all_tournaments'
-
+  get '/tournaments/:id/closed', to: 'tournaments#close_tournament', as: 'close_tournament'
+  get '/tournaments/:id/opened', to: 'tournaments#open_tournament', as: 'open_tournament'
 
   resources :teams
   resources :players

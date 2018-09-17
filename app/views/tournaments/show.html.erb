@@ -1,2 +1,27 @@
-<h1>Tournaments#show</h1>
-<p>Find me in app/views/tournaments/show.html.erb</p>
+<h1>Compétition : <%= @tournament.name %></h1>
+
+
+Points pour une victoire :
+<br>Sur 90mn : <%= @tournament.win_regular_points %>
+<br>Après prolongations : <%= @tournament.win_prol_points %>
+<br>Aux pénalties : <%= @tournament.win_peno_points %>
+
+<br><br>
+Points pour une défaite
+<br>90mn : <%= @tournament.draw_regular_points %>
+<br>Après prolongations : <%= @tournament.lose_regular_points %>
+<br>Aux pénaltys : <%= @tournament.lose_prol_points %>
+
+<br><br>Points pour un match nul : <%= @tournament.lose_peno_points %>
+
+<br><br><%= @tournament.finished ? "Terminé" : "En cours"%></td>
+<br>
+<% if @tournament.finished? %>
+  <%= link_to "Réouvrir", open_tournament_path %>
+<% else %>
+  <%= link_to "Cloturer", close_tournament_path %>
+<% end %>
+<br><br>
+<%= link_to 'Supprimer', tournament_path(@tournament), method: :delete, data: { confirm: 'Etes vous sur de supprimer cette compétition et tous ses résultats ?' }%>
+<br><br>
+<%= link_to "Retour à la liste des compétitions", all_tournaments_path %>

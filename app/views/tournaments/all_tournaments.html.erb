@@ -1,8 +1,33 @@
 <h1>Liste des compétitions réalisées </h1>
 
 <div class="title_w_bg">Compétitions</div>
-
-<% @tournaments.each do |tounament| %>
-  <%= tournament.name %>
-  <br><%= tournament.finished %>
-<% end %>  
+<br>
+<table class="tournament_list">
+  <tr>
+    <th>Tournoi</th>
+    <th>Victoire</th>
+    <th>V.pr.</th>
+    <th>V.pn</th>
+    <th>Nul</th>
+    <th>Défaite</th>
+    <th>D.pr.</th>
+    <th>D.pn.</th>
+    <th>Statut</th>
+  </tr>
+  <% @tournaments.each do |tournament| %>
+  <br>
+  <tr>
+    <td><%= link_to tournament.name, tournament_path(tournament) %></td>
+    <td><%= tournament.win_regular_points %></td>
+    <td><%= tournament.win_prol_points %></td>
+    <td><%= tournament.win_peno_points %></td>
+    <td><%= tournament.draw_regular_points %></td>
+    <td><%= tournament.lose_regular_points %></td>
+    <td><%= tournament.lose_prol_points %></td>
+    <td><%= tournament.lose_peno_points %></td>
+    <td><%= tournament.finished ? "Terminé" : "En cours" %></td>
+  </tr>
+  <% end %>
+</table>
+<br><br>
+<%= link_to "Nouvelle compétition", new_tournament_path %>

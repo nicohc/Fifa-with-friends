@@ -553,3 +553,24 @@ ul.list_rules{
 #comment_content {
     width: 280px;
 }
+
+/* Tournament - Tableau Règles nouvelle compétition */
+.tab_tournament_rules{
+  label{ width: 200px;}
+  input{ width: 20px;}
+}
+
+/* Tournament - Tableau Règles nouvelle compétition */
+.tournament_list{
+
+}
+.tournament_list tr{
+  height: 30px;
+}
+.tournament_list tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+.tournament_list th:first-child,
+.tournament_list th:last-child {
+  width: 150px;
+}
