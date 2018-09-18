@@ -1,8 +1,6 @@
-<p><%= @match.tournament.name%>ici</h1>
 <div class="match_entete">
-  <h1><%= @match.id%>e journée</h1>
+  <h1><%= @match.tournament.name%> - <%= @match.id%>e journée</h1>
 </div>
-<br>
 <div class="match_entete_teams">
   <div class="match_entete_team_one" style="background-color:<%= @home_team.club.color.nil? ? "black" : @home_team.club.color %>">
     <%= @home_team.club.name %>
@@ -12,39 +10,27 @@
     <%= @visiting_team.club.name %>
   </div>
 </div>
+<div class="match_entete_bas">
+  <%= @match.created_at.strftime("%A %d %B %Y") %>
+</div>
+
+<!-- Début bloc image et score -->
 <% if !@match.image_une_url.nil? %>
-  <div class="match_entete_bas">
-    <%= @match.created_at.strftime("%A %d %B %Y") %>
-    <br><%= image_tag(image_path(@match.image_une_url), size: "624x416")%>
+  <div class="match_picture" style="background-image: url( <%= @match.image_une_url%>)">
+  <% else %>
+  <div class="match_picture" style="background-image: url( <%= image_path('clubs/noclub.jpg') %>)">
+<% end %>
+    <div class="match_tab_player"><%= @home_team.player.pseudo %></div>
+    <div class="tab_score match_tab_score">
+          <%= @home_team.score %> - <%= @visiting_team.score %>
+          <br>
+          <span class="tab_score_prol">
+            <%= (@match.prolongations && !@match.teams.first.prol_score) ? "a.p" : "" %>
+            <%= @home_team.prol_score %><%= @home_team.prol_score == nil ? '' : ' tab ' %><%= @visiting_team.prol_score %>
+          </span>
+    </div>
+    <div class="match_tab_player"><%= @visiting_team.player.pseudo %></div>
   </div>
-<% end%>
+<!-- Fin bloc image et score -->
 
-<p>
-<% if !@match.teams.first.player_id.nil? %>
-  Joueur 1: <%= @home_team.player.pseudo %>
-<% end %>
-<br>Equipe 1: <%= @home_team.club.name %>
-<br>Score : <%= @home_team.score %><% @match.prolongations ? "après prolongations" : "" %>
-<br>
-<% if @match.prolongations? %>
-  Score penalties : <%= @home_team.prol_score %>
-<% end %>
-</p>
-<p>
-<% if !@match.teams.last.player_id.nil? %>
-  Joueur 2: <%= @visiting_team.player.pseudo %>
-<% end %>
-<br>Equipe 2: <%= @visiting_team.club.name %>
-<br>Score : <%= @visiting_team.score %><% @match.prolongations ? "après prolongations" : "" %>
-<br>
-<% if @match.prolongations? %>
-  Score penalties : <%= @visiting_team.prol_score %>
-<% end %>
-
-</p>
-<br>
-
-
-
-
-<p> <a href="/">Retourner à l'accueil</a> </p>
+<br><%= link_to "Retour à la liste des Matchs", all_matches_path %>

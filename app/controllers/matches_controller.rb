@@ -219,12 +219,13 @@ class MatchesController < ApplicationController
 
   def create
     @match = Match.new(match_params)
-    if matches_good_conditions
-
+    if matches_good_conditions()
     @playerone = Player.find(@match.teams.first.player_id)
     @playertwo = Player.find(@match.teams.last.player_id)
     winning_conditions()
-
+    p "e2"
+    @match.tournament_id = Tournament.last.id
+    p "e3"
         if @match.save
           image_illustration()
           points_conditions()
