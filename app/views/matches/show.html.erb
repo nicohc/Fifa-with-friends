@@ -1,6 +1,8 @@
+<p><%= @match.tournament.name%>ici</h1>
 <div class="match_entete">
   <h1><%= @match.id%>e journée</h1>
 </div>
+<br>
 <div class="match_entete_teams">
   <div class="match_entete_team_one" style="background-color:<%= @home_team.club.color.nil? ? "black" : @home_team.club.color %>">
     <%= @home_team.club.name %>
