@@ -24,13 +24,13 @@
     <th>D.</th>
     <th>D.pr</th>
     <th>D.pn.</th>
-    <th>Diff.</th>
     <th>bp.</th>
-    <th class="lb_br">bc.</th>
+    <th>bc.</th>
+    <th class="lb_br">Diff.</th>
   </tr>
   <br>
 
-  <% @tournament.seasons.each { |ts| %>
+  <% @tournament.seasons.order(points: :desc).each { |ts| %>
   <tr>
     <td></td>
     <td><%= ts.player.pseudo %></td>
@@ -42,9 +42,9 @@
     <td><%= ts.lose %> </td>
     <td><%= ts.lose_prol %> </td>
     <td class="lb_br"><%= ts.lose_peno %> </td>
-    <td></td>
-    <td></td>
-    <td class="lb_br"></td>
+    <td><%= @bp = Team.all.where("season_id= '#{ts.id}'").sum(:score) %></td>
+    <td><%= @bc = (Team.where("season_id= '#{ts.id}'").collect{|a| a.match.teams.collect{|b| b.score}.sum }.sum)-(Team.all.where("season_id= '#{ts.id}'").sum(:score)) %></td>
+    <td class="lb_br"><%= @bp-@bc %> </td>
 
   </tr>
   <% } %>
