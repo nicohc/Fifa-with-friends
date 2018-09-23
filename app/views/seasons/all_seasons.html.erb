@@ -1,0 +1,19 @@
+<h1>FIFA 18</h1>
+
+<div class="title_w_bg">Liste des saisons</div>
+<table class="tournament_list">
+  <tr>
+    <th>id</th>
+    <th>compétition</th>
+    <th>player</th>
+  </tr>
+  <% @seasons.each do |season| %>
+  <tr>
+    <td><%= season.id %></td>
+    <td><%= season.tournament.name %></td>
+    <td><%= season.player.pseudo %></td>
+    <td><%= link_to 'Supprimer', season_path(season), method: :delete,
+            data: { confirm: 'Etes vous sur ?' }%></td>
+  </tr>
+  <% end %>
+</table>

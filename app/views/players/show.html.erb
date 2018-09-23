@@ -5,13 +5,41 @@
 <% if @player.seasons.empty? %>
   Pas de saison
 <% else %>
-  <% @player.seasons.each { |pls|  %>
-    <%= pls.id %>
-    <%= link_to pls.tournament, tournament_path(pls.tournament) %>
+  <table class="leaderboard">
+    <tr>
+      <th>Id season</th>
+      <th>Comp.</th>
+      <th>Pts</th>
+      <th>J.</th>
+      <th>G.</th>
+      <th>G.pr</th>
+      <th>G.pn.</th>
+      <th>D.</th>
+      <th>D.pr</th>
+      <th>D.pn.</th>
+      <th>Diff.</th>
+      <th>bp.</th>
+      <th class="lb_br">bc.</th>
+    </tr>
     <br>
+  <% @player.seasons.each { |pls|  %>
+    <tr>
+      <td><%= pls.id %></td>
+      <td class="lead_team"><%= link_to pls.tournament.name, tournament_path(pls.tournament) %></td>
+      <td><b><%= pls.points %></b></td>
+      <td class="lb_br"><%= pls.teams.count %> </td>
+      <td><%= pls.win %> </td>
+      <td><%= pls.win_prol %> </td>
+      <td class="lb_br"><%= pls.win_peno %> </td>
+      <td><%= pls.lose %> </td>
+      <td><%= pls.lose_prol %> </td>
+      <td class="lb_br"><%= pls.lose_peno %> </td>
+    </tr>
   <% } %>
+  </table>
 <% end %>
 
+<br>
 <br>
 
 <div class="title_w_bg">Statistiques </div>

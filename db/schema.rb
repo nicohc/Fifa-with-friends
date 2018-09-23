@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180922181715) do
+ActiveRecord::Schema.define(version: 20180923101352) do
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
@@ -78,9 +78,11 @@ ActiveRecord::Schema.define(version: 20180922181715) do
     t.integer "player_id"
     t.integer "club_id"
     t.string "status"
+    t.integer "season_id"
     t.index ["club_id"], name: "index_teams_on_club_id"
     t.index ["match_id"], name: "index_teams_on_match_id"
     t.index ["player_id"], name: "index_teams_on_player_id"
+    t.index ["season_id"], name: "index_teams_on_season_id"
   end
 
   create_table "tournaments", force: :cascade do |t|

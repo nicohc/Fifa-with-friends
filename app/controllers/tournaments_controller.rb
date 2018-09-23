@@ -32,9 +32,28 @@ class TournamentsController < ApplicationController
     end
   end
 
-  def migrate_all_existing_matches
+  def migrate_all_existing_matches_to_last_season
+    Team.all.each { |t|
+        t.season_id = t.player.seasons.last.id
+        t.save
+    }
+    redirect_to all_tournaments_path
   end
-
+  def migrate_all_player_stats_to_last_season_stats
+    Season.all.each { |se|
+      if !se.tournament_id.nil?
+        se.points = se.player.points
+        se.win = se.player.win
+        se.win_prol = se.player.win_prol
+        se.win_peno = se.player.win_peno
+        se.lose = se.player.lose
+        se.lose_prol = se.player.lose_prol
+        se.lose_peno = se.player.lose_peno
+        se.save
+      end
+    }
+    redirect_to all_tournaments_path
+  end
 
 
   def show

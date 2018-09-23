@@ -271,6 +271,7 @@ class MatchesController < ApplicationController
   end
 
 
+
   def show
     @match = Match.find(params[:id])
     @home_team = Match.find(params[:id]).teams.first
