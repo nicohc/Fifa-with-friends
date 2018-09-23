@@ -1,12 +1,15 @@
 <h1>FIFA 18 - Tous les matchs</h1>
 
 <div class="title_w_bg">Liste des matchs joués</div>
+<!--
 <br><%= link_to "MAJ Matchs => Ajout tournoi", maj_tournament_path%></td>
-
+<br>
+-->
 
 <table class="scoreboard">
   <tr>
     <th>ID du match</th>
+    <th>Compétiton</th>
     <th>Joueur 1</th>
     <th>Team 1</th>
     <th>Score</th>
@@ -29,6 +32,7 @@
       <% else %>
       <tr>
         <td><%= match.id %></td>
+        <td><%= match.tournament.name %></td>
         <td><%= link_to Player.find(match.teams.first.player_id).pseudo, player_path(match.teams.first.player_id) %> </td>
         <td><%= match.teams.first.club.name %> </td>
         <td><div class="tab_score">

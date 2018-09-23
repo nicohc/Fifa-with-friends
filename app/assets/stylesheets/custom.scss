@@ -258,7 +258,7 @@ footer a{
 
 .title_w_bg{
   margin-top: 12px;
-  background: #606060;
+  background: black;
   height: 28px;
   line-height: 31px;
   font-size: 16px;
@@ -277,11 +277,18 @@ footer a{
   padding: 0px 0px 5px 9px;
   line-height: 33px;
 }
-.title_journee{
-  padding: 0 35px 0 10px;
+.title_tournament{
+  padding: 0 20px 0 10px;
   display: inline-block;
   margin-left: 25px;
-  background-color: grey;
+  background-color: #606060;
+}
+.title_journee{
+  padding: 0 20px 0 10px;
+  margin-left: -4px;
+  display: inline-block;
+  background-color: rgb(204, 204, 204);
+  color: black;
 }
 
 .image_une {

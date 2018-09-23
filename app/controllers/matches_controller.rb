@@ -53,13 +53,11 @@ class MatchesController < ApplicationController
           @match.prolongations = true
           @match.teams.first.status = "winner"
           @match.teams.last.status = "loser"
-          @match.save
       elsif (@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score < @match.teams.last.prol_score)
           flash[:notice] = "J2 a gagné aux tirs au buts."
           @match.prolongations = true
           @match.teams.first.status = "loser"
           @match.teams.last.status = "winner"
-          @match.save
       end
   end
 
@@ -95,17 +93,6 @@ class MatchesController < ApplicationController
           @match.save
       end
   end
-
-
-  def image_illustration
-    if @match.teams.first.status = "winner"
-      @match.image_une_url = @match.teams.first.club.image_url
-    else
-      @match.image_une_url = @match.teams.last.club.image_url
-    end
-    @match.save
-  end
-
 
   def points_conditions
     if ((@match.teams.first.score > @match.teams.last.score) && !@match.prolongations)
@@ -216,6 +203,16 @@ class MatchesController < ApplicationController
   end
 
 
+    def image_illustration
+      if @match.teams.first.status == "winner"
+        @match.image_une_url = @match.teams.first.club.image_url
+        @match.save
+      else
+        @match.image_une_url = @match.teams.last.club.image_url
+        @match.save
+      end
+    end
+
 
   def create
     @match = Match.new(match_params)
@@ -223,11 +220,10 @@ class MatchesController < ApplicationController
     @playerone = Player.find(@match.teams.first.player_id)
     @playertwo = Player.find(@match.teams.last.player_id)
     winning_conditions()
-    p "e2"
-    @match.tournament_id = Tournament.last.id
-    p "e3"
         if @match.save
+          p "e3"
           image_illustration()
+          p "e4"
           points_conditions()
           flash[:success] = "Votre match a bien été créé !"
           redirect_to @match
@@ -274,6 +270,9 @@ class MatchesController < ApplicationController
     redirect_to all_matches_path
   end
 
+  def maj_season_for_teams
+  end
+
   def show
     @match = Match.find(params[:id])
     @home_team = Match.find(params[:id]).teams.first
@@ -288,7 +287,6 @@ class MatchesController < ApplicationController
     @modealeatoire = mode.sample(1)
     @club_alea1 = clubs.sample.name
     @club_alea2 = clubs.sample.name
-
   end
 
   def destroy
@@ -315,7 +313,7 @@ class MatchesController < ApplicationController
 
   private
   def match_params
-    params.require(:match).permit(:id, :prolongations, :image_une_url,
+    params.require(:match).permit(:id, :prolongations, :image_une_url, :tournament_id,
       teams_attributes: [:id, :score, :prol_score, :club_id, :match_id, :player_id],
       )
   end

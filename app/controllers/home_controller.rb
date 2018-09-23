@@ -21,11 +21,14 @@ class HomeController < ApplicationController
     @match_une = Match.last
 
     maj_status_last_match()
-
-    image_a_la_une()
-    gros_titre_a_la_une()
-    special_teams()
-    special_score()
+    if Match.last.nil?
+      p "Pas de last match"
+    else
+      image_a_la_une()
+      gros_titre_a_la_une()
+      special_teams()
+      special_score()
+    end
 
     @players = Player.all
     @comments = Comment.all
@@ -97,15 +100,15 @@ class HomeController < ApplicationController
   end
 
   def gros_titre_a_la_une
-    if !@matches.first.nil?
-      if @match_une.teams.first.status ='winner'
-        @team_grostitre = @match_une.teams.first.club.name
-        @team_grostitre_denominateur = @match_une.teams.first.club.denominateur
-      else
-        @team_grostitre = @match_une.teams.second.club.name
-        @team_grostitre_denominateur = @match_une.teams.second.club.denominateur
+      if !@matches.first.nil?
+        if @match_une.teams.first.status == 'winner'
+          @team_grostitre_denominateur = @match_une.teams.first.club.denominateur
+          @team_grostitre = @match_une.teams.first.club.name
+        else
+          @team_grostitre_denominateur = @match_une.teams.second.club.denominateur
+          @team_grostitre = @match_une.teams.second.club.name
+        end
       end
-    end
   end
 
   def special_teams
@@ -124,6 +127,8 @@ class HomeController < ApplicationController
       @grostitre = "Ca pique !"
     end
   end
+
+
 
 =begin
 

@@ -5,15 +5,20 @@
 <table class="tournament_list">
   <tr>
     <th>Tournoi</th>
+    <th>Nombre de joueurs</th>
     <th>Nombre de matchs</th>
     <th>Statut</th>
+    <th>-</th>
   </tr>
   <% @tournaments.each do |tournament| %>
   <br>
   <tr>
     <td><%= link_to tournament.name, tournament_path(tournament) %></td>
+    <td><%= tournament.players.count %></td>
     <td><%= tournament.matches.count %></td>
     <td><%= tournament.finished ? "Terminé" : "En cours" %></td>
+    <td><%= link_to 'Supprimer', tournament_path(tournament), method: :delete,
+            data: { confirm: 'Etes vous sur ?' }%></td>
   </tr>
   <% end %>
 </table>

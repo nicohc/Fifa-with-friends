@@ -7,6 +7,16 @@
     <%= t.text_field :name %>
   </div>
   <br><br>
+  <div class="title_w_bg">Joueurs</div>
+  <br>Ajoutez au moins deux joueurs pour lancer une nouvelle compétition : 
+  <div class="field">
+    <%= t.fields_for :seasons do |pls| %>
+      <%= pls.label :"Joueur" %>
+      <%= pls.collection_select :player_id, Player.all, :id, :pseudo, class: 'form-control', include_blank: "Choisir un joueur" %>
+      <br>
+    <% end %>
+  </div>
+  <br><br>
   <div class="title_w_bg">Règles de la compétition</div>
   <div class="tab_tournament_rules">
     <div class="field">

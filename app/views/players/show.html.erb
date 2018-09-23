@@ -1,5 +1,19 @@
 <h1>Profil du joueur : <%= @player.pseudo %></h1>
 
+<div class="title_w_bg"> Saisons du joueur </div>
+<br>
+<% if @player.seasons.empty? %>
+  Pas de saison
+<% else %>
+  <% @player.seasons.each { |pls|  %>
+    <%= pls.id %>
+    <%= pls.tournament %>
+    <br>
+  <% } %>
+<% end %>
+
+<br>
+
 <div class="title_w_bg">Statistiques </div>
 <br>
 <table class="leaderboard">

@@ -10,21 +10,47 @@
 <% end %>
 <br><br>
 
-<div class="title_w_bg">Règles</div>
-<br>Points pour une victoire :
-<br>Sur 90mn : <%= @tournament.win_regular_points %>
-<br>Après prolongations : <%= @tournament.win_prol_points %>
-<br>Aux pénalties : <%= @tournament.win_peno_points %>
+<div class="title_w_bg">Joueurs enregistrés</div>
 
-<br><br>
-Points pour une défaite
-<br>90mn : <%= @tournament.lose_regular_points %>
-<br>Après prolongations : <%= @tournament.lose_prol_points %>
-<br>Aux pénaltys : <%= @tournament.lose_peno_points %>
+<table class="leaderboard">
+  <tr>
+    <th> </th>
+    <th> </th>
+    <th>Pts</th>
+    <th>J.</th>
+    <th>G.</th>
+    <th>G.pr</th>
+    <th>G.pn.</th>
+    <th>D.</th>
+    <th>D.pr</th>
+    <th>D.pn.</th>
+    <th>Diff.</th>
+    <th>bp.</th>
+    <th class="lb_br">bc.</th>
+  </tr>
+  <br>
 
-<br><br>Points pour un match nul : <%= @tournament.draw_regular_points %>
+  <% @tournament.seasons.each { |ts| %>
+  <tr>
+    <td></td>
+    <td><%= ts.player.pseudo %></td>
+    <td><b><%= ts.points %></b></td>
+    <td class="lb_br">Décompte équipes </td>
+    <td><%= ts.win %> </td>
+    <td><%= ts.win_prol %> </td>
+    <td class="lb_br"><%= ts.win_peno %> </td>
+    <td><%= ts.lose %> </td>
+    <td><%= ts.lose_prol %> </td>
+    <td class="lb_br"><%= ts.lose_peno %> </td>
+    <td></td>
+    <td></td>
+    <td class="lb_br"></td>
 
-<br><br>
+  </tr>
+  <% } %>
+</table>
+
+<br>
 
 <div class="title_w_bg">Matchs</div>
 <br>
@@ -68,8 +94,23 @@ Points pour une défaite
   <% end %>
 
 </table>
+<br><br>
 
+<div class="title_w_bg">Règles</div>
+<br>Points pour une victoire :
+<br>Sur 90mn : <%= @tournament.win_regular_points %>
+<br>Après prolongations : <%= @tournament.win_prol_points %>
+<br>Aux pénalties : <%= @tournament.win_peno_points %>
+<br><br>
+Points pour une défaite
+<br>90mn : <%= @tournament.lose_regular_points %>
+<br>Après prolongations : <%= @tournament.lose_prol_points %>
+<br>Aux pénaltys : <%= @tournament.lose_peno_points %>
 
+<br><br>Points pour un match nul : <%= @tournament.draw_regular_points %>
+
+<br><br>
+<td><%= link_to "Modifier", edit_tournament_path(@tournament)%></td>
 <br><br>
 <%= link_to 'Supprimer', tournament_path(@tournament), method: :delete, data: { confirm: 'Etes vous sur de supprimer cette compétition et tous ses résultats ?' }%>
 <br><br>

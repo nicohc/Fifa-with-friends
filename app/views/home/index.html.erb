@@ -7,7 +7,7 @@
     <% if @matches.count != 0 %>
 
       <% if !mobile_device? %>
-
+        <% if @matches.count != 0 %>
           <div class="grostitre">
             <% if !@grostitre.nil? %>
               <%= @grostitre %>
@@ -15,9 +15,14 @@
               <%= @team_grostitre_denominateur.nil? ? "" : @team_grostitre_denominateur %> <%= @team_grostitre %> l'emporte
             <% end %>
           </div>
-
+        <% else %>
+          <div class="grostitre">
+            Pas de match rencontre
+          </div>
+        <% end %>
 
       <div class="title_w_bg title_une">A la une
+        <div class="title_tournament"><%= @match_une.tournament.name %></div>
         <div class="title_journee"><%= @match_une.id %>e journée</div>
       </div>
       <% end %>
