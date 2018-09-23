@@ -28,7 +28,22 @@ class PlayersController < ApplicationController
     @player = Player.find(params[:id])
     @teams = Team.all
     @players = Player.all
+    maj_season_for_players()
+  end
 
+  def maj_season_for_players
+    if @player.seasons.empty?
+    Player.all.each { |pl|
+      pl.seasons.build
+      pl.seasons.first.tournament_id = Tournament.last.id
+      if pl.save
+        flash[:success] = "Saison ajoutée !"
+      else
+        flash[:alert] = "Saison ajoutée !"
+        render :action => 'edit'
+      end
+    }
+    end
   end
 
   def destroy
@@ -40,7 +55,9 @@ class PlayersController < ApplicationController
 
   private
   def players_params
-      params.require(:player).permit(:pseudo, :points)
+      params.require(:player).permit(:pseudo, :points,
+      seasons_attributes: [:id, :tournament_id]
+    )
   end
 
 

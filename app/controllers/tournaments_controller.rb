@@ -35,6 +35,8 @@ class TournamentsController < ApplicationController
   def migrate_all_existing_matches
   end
 
+
+
   def show
     @tournament = Tournament.find(params[:id])
   end

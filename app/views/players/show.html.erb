@@ -109,6 +109,9 @@
 <div class="title_w_bg">Records et chiffres </div>
 <br>- Record de buts marqués en un match : <%= maxgoal = @player.teams.maximum("score") %>
 <br>
+<% if @player.teams.empty? %>
+  "Pas de match pour l'instant"
+<% else %>
 <table class="scoreboard">
   <tr>
     <th>ID du match</th>
@@ -146,6 +149,7 @@
 
   </tr>
 </table>
+<% end %>
 
 <br>
 <div class="title_w_bg">Tous les matchs du joueur</div>

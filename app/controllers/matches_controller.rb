@@ -270,8 +270,6 @@ class MatchesController < ApplicationController
     redirect_to all_matches_path
   end
 
-  def maj_season_for_teams
-  end
 
   def show
     @match = Match.find(params[:id])
