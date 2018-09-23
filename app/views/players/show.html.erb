@@ -7,7 +7,7 @@
 <% else %>
   <% @player.seasons.each { |pls|  %>
     <%= pls.id %>
-    <%= pls.tournament %>
+    <%= link_to pls.tournament, tournament_path(pls.tournament) %>
     <br>
   <% } %>
 <% end %>

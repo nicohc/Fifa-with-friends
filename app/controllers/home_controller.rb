@@ -16,6 +16,10 @@ class HomeController < ApplicationController
     Player.all.destroy_all
   end
 
+  def reset_tournaments
+    Tournament.all.destroy_all
+  end
+
   def index
     @matches = Match.all
     @match_une = Match.last
@@ -32,9 +36,10 @@ class HomeController < ApplicationController
 
     @players = Player.all
     @comments = Comment.all
-    #reset_points()
-    #reset_matches()
-    #reset_players()
+    # reset_points()
+    # reset_matches()
+    # reset_players()
+    # reset_tournaments()
   end
 
 
