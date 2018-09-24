@@ -58,6 +58,7 @@ class MatchesController < ApplicationController
           @match.prolongations = true
           @match.teams.first.status = "loser"
           @match.teams.last.status = "winner"
+
       end
   end
 
@@ -97,51 +98,51 @@ class MatchesController < ApplicationController
   def points_conditions
     if ((@match.teams.first.score > @match.teams.last.score) && !@match.prolongations)
         flash[:notice] = "+3 points pour J1"
-        @playerone.points += 3
-        @playerone.win += 1
-        @playerone.save
-        @playertwo.lose += 1
-        @playertwo.save
+        @seasonone.points += 3
+        @seasonone.win += 1
+        @seasonone.save
+        @seasontwo.lose += 1
+        @seasontwo.save
 
     elsif ((@match.teams.first.score < @match.teams.last.score) && !@match.prolongations)
         flash[:notice] = "+3 points pour J2"
-        @playertwo.points += 3
-        @playertwo.win += 1
-        @playertwo.save
-        @playerone.lose += 1
-        @playerone.save
+        @seasontwo.points += 3
+        @seasontwo.win += 1
+        @seasontwo.save
+        @seasonone.lose += 1
+        @seasonone.save
 
     elsif @match.prolongations && (@match.teams.first.score > @match.teams.last.score)
         flash[:notice] = "+2 points pour J1"
-        @playerone.points += 2
-        @playerone.win_prol += 1
-        @playerone.save
-        @playertwo.lose_prol += 1
-        @playertwo.save
+        @seasonone.points += 2
+        @seasonone.win_prol += 1
+        @seasonone.save
+        @seasontwo.lose_prol += 1
+        @seasontwo.save
 
     elsif @match.prolongations && (@match.teams.first.score < @match.teams.last.score)
         flash[:notice] = "+2 points pour J2"
-        @playertwo.points += 2
-        @playertwo.win_prol += 1
-        @playertwo.save
-        @playerone.lose_prol += 1
-        @playerone.save
+        @seasontwo.points += 2
+        @seasontwo.win_prol += 1
+        @seasontwo.save
+        @seasonone.lose_prol += 1
+        @seasonone.save
 
     elsif (@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score > @match.teams.last.prol_score)
         flash[:notice] = "+1 point pour J1"
-        @playerone.points += 1
-        @playerone.win_peno += 1
-        @playerone.save
-        @playertwo.lose_peno += 1
-        @playertwo.save
+        @seasonone.points += 1
+        @seasonone.win_peno += 1
+        @seasonone.save
+        @seasontwo.lose_peno += 1
+        @seasontwo.save
 
     elsif (@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score < @match.teams.last.prol_score)
         flash[:notice] = "+1 point pour J2"
-        @playertwo.points += 1
-        @playertwo.win_peno += 1
-        @playertwo.save
-        @playerone.lose_peno += 1
-        @playerone.save
+        @seasontwo.points += 1
+        @seasontwo.win_peno += 1
+        @seasontwo.save
+        @seasonone.lose_peno += 1
+        @seasonone.save
 
     else
         p "Autre chose"
@@ -219,8 +220,20 @@ class MatchesController < ApplicationController
     if matches_good_conditions()
     @playerone = Player.find(@match.teams.first.player_id)
     @playertwo = Player.find(@match.teams.last.player_id)
+
     winning_conditions()
         if @match.save
+          @seasonone = Season.where(["player_id=? and tournament_id=?", @playerone, @match.tournament_id])
+          @seasontwo = Season.where(["player_id=? and tournament_id=?", @playertwo, @match.tournament_id])
+          p "e1"
+          p @seasonone
+          p @seasontwo
+          @match.teams.first.season_id = @seasonone
+          @match.teams.second.season_id = @seasontwo
+          p "e2"
+          p @match.teams.first.season_id
+          @match.save
+
           p "e3"
           image_illustration()
           p "e4"
@@ -233,6 +246,7 @@ class MatchesController < ApplicationController
       p "Une erreur existe, veuillez recommencer."
     end
   end
+
 
   def edit
     @match = Match.find(params[:id])
@@ -313,7 +327,7 @@ class MatchesController < ApplicationController
   private
   def match_params
     params.require(:match).permit(:id, :prolongations, :image_une_url, :tournament_id,
-      teams_attributes: [:id, :score, :prol_score, :club_id, :match_id, :player_id],
+      teams_attributes: [:id, :score, :prol_score, :club_id, :match_id, :player_id, :season_id],
       )
   end
 end
