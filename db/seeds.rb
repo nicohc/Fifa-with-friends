@@ -12,7 +12,7 @@ joueur_trois = Player.create(pseudo: "Mike", points:0 )
 joueur_quatre = Player.create(pseudo: "Jim", points:0 )
 
 club_un = Club.create(name: "O.M", color:"#009CDC" ,denominateur: "L'", image_url:'https://i.eurosport.com/2017/04/30/2073448-43464179-640-360.jpg')
-club_deux = Club.create(name: "Lille", color:"red", image_url:'http://www.footmercato.net/images/a/de-nombreux-departs-sont-a-prevoir-a-lille_202620.jpg')
+club_deux = Club.create(name: "LOSC", color:"red", denominateur: "Le", image_url:'http://www.footmercato.net/images/a/de-nombreux-departs-sont-a-prevoir-a-lille_202620.jpg')
 club_trois = Club.create(name: "Niort",  color:"black",image_url: 'http://www.allezredstar.com/images2012/m2848_NIORT.jpg')
 club_quatre = Club.create(name: "Charenton", color:"yellow", image_url:"https://static.ladepeche.fr/content/media/image/large/2017/07/03/201707031303-full.jpg")
 

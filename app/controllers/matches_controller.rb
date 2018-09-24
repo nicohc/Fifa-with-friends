@@ -151,52 +151,52 @@ class MatchesController < ApplicationController
 
   def matches_update_remove_points
     if ((@home_team_old_score > @visiting_team_old_score ) && !@match_prol_old)
-        @playerone.points -= 3
+        @seasonone.points -= 3
         p "Retrait points J1 a gagné"
-        @playerone.win -= 1
-        @playerone.save
-        @playertwo.lose -= 1
-        @playertwo.save
+        @seasonone.win -= 1
+        @seasonone.save
+        @seasontwo.lose -= 1
+        @seasontwo.save
 
     elsif ((@home_team_old_score < @visiting_team_old_score ) && !@match_prol_old)
-        @playertwo.points -= 3
+        @seasontwo.points -= 3
         p "Retrait points J2 a gagné"
-        @playertwo.win -= 1
-        @playertwo.save
-        @playerone.lose -= 1
-        @playerone.save
+        @seasontwo.win -= 1
+        @seasontwo.save
+        @seasonone.lose -= 1
+        @seasonone.save
 
     elsif @match_prol_old && (@home_team_old_score > @visiting_team_old_score )
-        @playerone.points -= 2
+        @seasonone.points -= 2
         p "Retrait points : J1 a gagné après prolongations"
-        @playerone.win_prol -= 1
-        @playerone.save
-        @playertwo.lose_prol -= 1
-        @playertwo.save
+        @seasonone.win_prol -= 1
+        @seasonone.save
+        @seasontwo.lose_prol -= 1
+        @seasontwo.save
 
     elsif @match_prol_old && (@home_team_old_score < @visiting_team_old_score )
-        @playertwo.points -= 2
+        @seasontwo.points -= 2
         flash[:notice] = "Retrait points : J2 a gagné après prolongations"
-        @playertwo.win_prol -= 1
-        @playertwo.save
-        @playerone.lose_prol -= 1
-        @playerone.save
+        @seasontwo.win_prol -= 1
+        @seasontwo.save
+        @seasonone.lose_prol -= 1
+        @seasonone.save
 
     elsif (@home_team_old_score == @visiting_team_old_score ) && (@home_team_old_prol_score > @visiting_team_old_prol_score)
-        @playerone.points -= 1
+        @seasonone.points -= 1
         flash[:notice] = "Retrait points : J1 a gagné aux tirs au buts."
-        @playerone.win_peno -= 1
-        @playerone.save
-        @playertwo.lose_peno -= 1
-        @playertwo.save
+        @seasonone.win_peno -= 1
+        @seasonone.save
+        @seasontwo.lose_peno -= 1
+        @seasontwo.save
 
     elsif (@home_team_old_score == @visiting_team_old_score ) && (@home_team_old_prol_score < @visiting_team_old_prol_score)
-        @playertwo.points -= 1
+        @seasontwo.points -= 1
         flash[:notice] = "Retrait points : J2 a gagné aux tirs au buts."
-        @playertwo.win_peno -= 1
-        @playertwo.save
-        @playerone.lose_peno -= 1
-        @playerone.save
+        @seasontwo.win_peno -= 1
+        @seasontwo.save
+        @seasonone.lose_peno -= 1
+        @seasonone.save
 
     else
         p "Old : Autre chose"
@@ -220,23 +220,16 @@ class MatchesController < ApplicationController
     if matches_good_conditions()
     @playerone = Player.find(@match.teams.first.player_id)
     @playertwo = Player.find(@match.teams.last.player_id)
+    @seasonone = Season.where(["player_id=? and tournament_id=?", @playerone, @match.tournament_id]).first
+    @seasontwo = Season.where(["player_id=? and tournament_id=?", @playertwo, @match.tournament_id]).first
 
     winning_conditions()
         if @match.save
-          @seasonone = Season.where(["player_id=? and tournament_id=?", @playerone, @match.tournament_id])
-          @seasontwo = Season.where(["player_id=? and tournament_id=?", @playertwo, @match.tournament_id])
-          p "e1"
-          p @seasonone
-          p @seasontwo
-          @match.teams.first.season_id = @seasonone
-          @match.teams.second.season_id = @seasontwo
-          p "e2"
-          p @match.teams.first.season_id
+          @match.teams.first.season_id = @seasonone.id
+          @match.teams.second.season_id = @seasontwo.id
           @match.save
 
-          p "e3"
           image_illustration()
-          p "e4"
           points_conditions()
           flash[:success] = "Votre match a bien été créé !"
           redirect_to @match
@@ -256,6 +249,8 @@ class MatchesController < ApplicationController
     @match = Match.find(params[:id])
     @playerone = Player.find(@match.teams.first.player_id)
     @playertwo = Player.find(@match.teams.last.player_id)
+    @seasonone = Season.where(["player_id=? and tournament_id=?", @playerone, @match.tournament_id]).first
+    @seasontwo = Season.where(["player_id=? and tournament_id=?", @playertwo, @match.tournament_id]).first
     @home_team_old_score = @match.teams.first.score
     @visiting_team_old_score = @match.teams.last.score
     @home_team_old_prol_score = @match.teams.first.prol_score
@@ -263,7 +258,7 @@ class MatchesController < ApplicationController
     @match_prol_old = @match.prolongations
 
     if @match.update(match_params)
-      #Retraits points sur anciens reusltats
+      #Retraits points sur anciens resultats
       matches_update_remove_points()
       update_winning_conditions()
       #Nouveaux resultats
