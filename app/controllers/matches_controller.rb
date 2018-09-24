@@ -301,6 +301,8 @@ class MatchesController < ApplicationController
     @match = Match.find(params[:id])
     @playerone = Player.find(@match.teams.first.player_id)
     @playertwo = Player.find(@match.teams.last.player_id)
+    @seasonone = Season.where(["player_id=? and tournament_id=?", @playerone, @match.tournament_id]).first
+    @seasontwo = Season.where(["player_id=? and tournament_id=?", @playertwo, @match.tournament_id]).first
     @home_team_old_score = @match.teams.first.score
     @visiting_team_old_score = @match.teams.last.score
     @home_team_old_prol_score = @match.teams.first.prol_score

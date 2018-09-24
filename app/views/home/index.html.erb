@@ -81,7 +81,9 @@
     <% end %>
 
     <br>
-
+    <div class="match_une_links"> <%= link_to ">  Voir la compétition", tournament_path(@match_une.tournament.name) %>
+    <%= link_to ">  Le résumé du match", match_path(@match_une) %>
+    </div>
     <br>
 
     <div class="title_w_bg">Les 5 derniers matchs</div>

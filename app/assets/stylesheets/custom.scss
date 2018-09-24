@@ -404,7 +404,17 @@ footer a{
 
 
 
+.match_une_links {
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  a { text-decoration: none;
+    color: black;
+    width: 50%;
+  }
+  a:hover {color: grey;}
 
+}
 
 
 
