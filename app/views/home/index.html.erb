@@ -23,7 +23,7 @@
 
       <div class="title_w_bg title_une">A la une
         <div class="title_tournament"><%= @match_une.tournament.name %></div>
-        <div class="title_journee"><%= @match_une.id %>e journée</div>
+        <div class="title_journee"><%= @match_une.tournament.matches.count %>e journée</div>
       </div>
       <% end %>
 
@@ -81,7 +81,7 @@
     <% end %>
 
     <br>
-    <div class="match_une_links"> <%= link_to ">  Voir la compétition", tournament_path(@match_une.tournament.name) %>
+    <div class="match_une_links"> <%= link_to ">  Voir la compétition", tournament_path(@match_une.tournament) %>
     <%= link_to ">  Le résumé du match", match_path(@match_une) %>
     </div>
     <br>
