@@ -89,58 +89,62 @@
     <div class="title_w_bg">Les 5 derniers matchs</div>
 
     <table class="scoreboard">
-      <tr>
-        <th>Joueur 1</th>
-        <th>Team 1</th>
-        <th>Score</th>
-        <th>Team 2</th>
-        <th>Joueur 2</th>
-      </tr>
-      <br>
+
       <% if @matches.count == 0 %>
         <tr> <td> Pas de match enregistré </td> </tr>
+      <% elsif @match_une.tournament.matches.count > 1 %>
+              <tr>
+                <th>Joueur 1</th>
+                <th>Team 1</th>
+                <th>Score</th>
+                <th>Team 2</th>
+                <th>Joueur 2</th>
+              </tr>
+              <br>
+
+              <% @match_une.tournament.matches.order(id: :desc).first(5).each do |match| %>
+                <% if match.teams.empty? %>
+                <tr>
+                  <td><%= match.id %></td>
+                  <td>....</td>
+                  <td><%= link_to 'Supprimer', match_path(match), method: :delete,
+                          data: { confirm: 'Etes vous sur ?' }%></td>
+
+                </tr>
+                <% else %>
+                <tr>
+                  <td><span class="tab_player">
+                    <%= link_to Player.find(match.teams.first.player_id).pseudo, player_path(match.teams.first.player_id) %> </td>
+                  </span></td>
+
+                  <% if match.teams.first.status == "winner" %><td class="statuswinner">
+                    <% else %><td>
+                  <% end %>
+                  <%= match.teams.first.club.name %> </td>
+                  <td><div class="tab_score">
+                        <%= match.teams.first.score %> - <%= match.teams.last.score %>
+                      </div>
+                      <span class="tab_score_prol">
+                      <%= (match.prolongations && !match.teams.first.prol_score) ? "a.p" : "" %>
+                      <%= match.teams.first.prol_score %><%= match.teams.first.prol_score == nil ? '' : ' tab ' %><%= match.teams.last.prol_score %>
+                      </span>
+                  </td>
+                  <% if match.teams.last.status == "winner" %><td class="statuswinner">
+                    <% else %><td>
+                  <% end %>
+                  <%= match.teams.last.club.name %></td>
+                  <td><span class="tab_player">
+                      <%= link_to Player.find(match.teams.last.player_id).pseudo, player_path(match.teams.last.player_id) %>
+                      </span>
+                  </td>
+
+                  <td><%= link_to "Détails", match_path(match)%></td>
+                  <% if user_signed_in? %><td><%= link_to "Modifier", edit_match_path(match)%></td><% end %>
+                 </tr>
+                 <% end %>
+              <% end %>
       <% else %>
-        <% @matches.order(id: :desc).first(5).each do |match| %>
-          <% if match.teams.empty? %>
-          <tr>
-            <td><%= match.id %></td>
-            <td>....</td>
-            <td><%= link_to 'Supprimer', match_path(match), method: :delete,
-                    data: { confirm: 'Etes vous sur ?' }%></td>
-
-          </tr>
-          <% else %>
-          <tr>
-            <td><span class="tab_player">
-              <%= link_to Player.find(match.teams.first.player_id).pseudo, player_path(match.teams.first.player_id) %> </td>
-            </span></td>
-
-            <% if match.teams.first.status == "winner" %><td class="statuswinner">
-              <% else %><td>
-            <% end %>
-            <%= match.teams.first.club.name %> </td>
-            <td><div class="tab_score">
-                  <%= match.teams.first.score %> - <%= match.teams.last.score %>
-                </div>
-                <span class="tab_score_prol">
-                <%= (match.prolongations && !match.teams.first.prol_score) ? "a.p" : "" %>
-                <%= match.teams.first.prol_score %><%= match.teams.first.prol_score == nil ? '' : ' tab ' %><%= match.teams.last.prol_score %>
-                </span>
-            </td>
-            <% if match.teams.last.status == "winner" %><td class="statuswinner">
-              <% else %><td>
-            <% end %>
-            <%= match.teams.last.club.name %></td>
-            <td><span class="tab_player">
-                <%= link_to Player.find(match.teams.last.player_id).pseudo, player_path(match.teams.last.player_id) %>
-                </span>
-            </td>
-
-            <td><%= link_to "Détails", match_path(match)%></td>
-            <% if user_signed_in? %><td><%= link_to "Modifier", edit_match_path(match)%></td><% end %>
-          </tr>
-          <% end %>
-        <% end %>
+      <br>Pour l'instant, cette compétition n'a pas d'autre match.
       <% end %>
     </table>
 
@@ -165,21 +169,21 @@
       <br>
 
       <% i = 0
-        @players.order(points: :desc).each do |player|
+        @match_une.tournament.seasons.order(points: :desc).each do |season|
         i = i+1.to_i
       %>
         <tr>
           <td><%= i %></td>
-          <td class="lead_team"><%= link_to player.pseudo, player_path(player) %></td>
-          <td><b><%= player.points %></b></td>
-          <td class="lb_br"><%= player.teams.count %> </td>
-          <td><%= player.win %> </td>
-          <td><%= player.win_prol %> </td>
-          <td class="lb_br"><%= player.win_peno %> </td>
-          <td><%= player.lose %> </td>
-          <td><%= player.lose_prol %> </td>
-          <td class="lb_br"><%= player.lose_peno %> </td>
-          <td class="lb_br"><%= (Team.all.where("player_id= '#{player.id}'").sum(:score))-((Team.where("player_id= '#{player.id}'").collect{|a| a.match.teams.collect{|b| b.score}.sum }.sum)-(Team.all.where("player_id= '#{player.id}'").sum(:score))) %>
+          <td class="lead_team"><%= link_to season.player.pseudo, player_path(season.player) %></td>
+          <td><b><%= season.points %></b></td>
+          <td class="lb_br"><%= season.teams.count %> </td>
+          <td><%= season.win %> </td>
+          <td><%= season.win_prol %> </td>
+          <td class="lb_br"><%= season.win_peno %> </td>
+          <td><%= season.lose %> </td>
+          <td><%= season.lose_prol %> </td>
+          <td class="lb_br"><%= season.lose_peno %> </td>
+          <td class="lb_br"><%= (Team.all.where("season_id= '#{season.id}'").sum(:score))-((Team.where("season_id= '#{season.id}'").collect{|a| a.match.teams.collect{|b| b.score}.sum }.sum)-(Team.all.where("season_id= '#{season.id}'").sum(:score))) %>
         </tr>
       <% end %>
 
