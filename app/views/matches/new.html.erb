@@ -4,7 +4,7 @@
   <%= render 'shared/error_new_match', object: @match %>
 
   <%= f.label :"Compétition" %>
-  <%= f.collection_select :tournament_id, Tournament.all, :id, :name, class: 'form-control', include_blank: "Choisir un tournoi" %>
+  <%= f.collection_select :tournament_id, Tournament.all.where(finished:false), :id, :name, class: 'form-control', include_blank: "Choisir un tournoi" %>
   <br> <br>
   <%= f.fields_for :teams do |t| %>
     <div>

@@ -8,12 +8,27 @@ class MatchesController < ApplicationController
   end
 
   def matches_good_conditions
+
+    if @match.tournament_id.nil?
+      flash[:danger] = 'Veuillez indiquer une compétition !'
+      return false
+    end
+
+    if @match.teams.empty?
+      flash[:danger] = 'Veuillez indiquer deux joueurs !'
+      return false
+    end
     if (@match.teams.first.player_id.nil? || @match.teams.last.player_id.nil?)
       flash[:danger] = 'Veuillez indiquer deux joueurs !'
       return false
     end
     if (@match.teams.first.player_id == @match.teams.last.player_id)
       flash[:danger] = 'Veuillez indiquer deux joueurs différents !'
+      return false
+    end
+
+    if !@match.tournament.players.ids.include?(@match.teams.first.player_id || @match.teams.last.player_id)
+      flash[:danger] = 'Veuillez indiquer deux joueurs inscrits à cette compétiton !'
       return false
     end
 
@@ -25,6 +40,13 @@ class MatchesController < ApplicationController
       flash[:danger] = 'Match nul : Score aux penalties incomplets.'
       return false
     end
+
+    if (@match.teams.first.club_id.nil? || @match.teams.last.club_id.nil?)
+      flash[:danger] = 'Veuillez indiquer un club pour chaque équipe !'
+      return false
+    end
+
+
 
     return true
   end
@@ -97,48 +119,48 @@ class MatchesController < ApplicationController
 
   def points_conditions
     if ((@match.teams.first.score > @match.teams.last.score) && !@match.prolongations)
-        flash[:notice] = "+3 points pour J1"
-        @seasonone.points += 3
+        flash[:notice] = "+#{@match.tournament.win_regular_points} points pour J1"
+        @seasonone.points += @match.tournament.win_regular_points
         @seasonone.win += 1
         @seasonone.save
         @seasontwo.lose += 1
         @seasontwo.save
 
     elsif ((@match.teams.first.score < @match.teams.last.score) && !@match.prolongations)
-        flash[:notice] = "+3 points pour J2"
-        @seasontwo.points += 3
+        flash[:notice] = "+#{@match.tournament.win_regular_points} points pour J2"
+        @seasontwo.points += @match.tournament.win_regular_points
         @seasontwo.win += 1
         @seasontwo.save
         @seasonone.lose += 1
         @seasonone.save
 
     elsif @match.prolongations && (@match.teams.first.score > @match.teams.last.score)
-        flash[:notice] = "+2 points pour J1"
-        @seasonone.points += 2
+        flash[:notice] = "+#{@match.tournament.win_prol_points} points pour J1"
+        @seasonone.points += @match.tournament.win_prol_points
         @seasonone.win_prol += 1
         @seasonone.save
         @seasontwo.lose_prol += 1
         @seasontwo.save
 
     elsif @match.prolongations && (@match.teams.first.score < @match.teams.last.score)
-        flash[:notice] = "+2 points pour J2"
-        @seasontwo.points += 2
+        flash[:notice] = "+#{@match.tournament.win_prol_points} points pour J2"
+        @seasontwo.points += @match.tournament.win_prol_points
         @seasontwo.win_prol += 1
         @seasontwo.save
         @seasonone.lose_prol += 1
         @seasonone.save
 
     elsif (@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score > @match.teams.last.prol_score)
-        flash[:notice] = "+1 point pour J1"
-        @seasonone.points += 1
+        flash[:notice] = "+#{@match.tournament.win_peno_points} point pour J1"
+        @seasonone.points += @match.tournament.win_peno_points
         @seasonone.win_peno += 1
         @seasonone.save
         @seasontwo.lose_peno += 1
         @seasontwo.save
 
     elsif (@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score < @match.teams.last.prol_score)
-        flash[:notice] = "+1 point pour J2"
-        @seasontwo.points += 1
+        flash[:notice] = "+#{@match.tournament.win_peno_points} point pour J2"
+        @seasontwo.points += @match.tournament.win_peno_points
         @seasontwo.win_peno += 1
         @seasontwo.save
         @seasonone.lose_peno += 1

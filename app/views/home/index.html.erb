@@ -191,10 +191,12 @@
     <br>
     <div class="title_w_bg">Reglement en vigueur </div>
     <ul class="list_rules mobile-content_une">
-      <li>Match gagné : +3
-      <li>Match gagné après prolongations : +2
-      <li>Match gagné aux penalties : +1
-      <li>Pas de point pour le perdant.
+      <li>Match gagné : +<%= @match_une.tournament.win_regular_points %>
+      <li>Match gagné après prolongations : +<%= @match_une.tournament.win_prol_points %>
+      <li>Match gagné aux penalties : +<%= @match_une.tournament.win_peno_points %>
+      <li><% if (@match_une.tournament.lose_regular_points && @match_une.tournament.lose_prol_points && @match_une.tournament.lose_peno_points) == 0 %>
+          Pas de point pour le perdant.
+        <% end %>
     </ul>
   </div>
 
