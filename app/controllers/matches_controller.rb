@@ -123,6 +123,7 @@ class MatchesController < ApplicationController
         @seasonone.points += @match.tournament.win_regular_points
         @seasonone.win += 1
         @seasonone.save
+        @seasontwo.points += @match.tournament.lose_regular_points
         @seasontwo.lose += 1
         @seasontwo.save
 
@@ -131,6 +132,7 @@ class MatchesController < ApplicationController
         @seasontwo.points += @match.tournament.win_regular_points
         @seasontwo.win += 1
         @seasontwo.save
+        @seasonone.points += @match.tournament.lose_regular_points
         @seasonone.lose += 1
         @seasonone.save
 
@@ -139,6 +141,7 @@ class MatchesController < ApplicationController
         @seasonone.points += @match.tournament.win_prol_points
         @seasonone.win_prol += 1
         @seasonone.save
+        @seasontwo.points += @match.tournament.lose_prol_points
         @seasontwo.lose_prol += 1
         @seasontwo.save
 
@@ -147,6 +150,7 @@ class MatchesController < ApplicationController
         @seasontwo.points += @match.tournament.win_prol_points
         @seasontwo.win_prol += 1
         @seasontwo.save
+        @seasonone.points += @match.tournament.lose_prol_points
         @seasonone.lose_prol += 1
         @seasonone.save
 
@@ -155,6 +159,7 @@ class MatchesController < ApplicationController
         @seasonone.points += @match.tournament.win_peno_points
         @seasonone.win_peno += 1
         @seasonone.save
+        @seasontwo.points += @match.tournament.lose_peno_points
         @seasontwo.lose_peno += 1
         @seasontwo.save
 
@@ -163,6 +168,7 @@ class MatchesController < ApplicationController
         @seasontwo.points += @match.tournament.win_peno_points
         @seasontwo.win_peno += 1
         @seasontwo.save
+        @seasonone.points += @match.tournament.lose_peno_points
         @seasonone.lose_peno += 1
         @seasonone.save
 
@@ -173,18 +179,22 @@ class MatchesController < ApplicationController
 
   def matches_update_remove_points
     if ((@home_team_old_score > @visiting_team_old_score ) && !@match_prol_old)
-        @seasonone.points -= 3
         p "Retrait points J1 a gagné"
+        flash[:notice] = "+#{@match.tournament.win_regular_points} points pour J1"
+        @seasonone.points -= @match.tournament.win_regular_points
         @seasonone.win -= 1
         @seasonone.save
+        @seasontwo.points -= @match.tournament.lose_regular_points
         @seasontwo.lose -= 1
         @seasontwo.save
 
     elsif ((@home_team_old_score < @visiting_team_old_score ) && !@match_prol_old)
-        @seasontwo.points -= 3
         p "Retrait points J2 a gagné"
+        flash[:notice] = "-#{@match.tournament.win_regular_points} points pour J2"
+        @seasontwo.points -= @match.tournament.win_regular_points
         @seasontwo.win -= 1
         @seasontwo.save
+        @seasonone.points -= @match.tournament.lose_regular_points
         @seasonone.lose -= 1
         @seasonone.save
 
