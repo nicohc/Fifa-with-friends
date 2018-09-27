@@ -1,5 +1,5 @@
 <% if !mobile_device? %>
-<h1 class="mobile-content_une">FIFA 18</h1>
+<h1 class="mobile-content_une"><%=@match_une.tournament.name%></h1>
 <% end %>
 
 <div class="main_content_4_8">
@@ -81,7 +81,7 @@
     <% end %>
 
     <br>
-    <div class="match_une_links"> <%= link_to ">  Voir la compétition", tournament_path(@match_une.tournament) %>
+    <div class="match_une_links mobile-content_une"> <%= link_to ">  Voir la compétition", tournament_path(@match_une.tournament) %>
     <%= link_to ">  Le résumé du match", match_path(@match_une) %>
     </div>
     <br>
@@ -206,7 +206,9 @@
 
     <table class="commentboard mobile-content_une">
       <% if @comments.count == 0 %>
-        Pas de commentaire
+        <div class="mobile-content_une">
+          Pas de commentaire
+        </div>  
       <% else %>
         <% @comments.order("created_at DESC").each do |comment| %>
           <tr>

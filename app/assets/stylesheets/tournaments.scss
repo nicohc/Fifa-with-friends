@@ -1,3 +1,30 @@
 // Place all the styles related to the tournaments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* Tournament - Tableau Règles nouvelle compétition */
+.tab_tournament_rules{
+  label{ width: 200px;}
+  input{ width: 20px;}
+}
+
+/* Tournament - Tableau Règles nouvelle compétition */
+.tournament_list tr{
+  height: 30px;
+}
+.tournament_list tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+.tournament_list th:first-child,
+.tournament_list th:last-child {
+  width: 150px;
+}
+
+.tournament_list{
+  td{
+    min-width: 70px;
+  }
+  td:not(:first-child){
+    text-align: center;
+  }
+}

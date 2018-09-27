@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/touslesmatchs', to: 'home#all_matches', as: 'all_matches'
   get '/touslesclubs', to: 'clubs#all_clubs', as: 'all_clubs'
   get '/allseasons', to: 'seasons#all_seasons', as: 'all_seasons'
+  get '/admin', to: 'home#administration', as: 'admin'
 
   get '/classement', to: 'home#leaderboard', as: 'leaderboard'
   get '/randomiser', to: 'matches#randomiser', as: 'alea_match'

@@ -1,0 +1,36 @@
+<h1>Administration</h1>
+
+Pour la mise à jour vers version 2.0:
+<br>
+<br>Commencer par créer un tournoi
+<br>
+<br><%= link_to "MAJ Matchs => Ajout tournoi", maj_tournament_path%></td>
+<br>Vérification: <%= !Match.first.tournament.nil? ? "OK" : "No OK"%>
+<br>2e Vérification: <%= !Match.last.tournament.nil? ? "OK" : "No OK"%>
+<br>
+<br><%= link_to "MAJ Teams => Ajout season_id", maj_teams_season_path%>
+<br>Vérification: <%= !Match.first.teams.first.season.nil? ? "OK" : "No OK"%>
+<br>2e Vérification: <%= !Match.last.teams.last.season.nil? ? "OK" : "No OK"%>
+<br>
+<br><%= link_to "MAJ Seasons => Ajout player stats", maj_seasons_stats_path%>
+<br>Vérification: <%= !Player.first.seasons.first.points.nil? ? "OK" : "No OK"%>
+<br>2e Vérification: <%= !Player.last.seasons.last.points.nil? ? "OK" : "No OK"%>
+<br>
+<br>A faire en 2e étape, retrait des colonnes inutilisées sur Player.
+<br>
+<br>
+<br>Nombre d'utilisateurs enregistrés : <%=User.count%>
+<br>Nombre de joueurs enregistrés : <%=Player.count%>
+<br>Nombre de tournois créés : <%=Tournament.count%>
+<br>Nombre de matchs créés : <%=Match.count%>
+<br>Nombre de commentaires : <%=Comment.count%>
+<br>
+<br>Nombre de clubs paramétrés : <%=Club.count%>
+<br>
+<br>
+<br>Liste des utilisateurs enregistrés :  
+<br><% User.all.each { |user| %>
+<%= user.username %>, <%= user.admin %>
+<br>
+<% } %>
+<br>

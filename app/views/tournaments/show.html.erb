@@ -3,14 +3,17 @@
 <div class="title_w_bg">Statut</div>
 <br>
 <%= @tournament.finished ? "Terminé" : "En cours"%></td>
-<% if @tournament.finished? %>
-  <%= link_to "Réouvrir", open_tournament_path %>
-<% else %>
-  <%= link_to "Cloturer", close_tournament_path %>
+<% if user_signed_in? && current_user.admin %>
+  <% if @tournament.finished? %>
+    <%= link_to "Réouvrir", open_tournament_path %>
+  <% else %>
+    <%= link_to "Cloturer", close_tournament_path %>
+  <% end %>
 <% end %>
+
 <br><br>
 
-<div class="title_w_bg">Joueurs enregistrés</div>
+<div class="title_w_bg">Classement</div>
 
 <table class="leaderboard">
   <tr>
@@ -50,7 +53,49 @@
   <% } %>
 </table>
 
-<br>
+<div class="title_w_bg">Statistiques : Ratios par match </div>
+
+<table class="leaderboard">
+  <tr>
+    <th> </th>
+    <th> </th>
+    <th>Pts / match</th>
+    <th>Matchs<br>joués</th>
+    <th>G.</th>
+    <th>G.pr</th>
+    <th>G.pn.</th>
+    <th>D.</th>
+    <th>D.pr</th>
+    <th>D.pn.</th>
+    <th class="lb_br">Buts /<br>match</th>
+    <th class="lb_br">Bc./<br>match</th>
+  </tr>
+  <br>
+
+  <% i = 0
+    @tournament.seasons.order(points: :desc).each do |ts|
+    i = i+1.to_i
+  %>
+    <tr>
+      <td><%= i %></td>
+      <td class="lead_team"><%= ts.player.pseudo %></td>
+      <td class="lb_br"><b><%= (ts.points.to_f/ ts.teams.count).round(2)%></b></td>
+      <td class="lb_br"><%= ts.teams.count %> </td>
+
+      <td>              <%= number_to_percentage(((100 * ts.win) / ts.teams.count), precision: 0) %> </td>
+      <td>              <%= number_to_percentage(((100 * ts.win_prol)/ ts.teams.count), precision: 0) %> </td>
+      <td class="lb_br"><%= number_to_percentage(((100 * ts.win_peno) / ts.teams.count), precision: 0) %> </td>
+      <td>              <%= number_to_percentage(((100 * ts.lose) / ts.teams.count), precision: 0) %> </td>
+      <td>              <%= number_to_percentage(((100 * ts.lose_prol) / ts.teams.count), precision: 0) %> </td>
+      <td class="lb_br"><%= number_to_percentage(((100 * ts.lose_peno) / ts.teams.count), precision: 0) %> </td>
+      <td><%= (Team.all.where("season_id= '#{ts.id}'").sum(:score).to_f / ts.teams.count).round(2) %></td>
+      <td class="lb_br"><%= (((Team.where("season_id= '#{ts.id}'").collect{|a| a.match.teams.collect{|b| b.score}.sum }.sum)-(Team.all.where("season_id= '#{ts.id}'").sum(:score))).to_f / ts.teams.count).round(2) %></td>
+    </tr>
+  <% end %>
+
+</table>
+
+
 
 <div class="title_w_bg">Matchs</div>
 <br>
@@ -94,8 +139,7 @@
   <% end %>
 
 </table>
-<br><br>
-
+<br>
 <div class="title_w_bg">Règles</div>
 <br>Points pour une victoire :
 <br>Sur 90mn : <%= @tournament.win_regular_points %>
@@ -110,8 +154,10 @@ Points pour une défaite
 <br><br>Points pour un match nul : <%= @tournament.draw_regular_points %>
 
 <br><br>
-<td><%= link_to "Modifier", edit_tournament_path(@tournament)%></td>
+<% if user_signed_in? %>
+<%= link_to "Modifier", edit_tournament_path(@tournament)%></td>
 <br><br>
 <%= link_to 'Supprimer', tournament_path(@tournament), method: :delete, data: { confirm: 'Etes vous sur de supprimer cette compétition et tous ses résultats ?' }%>
 <br><br>
+<% end %>
 <%= link_to "Retour à la liste des compétitions", all_tournaments_path %>

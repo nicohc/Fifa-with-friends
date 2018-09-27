@@ -1,30 +1,25 @@
 <h1>Liste des compétitions réalisées </h1>
 
-<br><%= link_to "MAJ Teams => Ajout season_id", maj_teams_season_path%>
-<br><%= link_to "MAJ Seasons => Ajout player stats", maj_seasons_stats_path%>
-<br>
-
 <div class="title_w_bg">Compétitions</div>
 <br>
+<%= link_to "Créer une nouvelle compétition", new_tournament_path %>
 <table class="tournament_list">
   <tr>
     <th>Tournoi</th>
-    <th>Nombre de joueurs</th>
-    <th>Nombre de matchs</th>
     <th>Statut</th>
+    <th>Joueurs</th>
+    <th>Matchs</th>
     <th>-</th>
   </tr>
   <% @tournaments.each do |tournament| %>
   <br>
   <tr>
     <td><%= link_to tournament.name, tournament_path(tournament) %></td>
+    <td><%= tournament.finished ? "Terminé" : "En cours" %></td>
     <td><%= tournament.players.count %></td>
     <td><%= tournament.matches.count %></td>
-    <td><%= tournament.finished ? "Terminé" : "En cours" %></td>
     <td><%= link_to 'Supprimer', tournament_path(tournament), method: :delete,
             data: { confirm: 'Etes vous sur ?' }%></td>
   </tr>
   <% end %>
 </table>
-<br><br>
-<%= link_to "Nouvelle compétition", new_tournament_path %>

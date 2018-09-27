@@ -114,6 +114,29 @@ nav ul li a:hover { color: grey;}
   }
 }
 
+/* Sous-Menus */
+
+.main-menu .sous_menu{
+  display: none;
+}
+
+.main-menu .principal_item:hover{
+  .sous_menu{
+      display: block;
+      position: absolute;
+      width: 170px;
+      height: auto;
+      background-color: whitesmoke;
+      margin-top: 15px;
+      margin-left: -10px;
+      border: #D61E00 1px dotted;
+      li:hover {
+        background-color: #D61E00;
+        a {color: white !important;}
+      }
+  }
+}
+
 
 /* Menu on mobile */
 
@@ -569,25 +592,4 @@ ul.list_rules{
 
 #comment_content {
     width: 280px;
-}
-
-/* Tournament - Tableau Règles nouvelle compétition */
-.tab_tournament_rules{
-  label{ width: 200px;}
-  input{ width: 20px;}
-}
-
-/* Tournament - Tableau Règles nouvelle compétition */
-.tournament_list{
-
-}
-.tournament_list tr{
-  height: 30px;
-}
-.tournament_list tr:nth-child(odd) {
-  background-color: #f2f2f2;
-}
-.tournament_list th:first-child,
-.tournament_list th:last-child {
-  width: 150px;
 }

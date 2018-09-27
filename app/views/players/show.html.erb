@@ -7,7 +7,9 @@
 <% else %>
   <table class="leaderboard">
     <tr>
+      <% if !mobile_device? %>
       <th>Id season</th>
+      <% end %>
       <th>Comp.</th>
       <th>Pts</th>
       <th>J.</th>
@@ -24,7 +26,9 @@
     <br>
   <% @player.seasons.each { |pls|  %>
     <tr>
+      <% if !mobile_device? %>
       <td><%= pls.id %></td>
+      <% end %>
       <td class="lead_team"><%= link_to pls.tournament.name, tournament_path(pls.tournament) %></td>
       <td><b><%= pls.points %></b></td>
       <td class="lb_br"><%= pls.teams.count %> </td>
@@ -38,11 +42,16 @@
       <td><%= @bc = (Team.where("season_id= '#{pls.id}'").collect{|a| a.match.teams.collect{|b| b.score}.sum }.sum)-(Team.all.where("season_id= '#{pls.id}'").sum(:score)) %></td>
       <td class="lb_br"><%= @bp-@bc %> </td>
     </tr>
+    <tr>
+      <td colspan = 4></td>
+      <td colspan = 3><%= pls.win + pls.win_peno + pls.win_prol %> Victoires </td>
+      <td colspan = 3><%= pls.lose + pls.lose_prol + pls.lose_peno %> Défaites </td>
+      <td colspan = 3></td>
+    </tr>
   <% } %>
   </table>
 <% end %>
 
-<br>
 <br>
 
 <div class="title_w_bg">Statistiques globales</div>
@@ -132,23 +141,27 @@
 
 <div class="title_w_bg">Equipes les plus utilisées </div>
 <br>
+<div class="mobile-content_une">
 <% club = @player.teams.each_with_object(Hash.new(0)) do |tm,counts| counts[tm.club.name]+= 1 end %>
 <% sortcountclub = club.sort_by{|k,v| v}.reverse%>
 <% sortcountclub.take(5).each{ |a,b| %>
   <%= a %>, <%= b %> fois.
   <br>
 <% } %>
-
+</div>
 <br>
 <div class="title_w_bg">Records et chiffres </div>
-<br>- Record de buts marqués en un match : <%= maxgoal = @player.teams.maximum("score") %>
-<br>
+<div class="mobile-content_une">
+- Record de buts marqués en un match : <%= maxgoal = @player.teams.maximum("score") %>
+</div>
 <% if @player.teams.empty? %>
   "Pas de match pour l'instant"
 <% else %>
 <table class="scoreboard">
   <tr>
-    <th>ID du match</th>
+    <% if !mobile_device? %>
+    <th>Id du match</th>
+    <% end %>
     <th>Compétition</th>
     <th>Joueur 1</th>
     <th>Team 1</th>
@@ -159,7 +172,9 @@
   <br>
   <% match_maxgoal = @player.teams.where(score: maxgoal).first.match %>
   <tr>
+    <% if !mobile_device? %>
     <td><%= match_maxgoal.id %></td>
+    <% end %>
     <td><%= match_maxgoal.tournament.name %></td>
     <td><%= link_to Player.find(match_maxgoal.teams.first.player_id).pseudo, player_path(match_maxgoal.teams.first.player_id) %> </td>
     <% if match_maxgoal.teams.first.status == "winner" %>
@@ -186,11 +201,13 @@
   </tr>
 </table>
 <% end %>
-
+<br>
 <div class="title_w_bg">Tous les matchs du joueur</div>
 <table class="scoreboard">
   <tr>
+    <% if !mobile_device? %>
     <th>ID</th>
+    <% end %>
     <th>Compétition</th>
     <th>Joueur 1</th>
     <th>Team 1</th>
@@ -211,7 +228,9 @@
     </tr>
     <% else %>
     <tr>
+      <% if !mobile_device? %>
       <td><%= match.id %></td>
+      <% end %>
       <td><%= match.tournament.name %></td>
       <td><%= link_to Player.find(match.teams.first.player_id).pseudo, player_path(match.teams.first.player_id) %> </td>
       <% if match.teams.first.status == "winner" %>

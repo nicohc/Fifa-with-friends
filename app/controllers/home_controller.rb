@@ -133,6 +133,13 @@ class HomeController < ApplicationController
     end
   end
 
+  def administration
+    if User.first.admin = false
+      u1 = User.first
+      u1.admin = true
+      u1.save
+    end
+  end
 
 
 =begin

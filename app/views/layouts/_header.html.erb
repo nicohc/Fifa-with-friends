@@ -8,9 +8,16 @@
         <div>
           <li><%= link_to content_tag(:i, nil, class: 'fas fa-home'), root_path %></li>
           <li id="site_title_fixed"><%= link_to "La compète", root_path %></li>
-          <li><%= link_to "Liste des Compétitions", all_tournaments_path %> </li>
+          <li class="principal_item"><%= link_to "Liste des Compétitions", all_tournaments_path %>
+            <% if Tournament.count > 1 %>
+                <ul class="sous_menu">
+                <% Tournament.order('id DESC').first(3).each { |t| %>
+                  <li><%= link_to t.name, tournament_path(t) %></li>
+                <% } %>
+                </ul>
+            <% end %>
+          </li>
           <li><%= link_to "Liste des Matchs", all_matches_path %> </li>
-          <li><%= link_to "Classement", leaderboard_path %> </li>
         </div>
         <div>
         <li class="divider"></li>
@@ -25,6 +32,10 @@
               <li><%= link_to "Liste des clubs", all_clubs_path %> </li>
               <li><%= link_to "Modifier mon compte", edit_user_registration_path %>
               </li>
+              <% if current_user.admin %>
+                <li><%= link_to "Administration", admin_path %></li>
+              <% end %>
+
               <li><%= link_to "Se déconnecter", destroy_user_session_path, method: :delete  %>
               </li>
             </ul>
@@ -46,7 +57,6 @@
         <ul class="mobile-menu" style="display:none;"><!-- Menu mobile -->
           <li><%= link_to "Accueil", '/' %></li>
           <li><%= link_to "Liste des Matchs", all_matches_path %> </li>
-          <li><%= link_to "Classement", leaderboard_path %> </li>
           <li class="divider"></li>
           <li><%= link_to "Nouveau match", new_match_path %> </li>
           <li><%= link_to "Créateur de match", alea_match_path %> </li>
@@ -57,6 +67,8 @@
                 <li><%= link_to "Liste des clubs", all_clubs_path %> </li>
                 <li><%= link_to "Modifier mon compte", edit_user_registration_path %>
                 </li>
+                <li><%= link_to "Administration", admin_path %></li>
+
                 <li><%= link_to "Se déconnecter", destroy_user_session_path, method: :delete  %>
                 </li>
             </li>
