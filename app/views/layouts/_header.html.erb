@@ -1,5 +1,5 @@
 <header class="navbar">
-    <% if !mobile_device? %>
+    <% if !mobile_device? && current_page?(root_path) %>
     <div id="site_title"><%= link_to "La compète", root_path %>
     </div>
     <% end %>

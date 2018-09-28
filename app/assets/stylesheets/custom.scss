@@ -16,11 +16,9 @@ body {
   top: 0px;
   right: 0;
   left: 0;
-  height: 160px;
   margin: auto;
-  padding: 0 1%;
   z-index: 9;
-  border-bottom: #D61E00 7px solid;
+
 
 }
 .navbar-fixed {
@@ -58,8 +56,9 @@ body {
 
 nav {
   display: inline-block;
-  float: right;
-  width: 100%;
+  width: 98%;
+  padding: 0 1%;
+  border-bottom: #D61E00 7px solid;
 }
 
 nav ul{
