@@ -34,6 +34,8 @@
               </li>
               <% if current_user.admin %>
                 <li><%= link_to "Administration", admin_path %></li>
+                <li><%= link_to "Saisons", all_seasons_path %></li>
+
               <% end %>
 
               <li><%= link_to "Se déconnecter", destroy_user_session_path, method: :delete  %>
