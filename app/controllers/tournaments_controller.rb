@@ -41,7 +41,6 @@ class TournamentsController < ApplicationController
   end
   def migrate_all_player_stats_to_last_season_stats
     Season.all.each { |se|
-      if !se.tournament_id.nil?
         se.points = se.player.points
         se.win = se.player.win
         se.win_prol = se.player.win_prol
@@ -50,7 +49,6 @@ class TournamentsController < ApplicationController
         se.lose_prol = se.player.lose_prol
         se.lose_peno = se.player.lose_peno
         se.save
-      end
     }
     redirect_to all_tournaments_path
   end
