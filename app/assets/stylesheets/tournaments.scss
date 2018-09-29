@@ -24,7 +24,21 @@
   td{
     min-width: 70px;
   }
+  td:first-child{
+    padding-left: 3px;
+  }
   td:not(:first-child){
     text-align: center;
+  }
+  a {
+    text-decoration: none;
+    color: #D61E00;
+  }
+  .add_tournament{
+    background-color: grey;
+    a {
+      text-decoration: none;
+      color: white;
+    }
   }
 }

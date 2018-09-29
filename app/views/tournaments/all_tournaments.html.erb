@@ -2,14 +2,13 @@
 
 <div class="title_w_bg">Compétitions</div>
 <br>
-<%= link_to "Créer une nouvelle compétition", new_tournament_path %>
 <table class="tournament_list">
   <tr>
     <th>Tournoi</th>
     <th>Statut</th>
     <th>Joueurs</th>
     <th>Matchs</th>
-    <th>-</th>
+    <% if user_signed_in? && current_user.admin %><th>-</th><% end %>
   </tr>
   <% @tournaments.each do |tournament| %>
   <br>
@@ -18,8 +17,13 @@
     <td><%= tournament.finished ? "Terminé" : "En cours" %></td>
     <td><%= tournament.players.count %></td>
     <td><%= tournament.matches.count %></td>
+    <% if user_signed_in? && current_user.admin %>
     <td><%= link_to 'Supprimer', tournament_path(tournament), method: :delete,
             data: { confirm: 'Etes vous sur ?' }%></td>
+    <% end %>
   </tr>
   <% end %>
+  <tr>
+    <td colspan = 4 class="add_tournament"><%= link_to "Créer une nouvelle compétition", new_tournament_path %></td>
+  </tr>
 </table>
