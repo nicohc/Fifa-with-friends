@@ -303,16 +303,6 @@ class MatchesController < ApplicationController
 
   end
 
-  def maj_tournament_for_matches
-    Match.all.each { |m|
-      m.tournament_id = Tournament.last.id
-      m.save
-    }
-    redirect_to all_matches_path
-  end
-
-
-
   def show
     @match = Match.find(params[:id])
     @home_team = Match.find(params[:id]).teams.first

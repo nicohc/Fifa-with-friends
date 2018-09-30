@@ -32,28 +32,6 @@ class TournamentsController < ApplicationController
     end
   end
 
-  def migrate_all_existing_matches_to_last_season
-    Team.all.each { |t|
-        t.season_id = t.player.seasons.last.id
-        t.save
-    }
-    redirect_to all_tournaments_path
-  end
-  def migrate_all_player_stats_to_last_season_stats
-    Season.all.each { |se|
-        se.points = se.player.points
-        se.win = se.player.win
-        se.win_prol = se.player.win_prol
-        se.win_peno = se.player.win_peno
-        se.lose = se.player.lose
-        se.lose_prol = se.player.lose_prol
-        se.lose_peno = se.player.lose_peno
-        se.save
-    }
-    redirect_to all_tournaments_path
-  end
-
-
   def show
     @tournament = Tournament.find(params[:id])
   end
@@ -81,6 +59,35 @@ class TournamentsController < ApplicationController
     redirect_to all_tournaments_path
   end
 
+=begin
+    def maj_tournament_for_matches
+      Match.all.each { |m|
+        m.tournament_id = Tournament.last.id
+        m.save
+      }
+      redirect_to all_matches_path
+    end
+    def migrate_all_existing_matches_to_last_season
+      Team.all.each { |t|
+          t.season_id = t.player.seasons.last.id
+          t.save
+      }
+      redirect_to all_tournaments_path
+    end
+    def migrate_all_player_stats_to_last_season_stats
+      Season.all.each { |se|
+          se.points = se.player.points
+          se.win = se.player.win
+          se.win_prol = se.player.win_prol
+          se.win_peno = se.player.win_peno
+          se.lose = se.player.lose
+          se.lose_prol = se.player.lose_prol
+          se.lose_peno = se.player.lose_peno
+          se.save
+      }
+      redirect_to all_tournaments_path
+    end
+=end
 
   private
   def tournament_params
