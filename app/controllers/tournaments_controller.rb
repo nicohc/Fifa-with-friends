@@ -67,6 +67,21 @@ class TournamentsController < ApplicationController
       }
       redirect_to all_matches_path
     end
+    def maj_season_for_players
+      if @player.seasons.empty?
+      Player.all.each { |pl|
+        pl.seasons.build
+        pl.seasons.first.tournament_id = Tournament.last.id
+        if pl.save
+          flash[:success] = "Saison ajoutée !"
+        else
+          flash[:alert] = "Saison ajoutée !"
+          render :action => 'edit'
+        end
+      }
+      end
+    end
+
     def migrate_all_existing_matches_to_last_season
       Team.all.each { |t|
           t.season_id = t.player.seasons.last.id

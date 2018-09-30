@@ -7,7 +7,7 @@
 <% else %>
   <table class="leaderboard">
     <tr>
-      <% if !mobile_device? %>
+      <% if !mobile_device? && user_signed_in?%>
       <th>Id season</th>
       <% end %>
       <th>Comp.</th>
@@ -26,7 +26,7 @@
     <br>
   <% @player.seasons.each { |pls|  %>
     <tr>
-      <% if !mobile_device? %>
+      <% if !mobile_device? && user_signed_in? %>
       <td><%= pls.id %></td>
       <% end %>
       <td class="lead_team"><%= link_to pls.tournament.name, tournament_path(pls.tournament) %></td>
@@ -202,6 +202,8 @@
 </table>
 <% end %>
 <br>
+
+
 <div class="title_w_bg">Tous les matchs du joueur</div>
 <table class="scoreboard">
   <tr>
@@ -219,8 +221,7 @@
     -->
   </tr>
   <br>
-  <% Match.includes(:players).where("players.id = ?", @player.id).references(:players).each { |match| %>
-
+  <% Match.includes(:players).where("players.id = ?", @player.id).references(:players).sort_by{|m| -m[:id]}.each { |match| %>
     <% if match.teams.empty? %>
     <tr>
       <td><%= match.id %></td>
