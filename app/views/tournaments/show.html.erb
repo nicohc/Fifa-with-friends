@@ -77,19 +77,24 @@
     i = i+1.to_i
   %>
     <tr>
+      <% if @tournament.matches.count != 0 %>
       <td><%= i %></td>
       <td class="lead_team"><%= ts.player.pseudo %></td>
       <td class="lb_br"><b><%= (ts.points.to_f/ ts.teams.count).round(2)%></b></td>
       <td class="lb_br"><%= ts.teams.count %> </td>
+        <% if ts.teams.count != 0 %>
+        <td>              <%= number_to_percentage(((100 * ts.win) / ts.teams.count), precision: 0) %> </td>
+        <td>              <%= number_to_percentage(((100 * ts.win_prol)/ ts.teams.count), precision: 0) %> </td>
+        <td class="lb_br"><%= number_to_percentage(((100 * ts.win_peno) / ts.teams.count), precision: 0) %> </td>
+        <td>              <%= number_to_percentage(((100 * ts.lose) / ts.teams.count), precision: 0) %> </td>
+        <td>              <%= number_to_percentage(((100 * ts.lose_prol) / ts.teams.count), precision: 0) %> </td>
+        <td class="lb_br"><%= number_to_percentage(((100 * ts.lose_peno) / ts.teams.count), precision: 0) %> </td>
+        <td><%= (Team.all.where("season_id= '#{ts.id}'").sum(:score).to_f / ts.teams.count).round(2) %></td>
+        <td class="lb_br"><%= (((Team.where("season_id= '#{ts.id}'").collect{|a| a.match.teams.collect{|b| b.score}.sum }.sum)-(Team.all.where("season_id= '#{ts.id}'").sum(:score))).to_f / ts.teams.count).round(2) %></td>
+        <% end %>
+      <% end %>
 
-      <td>              <%= number_to_percentage(((100 * ts.win) / ts.teams.count), precision: 0) %> </td>
-      <td>              <%= number_to_percentage(((100 * ts.win_prol)/ ts.teams.count), precision: 0) %> </td>
-      <td class="lb_br"><%= number_to_percentage(((100 * ts.win_peno) / ts.teams.count), precision: 0) %> </td>
-      <td>              <%= number_to_percentage(((100 * ts.lose) / ts.teams.count), precision: 0) %> </td>
-      <td>              <%= number_to_percentage(((100 * ts.lose_prol) / ts.teams.count), precision: 0) %> </td>
-      <td class="lb_br"><%= number_to_percentage(((100 * ts.lose_peno) / ts.teams.count), precision: 0) %> </td>
-      <td><%= (Team.all.where("season_id= '#{ts.id}'").sum(:score).to_f / ts.teams.count).round(2) %></td>
-      <td class="lb_br"><%= (((Team.where("season_id= '#{ts.id}'").collect{|a| a.match.teams.collect{|b| b.score}.sum }.sum)-(Team.all.where("season_id= '#{ts.id}'").sum(:score))).to_f / ts.teams.count).round(2) %></td>
+
     </tr>
   <% end %>
 

@@ -1,4 +1,4 @@
-<% if !mobile_device? %>
+<% if !mobile_device? && !@grostitre.nil?%>
 <h1 class="mobile-content_une"><%=@match_une.tournament.name%></h1>
 <% end %>
 
@@ -20,11 +20,12 @@
             Pas de match rencontre
           </div>
         <% end %>
-
-      <div class="title_w_bg title_une">A la une
-        <div class="title_tournament"><%= @match_une.tournament.name %></div>
-        <div class="title_journee"><%= @match_une.tournament.matches.count %>e journée</div>
-      </div>
+        <% if @matches.count != 0 %>
+        <div class="title_w_bg title_une">A la une
+          <div class="title_tournament"><%= @match_une.tournament.name %></div>
+          <div class="title_journee"><%= @match_une.tournament.matches.count %>e journée</div>
+        </div>
+        <% end %>
       <% end %>
 
       <div class="image_une">
@@ -81,9 +82,11 @@
     <% end %>
 
     <br>
-    <div class="match_une_links mobile-content_une"> <%= link_to ">  Voir la compétition", tournament_path(@match_une.tournament) %>
-    <%= link_to ">  Le résumé du match", match_path(@match_une) %>
-    </div>
+    <% if !@grostitre.nil? %>
+        <div class="match_une_links mobile-content_une"> <%= link_to ">  Voir la compétition", tournament_path(@match_une.tournament) %>
+          <%= link_to ">  Le résumé du match", match_path(@match_une) %>
+        </div>
+    <% end %>
     <br>
 
     <div class="title_w_bg">Les 5 derniers matchs</div>
@@ -153,6 +156,7 @@
     <br>
 
     <div class="title_w_bg">Classement </div>
+    <% if @matches.count != 0 %>
 
     <table class="leaderboard mobile-content_une">
       <tr>
@@ -188,10 +192,12 @@
           <td class="lb_br"><%= (Team.all.where("season_id= '#{season.id}'").sum(:score))-((Team.where("season_id= '#{season.id}'").collect{|a| a.match.teams.collect{|b| b.score}.sum }.sum)-(Team.all.where("season_id= '#{season.id}'").sum(:score))) %>
         </tr>
       <% end %>
+    <% end %>
 
     </table>
     <br>
     <div class="title_w_bg">Reglement en vigueur </div>
+    <% if @matches.count != 0 %>
     <ul class="list_rules mobile-content_une">
       <li>Match gagné : +<%= @match_une.tournament.win_regular_points %>
       <li>Match gagné après prolongations : +<%= @match_une.tournament.win_prol_points %>
@@ -200,6 +206,8 @@
           Pas de point pour le perdant.
         <% end %>
     </ul>
+    <% end %>
+    
   </div>
 
   <div class="main_right">
