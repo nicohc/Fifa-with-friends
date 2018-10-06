@@ -24,6 +24,7 @@
     <th>G.</th>
     <th>G.pr</th>
     <th>G.pn.</th>
+    <th>N.</th>
     <th>D.</th>
     <th>D.pr</th>
     <th>D.pn.</th>
@@ -42,6 +43,7 @@
     <td><%= ts.win %> </td>
     <td><%= ts.win_prol %> </td>
     <td class="lb_br"><%= ts.win_peno %> </td>
+    <td class="lb_br"><%= ts.draw %> </td>
     <td><%= ts.lose %> </td>
     <td><%= ts.lose_prol %> </td>
     <td class="lb_br"><%= ts.lose_peno %> </td>
@@ -64,6 +66,7 @@
     <th>G.</th>
     <th>G.pr</th>
     <th>G.pn.</th>
+    <th>N.</th>
     <th>D.</th>
     <th>D.pr</th>
     <th>D.pn.</th>
@@ -86,6 +89,7 @@
         <td>              <%= number_to_percentage(((100 * ts.win) / ts.teams.count), precision: 0) %> </td>
         <td>              <%= number_to_percentage(((100 * ts.win_prol)/ ts.teams.count), precision: 0) %> </td>
         <td class="lb_br"><%= number_to_percentage(((100 * ts.win_peno) / ts.teams.count), precision: 0) %> </td>
+        <td class="lb_br"><%= number_to_percentage(((100 * ts.draw) / ts.teams.count), precision: 0) %> </td>
         <td>              <%= number_to_percentage(((100 * ts.lose) / ts.teams.count), precision: 0) %> </td>
         <td>              <%= number_to_percentage(((100 * ts.lose_prol) / ts.teams.count), precision: 0) %> </td>
         <td class="lb_br"><%= number_to_percentage(((100 * ts.lose_peno) / ts.teams.count), precision: 0) %> </td>

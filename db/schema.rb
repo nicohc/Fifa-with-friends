@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181006171244) do
+ActiveRecord::Schema.define(version: 20181006210853) do
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20181006171244) do
     t.integer "lose_prol", default: 0
     t.integer "lose_peno", default: 0
     t.integer "tournament_id"
+    t.integer "draw", default: 0
     t.index ["player_id"], name: "index_seasons_on_player_id"
     t.index ["tournament_id"], name: "index_seasons_on_tournament_id"
   end

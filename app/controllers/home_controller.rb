@@ -96,20 +96,23 @@ class HomeController < ApplicationController
 
   def image_a_la_une
     if !@matches.first.nil?
-      if @match_une.teams.where("status='winner'").first.club.image_url.nil?
-        @image_a_la_une = 'clubs/noclub.jpg'
+      if @match_une.teams.first.status = 'draw'
+          @image_a_la_une = 'clubs/noclub.jpg'
+      elsif @match_une.teams.where("status='winner'").first.club.image_url.nil?
+          @image_a_la_une = 'clubs/noclub.jpg'
       else
-        @image_a_la_une = @match_une.teams.where("status = 'winner'").first.club.image_url
+          @image_a_la_une = @match_une.teams.where("status = 'winner'").first.club.image_url
       end
     end
   end
 
   def gros_titre_a_la_une
       if !@matches.first.nil?
-        if @match_une.teams.first.status == 'winner'
+        if @match_une.teams.first.status == 'draw'
+        elsif @match_une.teams.first.status == 'winner'
           @team_grostitre_denominateur = @match_une.teams.first.club.denominateur
           @team_grostitre = @match_une.teams.first.club.name
-        else
+        elsif
           @team_grostitre_denominateur = @match_une.teams.second.club.denominateur
           @team_grostitre = @match_une.teams.second.club.name
         end
@@ -117,11 +120,16 @@ class HomeController < ApplicationController
   end
 
   def special_teams
-    @team_grostitre = @match_une.teams.where("status = 'winner'").first.club.name
-    @team_grostitre_loser = @match_une.teams.where("status = 'loser'").first.club.name
+    if @match_une.teams.first.status == 'draw'
+      @grostitre = "Un match bien terne" if @match_une.teams.first.score = 0
+      @grostitre = "Match nul" if @match_une.teams.first.score > 0
+    elsif @match_une.teams.first.status != 'draw'
+      @team_grostitre = @match_une.teams.where("status = 'winner'").first.club.name
+      @team_grostitre_loser = @match_une.teams.where("status = 'loser'").first.club.name
 
-    @grostitre = "La Belgique a le seum" if @team_grostitre_loser === "Belgique"
-    @grostitre = "Une victoire innatendue !" if @team_grostitre === "Suède"
+      @grostitre = "La Belgique a le seum" if @team_grostitre_loser === "Belgique"
+      @grostitre = "Une victoire innatendue !" if @team_grostitre === "Suède"
+    end
   end
 
   def special_score

@@ -31,7 +31,7 @@ class MatchesController < ApplicationController
       flash[:danger] = 'Veuillez indiquer deux joueurs inscrits à cette compétiton !'
       return false
     end
-
+=begin
     if ((@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score == @match.teams.last.prol_score))
       flash[:danger] = 'Match nul + Scores aux penaties identiques. Impossible de donner un vainqueur !'
       return false
@@ -40,7 +40,7 @@ class MatchesController < ApplicationController
       flash[:danger] = 'Match nul : Score aux penalties incomplets.'
       return false
     end
-
+=end
     if (@match.teams.first.club_id.nil? || @match.teams.last.club_id.nil?)
       flash[:danger] = 'Veuillez indiquer un club pour chaque équipe !'
       return false
@@ -61,6 +61,11 @@ class MatchesController < ApplicationController
           flash[:notice] = "J2 a gagné"
           @match.teams.first[:status] = "loser"
           @match.teams.last[:status] = "winner"
+
+      elsif ((@match.teams.first.score == @match.teams.last.score) && @match.teams.first.prol_score.nil? && @match.teams.last.prol_score.nil?)
+          flash[:notice] = "Match nul"
+          @match.teams.first[:status] = "draw"
+          @match.teams.last[:status] = "draw"
 
       elsif @match.prolongations && (@match.teams.first.score > @match.teams.last.score)
           flash[:notice] = "J1 a gagné après prolongations"
@@ -114,6 +119,12 @@ class MatchesController < ApplicationController
           @match.teams.first.update_columns(status: "loser")
           @match.teams.last.update_columns(status: "winner")
           @match.save
+
+      elsif ((@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score.nil))
+          flash[:notice] = "Match nul"
+          @match.teams.first[:status] = "draw"
+          @match.teams.last[:status] = "draw"
+
       end
   end
 
@@ -134,6 +145,15 @@ class MatchesController < ApplicationController
         @seasontwo.save
         @seasonone.points += @match.tournament.lose_regular_points
         @seasonone.lose += 1
+        @seasonone.save
+
+    elsif ((@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score.nil?) && (@match.teams.last.prol_score.nil?))
+        flash[:notice] = "1 point pour J1 et J2"
+        @seasontwo.points += @match.tournament.draw_regular_points
+        @seasontwo.draw += 1
+        @seasontwo.save
+        @seasonone.points += @match.tournament.draw_regular_points
+        @seasonone.draw += 1
         @seasonone.save
 
     elsif @match.prolongations && (@match.teams.first.score > @match.teams.last.score)
@@ -230,6 +250,14 @@ class MatchesController < ApplicationController
         @seasonone.lose_peno -= 1
         @seasonone.save
 
+    elsif ((@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score.nil))
+        @seasonone.points -= 1
+        flash[:notice] = "Retrait points : Match nul"
+        @seasonone.draw -= 1
+        @seasonone.save
+        @seasontwo.draw -= 1
+        @seasontwo.save
+
     else
         p "Old : Autre chose"
     end
@@ -240,8 +268,11 @@ class MatchesController < ApplicationController
       if @match.teams.first.status == "winner"
         @match.image_une_url = @match.teams.first.club.image_url
         @match.save
-      else
+      elsif @match.teams.last.status == "winner"
         @match.image_une_url = @match.teams.last.club.image_url
+        @match.save
+      elsif @match.teams.first.status == "draw"
+        @match.image_une_url = 'clubs/noclub.jpg'
         @match.save
       end
     end

@@ -13,6 +13,7 @@ class PlayersController < ApplicationController
     @player.lose = 0
     @player.lose_prol = 0
     @player.lose_peno = 0
+    @player.draw = 0
 
     if @player.save
       redirect_to @player
