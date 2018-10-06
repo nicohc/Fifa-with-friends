@@ -9,6 +9,8 @@
     <tr>
       <% if !mobile_device? && user_signed_in?%>
       <th>Id season</th>
+      <% else %>
+      <th></th>
       <% end %>
       <th>Comp.</th>
       <th>Pts</th>
@@ -28,6 +30,8 @@
     <tr>
       <% if !mobile_device? && user_signed_in? %>
       <td><%= pls.id %></td>
+      <% else %>
+      <td>-</td>
       <% end %>
       <td class="lead_team"><%= link_to pls.tournament.name, tournament_path(pls.tournament) %></td>
       <td><b><%= pls.points %></b></td>
@@ -201,7 +205,6 @@
   </tr>
 </table>
 <% end %>
-<br>
 
 
 <div class="title_w_bg">Tous les matchs du joueur</div>

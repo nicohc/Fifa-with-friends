@@ -94,6 +94,7 @@
         <tr> <td> Pas de match enregistré </td> </tr>
       <% elsif @match_une.tournament.matches.count > 1 %>
               <tr>
+                <th>Mode</th>
                 <th>Joueur 1</th>
                 <th>Team 1</th>
                 <th>Score</th>
@@ -113,6 +114,7 @@
                 </tr>
                 <% else %>
                 <tr>
+                  <td><%= match.mode %></td>
                   <td><span class="tab_player">
                     <%= link_to Player.find(match.teams.first.player_id).pseudo, player_path(match.teams.first.player_id) %> </td>
                   </span></td>
@@ -208,7 +210,7 @@
       <% if @comments.count == 0 %>
         <div class="mobile-content_une">
           Pas de commentaire
-        </div>  
+        </div>
       <% else %>
         <% @comments.order("created_at DESC").each do |comment| %>
           <tr>

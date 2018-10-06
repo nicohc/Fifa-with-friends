@@ -5,6 +5,9 @@
 
   <%= f.label :"Compétition" %>
   <%= f.collection_select :tournament_id, Tournament.all.where(finished:false), :id, :name, class: 'form-control', include_blank: "Choisir un tournoi" %>
+  <br>
+  <%= f.label :"Mode de jeu" %>
+  <%= f.select :mode, [['Normal', 'Normal'], ['Sans règle', 'Sans règle'], ['Survie', 'Survie'], ['Distance', 'Distance'], ['Premier à...', 'Premier à']], prompt: "Choisir un mode de jeu" %>
   <br> <br>
   <%= f.fields_for :teams do |t| %>
     <div>
