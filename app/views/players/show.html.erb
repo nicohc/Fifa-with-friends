@@ -18,6 +18,7 @@
       <th>G.</th>
       <th>G.pr</th>
       <th>G.pn.</th>
+      <th>N.</th>
       <th>D.</th>
       <th>D.pr</th>
       <th>D.pn.</th>
@@ -39,6 +40,7 @@
       <td><%= pls.win %> </td>
       <td><%= pls.win_prol %> </td>
       <td class="lb_br"><%= pls.win_peno %> </td>
+      <td class="lb_br"><%= pls.draw %> </td>
       <td><%= pls.lose %> </td>
       <td><%= pls.lose_prol %> </td>
       <td class="lb_br"><%= pls.lose_peno %> </td>
@@ -49,6 +51,7 @@
     <tr>
       <td colspan = 4></td>
       <td colspan = 3><%= pls.win + pls.win_peno + pls.win_prol %> Victoires </td>
+      <td><%= pls.draw %> Nuls </td>
       <td colspan = 3><%= pls.lose + pls.lose_prol + pls.lose_peno %> Défaites </td>
       <td colspan = 3></td>
     </tr>
@@ -69,6 +72,7 @@
     <th>G.</th>
     <th>G.pr</th>
     <th>G.pn.</th>
+    <th>N.</th>
     <th>D.</th>
     <th>D.pr</th>
     <th>D.pn.</th>
@@ -86,6 +90,7 @@
     <td><%= @player.seasons.sum(:win) %> </td>
     <td><%= @player.seasons.sum(:win_prol) %> </td>
     <td class="lb_br"><%= @player.seasons.sum(:win_peno) %> </td>
+    <td class="lb_br"><%= @player.seasons.sum(:draw) %> </td>
     <td><%= @player.seasons.sum(:lose) %> </td>
     <td><%= @player.seasons.sum(:lose_prol) %> </td>
     <td class="lb_br"><%= @player.seasons.sum(:lose_peno) %> </td>
@@ -97,6 +102,7 @@
   <tr>
     <td colspan = 4></td>
     <td colspan = 3><%= @player.seasons.sum(:win) + @player.seasons.sum(:win_peno) +@player.seasons.sum(:win_prol) %> Victoires </td>
+    <td><%= @player.seasons.sum(:draw)%> Nuls </td>
     <td colspan = 3><%= @player.seasons.sum(:lose) + @player.seasons.sum(:lose_prol) + @player.seasons.sum(:lose_peno) %> Défaites </td>
     <td colspan = 3></td>
   </tr>
@@ -122,6 +128,7 @@
             <td></td>
             <td class="lead_team" colspan = 3 > vs. <%= Player.find(pl).pseudo %> : </td>
             <td colspan = 3><%= mixmatches["winner"] %> Victoire(s) </td>
+            <td><%= mixmatches["draw"] %> Nul(s) </td>
             <td colspan = 3><%= mixmatches["loser"] %> Défaite(s) </td>
             <td colspan = 3></td>
           </tr>
@@ -167,6 +174,7 @@
     <th>Id du match</th>
     <% end %>
     <th>Compétition</th>
+    <th>Mode</th>
     <th>Joueur 1</th>
     <th>Team 1</th>
     <th>Score</th>
@@ -180,6 +188,7 @@
     <td><%= match_maxgoal.id %></td>
     <% end %>
     <td><%= match_maxgoal.tournament.name %></td>
+    <td><%= match_maxgoal.mode %></td>
     <td><%= link_to Player.find(match_maxgoal.teams.first.player_id).pseudo, player_path(match_maxgoal.teams.first.player_id) %> </td>
     <% if match_maxgoal.teams.first.status == "winner" %>
       <td class="statuswinner"><%= match_maxgoal.teams.first.club.name %></td>
@@ -214,6 +223,7 @@
     <th>ID</th>
     <% end %>
     <th>Compétition</th>
+    <th>Mode</th>
     <th>Joueur 1</th>
     <th>Team 1</th>
     <th>Score</th>
@@ -236,6 +246,7 @@
       <td><%= match.id %></td>
       <% end %>
       <td><%= match.tournament.name %></td>
+      <td><%= match.mode %></td>
       <td><%= link_to Player.find(match.teams.first.player_id).pseudo, player_path(match.teams.first.player_id) %> </td>
       <% if match.teams.first.status == "winner" %>
         <td class="statuswinner"><%= match.teams.first.club.name %></td>

@@ -67,7 +67,7 @@
       <% if mobile_device? %>
         <div class="grostitre_une">
           <% if mobile_device? %>
-            A la une | <%= @match_une.id %>e journée
+            A la une | <%= @match_une.tournament.matches.count %>e journée
           <% end %>
           <div class="grostitre_mobile">
             <% if !@grostitre.nil? %>
@@ -82,7 +82,7 @@
     <% end %>
 
     <br>
-    <% if !@grostitre.nil? %>
+    <% if !@match_une.nil? %>
         <div class="match_une_links mobile-content_une"> <%= link_to ">  Voir la compétition", tournament_path(@match_une.tournament) %>
           <%= link_to ">  Le résumé du match", match_path(@match_une) %>
         </div>
