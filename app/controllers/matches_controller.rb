@@ -272,7 +272,7 @@ class MatchesController < ApplicationController
         @match.image_une_url = @match.teams.last.club.image_url
         @match.save
       elsif @match.teams.first.status == "draw"
-        @match.image_une_url = 'clubs/noclub.jpg'
+        @match.image_une_url = ActionController::Base.helpers.asset_path('clubs/noclub.jpg')
         @match.save
       end
     end

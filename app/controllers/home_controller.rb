@@ -96,11 +96,11 @@ class HomeController < ApplicationController
 
   def image_a_la_une
     if !@matches.first.nil?
-      if @match_une.teams.first.status = 'draw'
+      if @match_une.teams.first.status == 'draw'
           @image_a_la_une = 'clubs/noclub.jpg'
       elsif @match_une.teams.where("status='winner'").first.club.image_url.nil?
           @image_a_la_une = 'clubs/noclub.jpg'
-      else
+      elsif !@match_une.teams.where("status='winner'").first.club.image_url.nil?
           @image_a_la_une = @match_une.teams.where("status = 'winner'").first.club.image_url
       end
     end

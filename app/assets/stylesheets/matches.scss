@@ -27,10 +27,11 @@
 
 .match_entete_bas{
   text-align: center;
-  padding: 10px;
+  padding: 10px 0;
   font-size: 14px;
   display: flex;
   justify-content: space-between;
+  .match_entete_bas_d, .match_entete_bas_g { width: 100px; }
 }
 .match_picture{
   width: 100%;
