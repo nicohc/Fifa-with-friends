@@ -34,9 +34,13 @@
   </tr>
   <br>
 
-  <% @tournament.seasons.order(points: :desc).each { |ts| %>
+
+  <% i = 0
+    @tournament.seasons.order(points: :desc).each { |ts|
+    i = i+1.to_i
+  %>
   <tr>
-    <td></td>
+    <td><%= i %></td>
     <td><%= ts.player.pseudo %></td>
     <td><b><%= ts.points %></b></td>
     <td class="lb_br"><%= ts.teams.count %></td>
