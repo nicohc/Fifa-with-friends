@@ -8,18 +8,18 @@ $(window).scroll(function(){
     if ($(window).scrollTop() >= 110) {
         $('nav').addClass('sticky');
         $('nav').addClass('navbar-fixed');
-        $('.container').addClass('container-wfixednav');
+        $('.container .main_content').addClass('container-wfixednav');
     }
     else {
         $('nav').removeClass('sticky');
         $('nav').removeClass('navbar-fixed');
-        $('.container').removeClass('container-wfixednav');
+        $('.container .main_content').removeClass('container-wfixednav');
     };
   }
   else {
     $('nav').addClass('sticky');
     $('nav').addClass('navbar-fixed');
-    $('.container').addClass('container-wfixednav');
+    $('.container .main_content').addClass('container-wfixednav');
   };
 });
 
