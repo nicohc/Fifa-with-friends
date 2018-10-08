@@ -207,6 +207,8 @@
       <li><% if (@match_une.tournament.lose_regular_points && @match_une.tournament.lose_prol_points && @match_une.tournament.lose_peno_points) == 0 %>
           Pas de point pour le perdant.
         <% end %>
+      <li>Match nul : +<%= @match_une.tournament.draw_regular_points %>
+
     </ul>
     <% end %>
 

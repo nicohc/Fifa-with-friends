@@ -4,14 +4,23 @@ Should be equal the the height of the header
 ========================================== */
 
 $(window).scroll(function(){
+  if ( window.location.pathname == '/' ){
     if ($(window).scrollTop() >= 110) {
         $('nav').addClass('sticky');
         $('nav').addClass('navbar-fixed');
+        $('.container').addClass('container-wfixednav');
     }
     else {
         $('nav').removeClass('sticky');
         $('nav').removeClass('navbar-fixed');
-    }
+        $('.container').removeClass('container-wfixednav');
+    };
+  }
+  else {
+    $('nav').addClass('sticky');
+    $('nav').addClass('navbar-fixed');
+    $('.container').addClass('container-wfixednav');
+  };
 });
 
 
