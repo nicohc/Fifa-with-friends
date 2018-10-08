@@ -123,12 +123,14 @@ class HomeController < ApplicationController
     if @match_une.teams.first.status == 'draw'
       @grostitre = "Un match bien terne" if @match_une.teams.first.score = 0
       @grostitre = "Match nul" if @match_une.teams.first.score > 0
+      @grostitre = "Un match fou !" if @match_une.teams.first.score > 2
     elsif @match_une.teams.first.status != 'draw'
       @team_grostitre = @match_une.teams.where("status = 'winner'").first.club.name
       @team_grostitre_loser = @match_une.teams.where("status = 'loser'").first.club.name
 
       @grostitre = "La Belgique a le seum" if @team_grostitre_loser === "Belgique"
       @grostitre = "Une victoire innatendue !" if @team_grostitre === "Suède"
+      @grostitre = "Une avalanche de buts !" if @match_une.teams.where("status = 'winner'").first.score > 5
     end
   end
 
