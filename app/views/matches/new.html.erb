@@ -22,7 +22,7 @@
       </div>
       <hr>
       <div class="new_match_team_bloc_club">
-        <%= t.collection_select :club_id, Club.all, :id, :name, class: 'form-control', include_blank: "Choisir une équipe"%>
+        <%= t.collection_select :club_id, Club.all.order(:name), :id, :name, class: 'form-control', include_blank: "Choisir une équipe"%>
       </div>
       <br>
       <div class="new_match_team_bloc_score">
