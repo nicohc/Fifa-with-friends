@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181006210853) do
+ActiveRecord::Schema.define(version: 20181011225459) do
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20181006210853) do
     t.string "image_url"
     t.string "denominateur"
     t.string "color"
+    t.decimal "level", precision: 2, scale: 1
   end
 
   create_table "comments", force: :cascade do |t|

@@ -8,6 +8,9 @@
   <%= c.label :"Déterminant (le / la / les)si nécéssaire" %>
   <%= c.text_field :denominateur, class: 'form-control'%>
   <br><br>
+  <%= c.label :"Niveau du club" %>
+  <%= c.number_field :level, class: 'form-control', :step => 0.5%>
+  <br>
   <%= c.label :"Image victorieuse du club" %>
   (chemin url):
   <%= c.text_field :image_url, placeholder: "clubs/", class: 'form-control'%>

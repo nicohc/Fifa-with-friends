@@ -2,6 +2,8 @@
   <h1><%= @club.denominateur.nil? ? "" :  @club.denominateur %> <%= @club.name %></h1>
 </div>
 
+Niveau du club : <%= @club.level %>
+<br>
 Image de référence : <%= @club.image_url %>
 <br><br>
 <% if @club.image_url.empty? %>
