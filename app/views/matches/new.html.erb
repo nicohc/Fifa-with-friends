@@ -1,42 +1,48 @@
 <h1>Nouveau match</h1>
 
+<div class="new_match_bloc">
+
 <%= form_for(@match) do |f| %>
   <%= render 'shared/error_new_match', object: @match %>
-
-  <%= f.label :"Compétition" %>
-  <%= f.collection_select :tournament_id, Tournament.all.where(finished:false), :id, :name, class: 'form-control', include_blank: "Choisir un tournoi" %>
-  <br>
-  <%= f.label :"Mode de jeu" %>
-  <%= f.select :mode, [['Normal', 'Normal'], ['Sans règle', 'Sans règle'], ['Survie', 'Survie'], ['Distance', 'Distance'], ['Premier à...', 'Premier à']], prompt: "Choisir un mode de jeu" %>
-  <br> <br>
-  <%= f.fields_for :teams do |t| %>
-    <div>
-      <%= t.label :"Joueur" %>
-      <%= t.collection_select :player_id, Player.all, :id, :pseudo, class: 'form-control', include_blank: "Choisir un joueur" %>
-    </div>
-    <div>
-      <%= t.label :"Nom de l'équipe" %>
-      <%= t.collection_select :club_id, Club.all, :id, :name, class: 'form-control', include_blank: "Choisir une équipe"%>
-    </div>
-    <div>
-      <%= t.label :"Score de l'équipe" %>
-      <%= t.number_field :score, class: 'form-control'%>
-    </div>
-    <div>
-      <%= t.label :"Score penalties" %>
-      <%= t.number_field :prol_score, class: 'form-control'%>
-    </div>
+  <div class="new_match_context">
+    <%= f.collection_select :tournament_id, Tournament.all.where(finished:false), :id, :name, class: 'form-control', include_blank: "Sélectionnez une compétition" %>
     <br>
-  <% end %>
+    <%= f.select :mode, [['Normal', 'Normal'], ['Sans règle', 'Sans règle'], ['Survie', 'Survie'], ['Distance', 'Distance'], ['Premier à...', 'Premier à']], prompt: "Choisir un mode de jeu" %>
+    <br> <br>
+    <br> <br>
 
-  <br>
+  </div>
+
+  <div class="new_match_team">
+  <%= f.fields_for :teams do |t| %>
+    <div class="new_match_team_bloc">
+      <div>
+        <%= t.label :"Joueur" %>
+        <%= t.collection_select :player_id, Player.all, :id, :pseudo, class: 'form-control', include_blank: "Choisir un joueur" %>
+      </div>
+      <hr>
+      <div class="new_match_team_bloc_club">
+        <%= t.collection_select :club_id, Club.all, :id, :name, class: 'form-control', include_blank: "Choisir une équipe"%>
+      </div>
+      <br>
+      <div class="new_match_team_bloc_score">
+        <%= t.label :"Score de l'équipe" %>
+        <%= t.number_field :score, class: 'form-control'%>
+      </div>
+      <div class="new_match_team_bloc_score_prol">
+        <%= t.label :"Score penalties" %>
+        <%= t.number_field :prol_score, class: 'form-control'%>
+      </div>
+    <br>
+    </div>
+  <% end %>
+  </div>
 
   <%= f.check_box :prolongations, class: 'form-control' %>
   <%= f.label :"Prolongations" %>
+  <br>
   <br><br>
 
   <%= f.submit "Valider", class: "btn btn-primary" %>
 <% end %>
-
-<br><br>
-<%= link_to "Accueil", root_path %>
+</div>

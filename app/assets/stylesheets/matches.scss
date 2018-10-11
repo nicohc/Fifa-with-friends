@@ -83,3 +83,60 @@
     line-height: 20px;
   }
 }
+
+
+/* NEW match */
+.new_match_bloc{
+  background-color: black;
+  background-image: url("/assets/clubs/noclub.jpg");
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+.new_match_context select{
+  width: 50%;
+  text-align: center;
+}
+.new_match_team{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media only screen and (min-width: 600px) {
+    .new_match_team_bloc:nth-child(1) {
+      text-align: right;
+    }
+    .new_match_team_bloc:nth-child(2) {
+      text-align: left;
+      div {
+        display: flex;
+        flex-flow: row-reverse;
+        align-items: center;
+        justify-content: flex-end;
+      }
+      label { padding: 0 5px;}
+    }
+    .new_match_team_bloc_score input{
+      width: 85px;
+      height: 90px;
+      font-size: 80px;
+      text-align: center;
+      font-weight: bold;
+      vertical-align: middle;
+    }
+    .new_match_team_bloc_score_prol input{
+      font-size: 25px;
+      width: 50px;
+    }
+    .new_match_team_bloc_club select{
+      font-size: 26px;
+      text-align: center;
+      min-width: 280px;
+      background-color: black;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      border: none;
+      padding: 2px;
+    }
+}
