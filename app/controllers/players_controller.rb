@@ -7,14 +7,6 @@ class PlayersController < ApplicationController
     @player = Player.new(players_params)
     @player.points = 0
 
-    @player.win = 0
-    @player.win_prol = 0
-    @player.win_peno = 0
-    @player.lose = 0
-    @player.lose_prol = 0
-    @player.lose_peno = 0
-    @player.draw = 0
-
     if @player.save
       redirect_to @player
     else
