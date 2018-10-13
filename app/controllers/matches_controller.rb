@@ -343,7 +343,11 @@ class MatchesController < ApplicationController
   end
 
   def randomiser
-    clubs = Club.all
+    if Club.all.where("level >= 4.5").empty?
+      clubs = Club.all
+    else
+      clubs = Club.all.where("level >= 4.5")
+    end
     mode = ["Normal", "Sans règle", "Survie", "Distance", "Premier à...", "Têtes et volées" ]
     @modealeatoire = mode.sample(1)
     @club_alea1 = clubs.sample.name
