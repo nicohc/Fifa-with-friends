@@ -19,8 +19,8 @@
 
 - Mise en avant du dernier match (A la Une) avec image personnalisée liée à l'équipe gagnante et score différencié visuellement.
 
-![Image demo Nouveau match](images/Capture_new_match.png)
-![Image demo Résultat match](images/Capture_show_match.png)
+![Image demo Nouveau match](https://github.com/nicohc/Fifa-with-friends/blob/master/app/assets/images/Capture_new_match.png)
+![Image demo Résultat match](https://github.com/nicohc/Fifa-with-friends/blob/master/app/assets/images/Capture_show_match.png)
 
 ///////////// Available features  /////////////
 
