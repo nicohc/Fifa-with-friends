@@ -605,4 +605,7 @@ ul.list_rules{
 
 /* ------- Readme Markdown ------- */
 
-img[alt$=">"] { float: left; }
+img[alt$=">"] {
+  float: left;
+  width: 100px;
+}

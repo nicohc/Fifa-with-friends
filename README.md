@@ -19,8 +19,8 @@
 
 - Mise en avant du dernier match (A la Une) avec image personnalisée liée à l'équipe gagnante et score différencié visuellement.
 
-![image alt >](/app/assets/images/Capture_new_match.png) 
-![demo Résultat match](/app/assets/images/Capture_show_match.png)
+![demo Nouveau match](/app/assets/images/Capture_new_match.png | width=100)
+![demo Résultat match](/app/assets/images/Capture_show_match.png | width=100)
 
 ///////////// Available features  /////////////
 
