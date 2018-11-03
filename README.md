@@ -1,31 +1,37 @@
 # README
 
-- Projet en cours : Gestion de rencontres (matchs de foot) 1vs1, sur console, avec points et classement, avec gestion de plusieurs joueurs.
+- Gestion de rencontres (matchs de foot) 1vs1, sur console, avec points et classement, avec gestion de plusieurs joueurs.
 
 - Ruby on Rails project : Management of 1vs1 videogames matches (soccer), with points and ranking between several players.
 
-WIP :
+- Responsive design
 
-- Ajout de joueurs
-- Ajout d'équipes (appartenant à un joueur)
+///////////// Fonctionnalités disponibles /////////////
+- Création de compétitions avec personnalisation des points attribués pour une victoire/nul/défaite
+- Création de clubs avec personnalisation des couleurs du club et image représentant le club lors des victoires.
+- Création de joueurs, avec page profil et statistiques des compétitions et matchs joués
 
 - Ajout de rencontres
-- Mise à jour des rencontres
-
 - Gestion des résultats des rencontres et décompte de points pour les joueurs  
+- Mise à jour des rencontres disponible
+- Classement des joueurs dans une compétition
+- Statistiques avec ratios par matchs joués
 
-- Classement des joueurs
-- Ratios par matchs joués
+- Mise en avant du dernier match (A la Une) avec image personnalisée liée à l'équipe gagnante et score différencié visuellement.
 
-- Mise en avant du dernier match (A la Une) avec image personnalisée liée à l'équipe gagnante et score différencié visuellement. 
+///////////// Available features  /////////////
 
-////////// (Particularités de ce système) /////////////
+- Creation of competitions with customization of points awarded for a win / draw / defeat
+- Creation of clubs with customization of club colors and image representing the club during victories.
+- Creation of players, with profile page and statistics of competitions and games played
 
-Décompte des points actuel :
-  - Match gagné : +3
-  - Match gagné après prolongations : +2
-  - Match gagné aux penalties : +1
-  - Pas de point pour le perdant.
+- Addition of meetings
+- Management of the results of the meetings and counting of points for the players
+- Update of meetings available
+- Ranking of players in a competition
+- Statistics with ratios by games played
+
+- Highlighting the last match (front page) with personalized image linked to the winning team and visually differentiated score.
 
 /////////////////////////
 
@@ -33,4 +39,4 @@ N.B : L'ensemble des images utilisées pour ce projet sont utilisées à visée 
 
 /////////////////////////
 
- #FIFA #PES #ranking #matches #players
+ #FIFA #PES #ranking #matches #players #tournament #1to1 #responsive

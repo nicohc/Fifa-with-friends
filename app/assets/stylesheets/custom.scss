@@ -58,7 +58,7 @@ body {
 }
 
 nav {
-  display: inline-block;
+  //display: inline-block;
   width: 98%;
   padding: 0 1%;
   border-bottom: #D61E00 7px solid;
@@ -149,7 +149,7 @@ nav ul li a:hover { color: grey;}
 }
 @media only screen and (max-width: 600px) {
   .navbar {
-    height: 50px;
+    height: 57px;
   }
   #site_title_mobile{
     font-family: 'Libre Franklin', sans-serif;
@@ -211,13 +211,12 @@ nav ul li a:hover { color: grey;}
 footer {
   background-color: black;
   border-top: #D61E00 7px solid;
-  position: static;
   bottom: 0px;
   right: 0;
   left: 0;
   height: 50px;
   line-height: 50px;
-  margin-top: 60px;
+  margin-top: 4vh;
   color: white;
   text-align: center;
 }
@@ -227,7 +226,11 @@ footer a{
   text-decoration: none;
 }
 
-
+@media only screen and (max-width: 600px) {
+  footer {
+    font-size: small;
+  }
+}
 
 /* ------ CONTENT ------ */
 
@@ -265,6 +268,8 @@ footer a{
   .main_content {
     margin: auto;
     padding: 0px;
+    min-height: 72vh;
+
   }
   .main_content_4_8 {
     display: flex;

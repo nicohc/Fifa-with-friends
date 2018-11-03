@@ -2,24 +2,34 @@
 scrollTop() >= 300
 Should be equal the the height of the header
 ========================================== */
+function isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+};
 
 $(window).scroll(function(){
   if ( window.location.pathname == '/' ){
     if ($(window).scrollTop() >= 110) {
         $('nav').addClass('sticky');
         $('nav').addClass('navbar-fixed');
-        $('.container .main_content').addClass('container-wfixednav');
+        
+        if ( isMobileDevice() == false){
+          $('.container .main_content').addClass('container-wfixednav');
+        }
     }
     else {
         $('nav').removeClass('sticky');
         $('nav').removeClass('navbar-fixed');
-        $('.container .main_content').removeClass('container-wfixednav');
+        if ( isMobileDevice() == false){
+          $('.container .main_content').removeClass('container-wfixednav');
+        }
     };
   }
   else {
     $('nav').addClass('sticky');
     $('nav').addClass('navbar-fixed');
-    $('.container .main_content').addClass('container-wfixednav');
+    if ( isMobileDevice() == false){
+      $('.container .main_content').addClass('container-wfixednav');
+    }
   };
 });
 
