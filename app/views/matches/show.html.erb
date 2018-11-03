@@ -1,5 +1,5 @@
 <div class="match_entete">
-  <h1><%= @match.tournament.name%> - <%= @match.tournament.matches.count%>e journée</h1>
+  <h1><%= @match.tournament.name%> - <%= @match.tournament.matches.index(@match)+1%>e journée</h1>
 </div>
 <div class="match_entete_teams">
   <div class="match_entete_team_one" style="background-color:<%= @home_team.club.color.nil? ? "black" : @home_team.club.color %>">
@@ -20,7 +20,7 @@
 <% if !@match.image_une_url.nil? %>
   <div class="match_picture" style="background-image: url( <%= @match.image_une_url%>)">
   <% else %>
-  <div class="match_picture" style="background-image: url( <%= image_path('clubs/noclub.jpg') %>)">
+  <div class="match_picture" style="background-image: url( <%= image_path('clubs/noclub.jpg')%>)">
 <% end %>
     <div class="match_tab_player"><%= @home_team.player.pseudo %></div>
     <div class="tab_score match_tab_score">
