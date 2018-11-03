@@ -21,7 +21,8 @@
 
 ![demo Nouveau match](/app/assets/images/Capture_new_match.png)
 
-![demo Résultat match](/app/assets/images/Capture_show_match.png)
+<img src="/app/assets/images/Capture_show_match.png" width="100"  title="demo Résultat match">
+
 
 ///////////// Available features  /////////////
 
