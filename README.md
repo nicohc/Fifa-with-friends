@@ -19,10 +19,10 @@
 
 - Mise en avant du dernier match (A la Une) avec image personnalisée liée à l'équipe gagnante et score différencié visuellement.
 
-![demo Nouveau match](/app/assets/images/Capture_new_match.png)
-
-<img src="/app/assets/images/Capture_show_match.png" width="100"  title="demo Résultat match">
-
+<img src="/app/assets/images/screeshots/Capture_home.png" width="200"  title="demo Home page">
+<img src="/app/assets/images/screeshots/Capture_new_match.png" width="200"  title="demo Nouveau match">
+<img src="/app/assets/images/screeshots/Capture_show_match.png" width="200"  title="demo Résultat match">
+<img src="/app/assets/images/screeshots/Capture_show_tournament.png" width="200"  title="demo Résultat match">
 
 ///////////// Available features  /////////////
 
