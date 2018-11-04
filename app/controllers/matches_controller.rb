@@ -6,25 +6,26 @@ class MatchesController < ApplicationController
     2.times do
       team = @match.teams.build
     end
-    @selected_players = Player.all
-  end
-
-  def populate_other_list
-    tournament_id = params[:tournament_id]
-    @selected_seasons = Season.where(["tournament_id = ?", tournament_id]).pluck(:player_id)
     @selected_players = Array.new
-    @selected_seasons.each{|ss|
-      @selected_players << Player.find(ss)
-    }
 
-    respond_to do |format|
-      format.json { render json: {
-        selected_players: @selected_players
-        }
+    if params[:tournament_id].present?
+      tournament_id = params[:tournament_id]
+      @selected_seasons = Season.where(["tournament_id = ?", tournament_id]).pluck(:player_id)
+      @selected_players = Array.new
+      @selected_seasons.each{|ss|
+        @selected_players << Player.find(ss)
       }
     end
-    p tournament_id
-    p @selected_players
+    if request.xhr?
+      respond_to do |format|
+        format.json { render json: {
+          selected_players: @selected_players
+          }
+        }
+        p "Tournoi" + tournament_id
+        p @selected_players
+      end
+    end
   end
 
 
@@ -364,12 +365,12 @@ class MatchesController < ApplicationController
   end
 
   def randomiser
-    if Club.all.where("level >= 4.5").empty?
+    if Club.all.where("level > 4.5").empty?
       clubs = Club.all
     else
-      clubs = Club.all.where("level >= 4.5")
+      clubs = Club.all.where("level > 4.5")
     end
-    mode = ["Normal", "Sans règle", "Survie", "Distance", "Premier à...", "Têtes et volées" ]
+    mode = ["Normal", "Sans règle", "Survie", "Distance",  "Têtes et volées" ]
     @modealeatoire = mode.sample(1)
     @club_alea1 = clubs.sample.name
     @club_alea2 = clubs.sample.name
