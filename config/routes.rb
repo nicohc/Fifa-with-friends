@@ -13,7 +13,12 @@ Rails.application.routes.draw do
   get '/classement', to: 'home#leaderboard', as: 'leaderboard'
   get '/randomiser', to: 'matches#randomiser', as: 'alea_match'
 
-  resources :matches
+  resources :matches do
+    collection do
+      get 'populate_other_list'
+    end
+  end
+
   resources :tournaments
   get '/competitions', to: 'tournaments#all_tournaments', as: 'all_tournaments'
   get '/tournaments/:id/closed', to: 'tournaments#close_tournament', as: 'close_tournament'

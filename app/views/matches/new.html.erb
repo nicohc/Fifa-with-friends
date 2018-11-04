@@ -5,7 +5,7 @@
 <%= form_for(@match) do |f| %>
   <%= render 'shared/error_new_match', object: @match %>
   <div class="new_match_context">
-    <%= f.collection_select :tournament_id, Tournament.all.where(finished:false), :id, :name, class: 'form-control', include_blank: "Sélectionnez une compétition" %>
+    <%= f.collection_select :tournament_id, @tournament, :id, :name, class: 'form-control', include_blank: "Sélectionnez une compétition" %>
     <br>
     <%= f.select :mode, [['Normal', 'Normal'], ['Sans règle', 'Sans règle'], ['Survie', 'Survie'], ['Distance', 'Distance'], ['Premier à...', 'Premier à']], prompt: "Choisir un mode de jeu" %>
     <br> <br>
@@ -18,7 +18,7 @@
     <div class="new_match_team_bloc">
       <div>
         <%= t.label :"Joueur" %>
-        <%= t.collection_select :player_id, Player.all, :id, :pseudo, class: 'form-control', include_blank: "Choisir un joueur" %>
+        <%= t.collection_select :player_id, @selected_players, :id, :pseudo, class: 'form-control', include_blank: "Choisir un joueur" %>
       </div>
       <hr>
       <div class="new_match_team_bloc_club">

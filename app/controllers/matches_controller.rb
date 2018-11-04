@@ -2,10 +2,31 @@ class MatchesController < ApplicationController
 
   def new
     @match = Match.new
+    @tournament = Tournament.all.where(finished:false).includes(:players)
     2.times do
       team = @match.teams.build
     end
+    @selected_players = Player.all
   end
+
+  def populate_other_list
+    tournament_id = params[:tournament_id]
+    @selected_seasons = Season.where(["tournament_id = ?", tournament_id]).pluck(:player_id)
+    @selected_players = Array.new
+    @selected_seasons.each{|ss|
+      @selected_players << Player.find(ss)
+    }
+
+    respond_to do |format|
+      format.json { render json: {
+        selected_players: @selected_players
+        }
+      }
+    end
+    p tournament_id
+    p @selected_players
+  end
+
 
   def matches_good_conditions
 
