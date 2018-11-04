@@ -4,7 +4,7 @@
   <%= render 'shared/error_new_match', object: @match %>
   <br>
   <%= f.label :"Mode de jeu" %>
-  <%= f.select :mode, [['Normal', 'Normal'], ['Sans règle', 'Sans règle'], ['Survie', 'Survie'], ['Distance', 'Distance'], ['Premier à...', 'Premier à']], prompt: "Choisir un mode de jeu" %>
+  <%= f.select :mode, [['Normal', 'Normal'], ['Sans règle', 'Sans règle'], ['Survie', 'Survie'], ['Distance', 'Distance'], ['Têtes et volées', 'Têtes et volées']], prompt: "Choisir un mode de jeu" %>
   <br><br>
 
   <%= f.fields_for :teams do |t| %>
