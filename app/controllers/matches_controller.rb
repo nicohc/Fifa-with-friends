@@ -241,42 +241,49 @@ class MatchesController < ApplicationController
         @seasonone.save
 
     elsif @match_prol_old && (@home_team_old_score > @visiting_team_old_score )
-        @seasonone.points -= 2
-        p "Retrait points : J1 a gagné après prolongations"
+      p "Retrait points : J1 a gagné après prolongations"
+      flash[:notice] = "-#{@match.tournament.win_prol_points} points pour J1"
+        @seasonone.points -= @match.tournament.win_prol_points
         @seasonone.win_prol -= 1
         @seasonone.save
+        @seasontwo.points -= @match.tournament.lose_prol_points
         @seasontwo.lose_prol -= 1
         @seasontwo.save
 
     elsif @match_prol_old && (@home_team_old_score < @visiting_team_old_score )
-        @seasontwo.points -= 2
-        flash[:notice] = "Retrait points : J2 a gagné après prolongations"
+      p "Retrait points : J2 a gagné après prolongations"
+      flash[:notice] = "Retrait #{@match.tournament.win_prol_points} points : J2 a gagné après prolongations"
+        @seasontwo.points -= @match.tournament.win_prol_points
         @seasontwo.win_prol -= 1
         @seasontwo.save
+        @seasonone.points -= @match.tournament.lose_prol_points
         @seasonone.lose_prol -= 1
         @seasonone.save
 
     elsif (@home_team_old_score == @visiting_team_old_score ) && (@home_team_old_prol_score > @visiting_team_old_prol_score)
-        @seasonone.points -= 1
-        flash[:notice] = "Retrait points : J1 a gagné aux tirs au buts."
+      flash[:notice] = "Retrait points : J1 a gagné aux tirs au buts."
+        @seasonone.points -= @match.tournament.win_peno_points
         @seasonone.win_peno -= 1
         @seasonone.save
+        @seasontwo.points -= @match.tournament.lose_peno_points
         @seasontwo.lose_peno -= 1
         @seasontwo.save
 
     elsif (@home_team_old_score == @visiting_team_old_score ) && (@home_team_old_prol_score < @visiting_team_old_prol_score)
-        @seasontwo.points -= 1
-        flash[:notice] = "Retrait points : J2 a gagné aux tirs au buts."
+      flash[:notice] = "Retrait points : J2 a gagné aux tirs au buts."
+        @seasontwo.points -= @match.tournament.win_peno_points
         @seasontwo.win_peno -= 1
         @seasontwo.save
+        @seasonone.points -= @match.tournament.lose_peno_points
         @seasonone.lose_peno -= 1
         @seasonone.save
 
     elsif ((@match.teams.first.score == @match.teams.last.score) && (@match.teams.first.prol_score.nil))
-        @seasonone.points -= 1
-        flash[:notice] = "Retrait points : Match nul"
+      flash[:notice] = "Retrait points : Match nul"
+        @seasonone.points -= @match.tournament.draw_regular_points
         @seasonone.draw -= 1
         @seasonone.save
+        @seasontwo.points -= @match.tournament.draw_regular_points
         @seasontwo.draw -= 1
         @seasontwo.save
 
