@@ -24,6 +24,9 @@
       <div class="new_match_team_bloc_club">
         <%= t.collection_select :club_id, Club.all.order(:name), :id, :name, class: 'form-control', include_blank: "Choisir une équipe"%>
       </div>
+      <div class="new_match_team_bloc_club_star">
+        <%= %>
+      </div>
       <br>
       <div class="new_match_team_bloc_score">
         <%= t.label :"Score de l'équipe" %>

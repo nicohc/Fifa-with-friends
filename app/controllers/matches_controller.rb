@@ -16,16 +16,30 @@ class MatchesController < ApplicationController
         @selected_players << Player.find(ss)
       }
     end
+
+    if params[:club_id].present?
+      @selected_club = Array.new
+      club_id = params[:club_id]
+      p "Club ID " + club_id
+      @selected_club = Club.where(["id = ?", club_id])
+      p "Niveau " + @selected_club.first.level.to_s
+    end
+
     if request.xhr?
       respond_to do |format|
-        format.json { render json: {
-          selected_players: @selected_players
+          format.json { render json: {
+            selected_players: @selected_players,
+            selected_club: @selected_club
           }
         }
-        p "Tournoi" + tournament_id
+        p "Tournoi" + tournament_id if tournament_id.present?
         p @selected_players
+        p "Club" + club_id if club_id.present?
+        p @selected_club
       end
     end
+
+
   end
 
 
