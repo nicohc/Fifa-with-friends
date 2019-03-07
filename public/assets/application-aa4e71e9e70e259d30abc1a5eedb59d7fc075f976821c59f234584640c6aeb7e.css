@@ -1,0 +1,990 @@
+/* Entete profil club */
+/* line 8, /home/nico/Documents/fifa/app/assets/stylesheets/clubs.scss */
+.entete_club {
+  text-align: center;
+  color: white;
+}
+/* ------ GLOBAL ------ */
+/* line 4, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+  margin: 0;
+}
+
+/* ------ HEADER ------ */
+/* line 14, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.navbar {
+  background-color: white;
+  position: relative;
+  top: 0px;
+  right: 0;
+  left: 0;
+  margin: auto;
+  z-index: 9;
+}
+
+/* line 25, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.navbar-fixed {
+  background-color: white;
+  border-bottom: #D61E00 7px solid;
+}
+
+/* line 29, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.container-wfixednav {
+  padding-top: 40px !important;
+}
+
+/* line 33, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+#site_title {
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 80px;
+  line-height: 100px;
+  width: 100%;
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  padding-top: 10px;
+}
+/* line 46, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+#site_title a {
+  color: #D61E00;
+  text-decoration: none;
+}
+
+/* line 49, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+#site_title_fixed {
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 15px;
+  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+}
+/* line 58, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+#site_title_fixed a {
+  color: #D61E00;
+  text-decoration: none;
+}
+
+/* line 61, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+nav {
+  width: 98%;
+  padding: 0 1%;
+  border-bottom: #D61E00 7px solid;
+}
+
+/* line 68, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  margin: 0;
+  padding-left: 0;
+}
+
+/* line 78, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+nav ul div {
+  display: inline-flex;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+/* line 82, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 98%;
+  padding: 0 1%;
+}
+
+/* line 90, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.mobile-menu, .menu-symbol {
+  display: none;
+}
+
+/* line 94, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+nav ul li {
+  list-style: none;
+  padding: 15px 10px;
+}
+
+/* line 99, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+nav ul li a {
+  color: black;
+  text-decoration: none;
+}
+
+/* line 103, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+nav ul li a:hover {
+  color: grey;
+}
+
+/* line 105, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.dropdown-menu {
+  display: none;
+}
+
+/* line 109, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.dropdown:hover .dropdown-menu {
+  right: 8px;
+  position: absolute;
+  display: block;
+  margin-top: 15px;
+  height: auto;
+  background-color: whitesmoke;
+  padding: 10px;
+}
+
+/* Sous-Menus */
+/* line 122, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.main-menu .sous_menu {
+  display: none;
+}
+
+/* line 127, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.main-menu .principal_item:hover .sous_menu {
+  display: block;
+  position: absolute;
+  width: 170px;
+  height: auto;
+  background-color: whitesmoke;
+  margin-top: 15px;
+  margin-left: -10px;
+  border: #D61E00 1px dotted;
+}
+/* line 136, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.main-menu .principal_item:hover .sous_menu li:hover {
+  background-color: #D61E00;
+}
+/* line 138, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.main-menu .principal_item:hover .sous_menu li:hover a {
+  color: white !important;
+}
+
+/* Menu on mobile */
+@media only screen and (max-width: 600px) {
+  /* line 147, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .main-menu {
+    display: none;
+  }
+}
+@media only screen and (max-width: 600px) {
+  /* line 152, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .navbar {
+    height: 57px;
+  }
+
+  /* line 155, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  #site_title_mobile {
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 30px;
+    width: 100%;
+    text-align: center;
+    padding-left: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    border-bottom: #D61E00 7px solid;
+    background-color: white;
+  }
+  /* line 172, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  #site_title_mobile a {
+    color: #D61E00;
+    text-decoration: none;
+  }
+  /* line 173, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  #site_title_mobile li {
+    font-size: 16px;
+  }
+  /* line 174, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  #site_title_mobile li a {
+    color: white;
+  }
+
+  /* line 179, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .menu-symbol {
+    display: block;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: large;
+  }
+
+  /* line 188, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 50px;
+    margin: 0;
+    padding: 0 10px;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.9);
+    height: auto;
+    position: absolute;
+    width: 100%;
+    top: 57px;
+    right: 0;
+  }
+
+  /* line 204, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .mobile-menu a {
+    color: white;
+  }
+}
+/* ------ FOOTER ------ */
+/* line 212, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+footer {
+  background-color: black;
+  border-top: #D61E00 7px solid;
+  bottom: 0px;
+  right: 0;
+  left: 0;
+  height: 50px;
+  line-height: 50px;
+  margin-top: 4vh;
+  color: white;
+  text-align: center;
+}
+
+/* line 225, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+  /* line 231, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  footer {
+    font-size: small;
+  }
+}
+/* ------ CONTENT ------ */
+/* line 238, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.main_content {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0px 15px;
+  margin-top: 57px;
+}
+
+/* line 245, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.main_content_4_8 {
+  display: flex;
+}
+
+@media only screen and (min-width: 601px) {
+  /* line 251, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .main_content {
+    min-height: 100vh;
+  }
+
+  /* line 255, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .main_left {
+    width: 65%;
+    min-width: 700px;
+  }
+
+  /* line 260, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .main_right {
+    width: 35%;
+    min-width: 300px;
+    padding-left: 20px;
+  }
+}
+/* ------ UNE Mobile ------ */
+@media only screen and (max-width: 600px) {
+  /* line 269, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .main_content {
+    margin: auto;
+    padding: 0px;
+    min-height: 72vh;
+  }
+
+  /* line 275, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .main_content_4_8 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* line 280, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .main_left {
+    width: 100vw;
+  }
+
+  /* line 284, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .main_right {
+    width: 98vw;
+  }
+
+  /* line 288, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .mobile-content_une {
+    padding: 0 10px 0 5px !important;
+  }
+}
+/* line 294, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.title_w_bg {
+  margin-top: 12px;
+  background: black;
+  height: 28px;
+  line-height: 31px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  padding: 2px 35px 2px 9px;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+/* Image a la Une */
+/* line 309, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.title_une {
+  position: absolute;
+  margin: auto;
+  padding: 0px 0px 5px 9px;
+  line-height: 33px;
+}
+
+/* line 315, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.title_tournament {
+  padding: 0 20px 0 10px;
+  display: inline-block;
+  margin-left: 25px;
+  background-color: #606060;
+}
+
+/* line 321, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.title_journee {
+  padding: 0 20px 0 10px;
+  margin-left: -4px;
+  display: inline-block;
+  background-color: #cccccc;
+  color: black;
+}
+
+/* line 329, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.image_une {
+  height: 400px;
+  width: 700px;
+  overflow: hidden;
+}
+
+/* line 334, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.image_une img {
+  min-height: 400px;
+  max-width: 105%;
+  height: auto;
+}
+
+/* line 340, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.score_une {
+  height: 60px;
+  width: 700px;
+  padding: 0 50px;
+  box-sizing: border-box;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* line 353, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.grostitre_une {
+  background-color: #202020;
+  position: relative;
+  display: block;
+  padding: 12px;
+  min-height: 60px;
+  color: #909090;
+  text-align: center;
+}
+
+/* line 362, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.grostitre {
+  font-size: 28px;
+  font-family: "Sans";
+  line-height: 28px;
+  font-weight: 800;
+  margin-top: 10px;
+  text-transform: uppercase;
+  padding-bottom: 7px;
+}
+
+/* line 371, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.grostitre_mobile {
+  color: white;
+  font-size: 22px;
+  font-family: "Sans";
+  line-height: 22px;
+  font-weight: 700;
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+
+/* ------ UNE Mobile ------ */
+@media only screen and (max-width: 600px) {
+  /* line 383, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .image_une {
+    height: 205px;
+    width: 100vw;
+  }
+
+  /* line 387, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .image_une img {
+    min-height: 200px;
+  }
+
+  /* line 390, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .score_une {
+    height: 60px;
+    width: 100vw;
+    padding: 0 5px;
+    box-sizing: border-box;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+/* line 404, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.mobile-player_une {
+  display: inline-flex;
+  justify-content: space-around;
+  width: 33%;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  /* line 411, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .mobile-player_une {
+    display: flex;
+    flex-direction: column;
+  }
+}
+/* line 417, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.score_une .tab_player {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* line 421, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.score_une .tab_score_une {
+  display: inline-flex;
+  position: relative;
+  padding: 0 2px;
+}
+
+/* line 426, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.score_une .tab_score_une div {
+  padding: 15px 20px;
+  margin: 0 2px;
+  font-size: 26px;
+  font-weight: bold;
+  background-color: #404040;
+  color: white;
+}
+
+/* line 435, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.score_une .winner {
+  background-color: #fffaf2 !important;
+  color: black !important;
+}
+
+/* line 442, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.match_une_links {
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+/* line 446, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.match_une_links a {
+  text-decoration: none;
+  color: black;
+  width: 50%;
+}
+/* line 450, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.match_une_links a:hover {
+  color: grey;
+}
+
+/* Tableau des rencontres */
+@media only screen and (min-width: 980px) {
+  /* line 458, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .scoreboard {
+    min-width: 600px;
+  }
+  /* line 460, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .scoreboard a {
+    text-decoration: none;
+  }
+}
+/* line 463, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.scoreboard {
+  padding-bottom: 30px;
+}
+
+/* line 466, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.scoreboard tr {
+  text-align: center;
+}
+
+/* line 469, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.scoreboard tr:not(:first-child) {
+  height: 50px;
+}
+
+/* line 472, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.scoreboard tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* line 476, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.statuswinner {
+  font-weight: bold;
+}
+
+/* line 481, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.tab_score {
+  padding: 5px 10px 5px;
+  font-size: 24px;
+  color: white;
+  background-color: black;
+  text-align: center;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+  /* line 490, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .tab_score {
+    padding: 5px 2px 5px;
+    font-size: initial !important;
+  }
+
+  /* line 494, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .scoreboard {
+    width: 100vw;
+    padding: 0 10px 0 0px;
+  }
+}
+/* line 499, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.scoreboard .tab_score_prol {
+  padding-top: 5px;
+  font-size: 15px;
+}
+
+/* line 507, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.tab_player a {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+
+/* Tableau - Classement des joueurs */
+/* line 514, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.leaderboard {
+  padding-bottom: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  /* line 518, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .leaderboard {
+    width: 100vw;
+  }
+}
+/* line 524, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.leaderboard tr:not(:first-child) {
+  height: 40px;
+}
+
+/* line 527, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.leaderboard th {
+  font-weight: normal;
+}
+
+/* line 531, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.leaderboard td, .leaderboard tr {
+  border-bottom: 1px lightgrey solid;
+}
+
+/* line 535, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.leaderboard td {
+  text-align: center;
+}
+
+@media only screen and (min-width: 601px) {
+  /* line 538, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .leaderboard td {
+    min-width: 30px;
+  }
+
+  /* line 540, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .leaderboard td:nth-child(2) {
+    width: 100px;
+  }
+
+  /* line 541, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+  .leaderboard td:nth-child(3) {
+    width: 50px;
+  }
+}
+/* line 544, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.leaderboard .lb_br {
+  border-right: 1px lightgrey solid;
+}
+
+/* line 547, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.leaderboard .lb_br_big {
+  border-right: 4px grey solid;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+
+/* line 554, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.leaderboard .lead_team {
+  font-weight: bold;
+  font-size: 15px;
+  text-align: left;
+}
+/* line 558, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.leaderboard .lead_team a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* line 563, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+ul.list_rules {
+  padding: 0;
+  margin-top: 0;
+}
+
+/* line 568, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.list_rules li {
+  list-style: none;
+}
+
+/* line 572, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.commentboard {
+  width: 100%;
+  max-width: 400px;
+  word-break: break-all;
+}
+
+/* line 577, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.commentboard tr {
+  height: 30px;
+}
+
+/* line 580, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.commentboard tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+/* line 583, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.commentboard td:first-child {
+  width: 33px;
+}
+
+/* line 586, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.comment_time {
+  font-size: 12px;
+  color: grey;
+  padding-left: 5px;
+}
+
+/* line 591, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.comment_user {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* line 596, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.new_comment {
+  padding-bottom: 10px;
+}
+
+/* line 597, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+.new_comment .actions, .new_comment .field {
+  display: inline-block;
+}
+
+/* line 601, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+#comment_content {
+  width: 280px;
+}
+
+/* ------- Readme Markdown ------- */
+/* line 612, /home/nico/Documents/fifa/app/assets/stylesheets/custom.scss */
+img[alt="demo Nouveau match"] {
+  float: left;
+  width: 100px;
+}
+/* Entete profil match */
+/* line 7, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+.match_entete {
+  font-size: 10px;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* line 13, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+.match_entete_teams {
+  width: 100%;
+  display: flex;
+}
+
+/* line 17, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+.match_entete_team_one, .match_entete_team_two {
+  height: 75px;
+  width: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 0 30px;
+}
+
+/* line 27, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+.match_entete_team_one {
+  justify-content: end;
+}
+
+/* line 29, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+.match_entete_bas {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+/* line 35, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+.match_entete_bas .match_entete_bas_d, .match_entete_bas .match_entete_bas_g {
+  width: 100px;
+}
+
+/* line 37, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+.match_picture {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* line 47, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+.match_tab_score {
+  width: 180px;
+  height: 76px;
+  font-size: 50px;
+  line-height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/* line 55, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+.match_tab_score .tab_score_prol {
+  font-size: 20px;
+  line-height: 20px;
+}
+
+/* line 60, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+.match_tab_player {
+  background-color: white;
+  font-size: 28px;
+  text-align: center;
+  min-width: 190px;
+  height: 76px;
+  line-height: 76px;
+}
+
+@media only screen and (max-width: 600px) {
+  /* line 69, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+  .match_picture {
+    width: 100%;
+    max-height: 60vh;
+  }
+
+  /* line 73, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+  .match_tab_player {
+    font-size: 20px;
+    min-width: 30%;
+    height: 76px;
+    line-height: 76px;
+  }
+
+  /* line 79, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+  .match_tab_score {
+    font-size: 28px !important;
+  }
+
+  /* line 82, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+  .tab_score_prol {
+    font-size: 12px !important;
+    line-height: 20px;
+  }
+}
+/* NEW match */
+/* line 90, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+.new_match_bloc {
+  background-color: black;
+  background-image: url(/assets/clubs/noclub.jpg);
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+/* line 97, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+.new_match_context select {
+  width: 50%;
+  text-align: center;
+}
+
+/* line 101, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+.new_match_team {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media only screen and (min-width: 600px) {
+  /* line 107, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+  .new_match_team_bloc:nth-child(1) {
+    text-align: right;
+  }
+
+  /* line 110, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+  .new_match_team_bloc:nth-child(2) {
+    text-align: left;
+  }
+  /* line 112, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+  .new_match_team_bloc:nth-child(2) div {
+    display: flex;
+    flex-flow: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  /* line 118, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+  .new_match_team_bloc:nth-child(2) label {
+    padding: 0 5px;
+  }
+
+  /* line 120, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+  .new_match_team_bloc_score input {
+    width: 85px;
+    height: 90px;
+    font-size: 80px;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+  }
+
+  /* line 128, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+  .new_match_team_bloc_score_prol input {
+    font-size: 25px;
+    width: 50px;
+  }
+
+  /* line 132, /home/nico/Documents/fifa/app/assets/stylesheets/matches.scss */
+  .new_match_team_bloc_club select {
+    font-size: 26px;
+    text-align: center;
+    min-width: 280px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    padding: 2px;
+  }
+}
+@charset "UTF-8";
+/* Tournament - Tableau Règles nouvelle compétition */
+/* line 8, /home/nico/Documents/fifa/app/assets/stylesheets/tournaments.scss */
+.tab_tournament_rules label {
+  width: 200px;
+}
+/* line 9, /home/nico/Documents/fifa/app/assets/stylesheets/tournaments.scss */
+.tab_tournament_rules input {
+  width: 20px;
+}
+
+/* Tournament - Tableau Règles nouvelle compétition */
+/* line 13, /home/nico/Documents/fifa/app/assets/stylesheets/tournaments.scss */
+.tournament_list tr {
+  height: 30px;
+}
+
+/* line 16, /home/nico/Documents/fifa/app/assets/stylesheets/tournaments.scss */
+.tournament_list tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+/* line 19, /home/nico/Documents/fifa/app/assets/stylesheets/tournaments.scss */
+.tournament_list th:first-child,
+.tournament_list th:last-child {
+  width: 150px;
+}
+
+/* line 25, /home/nico/Documents/fifa/app/assets/stylesheets/tournaments.scss */
+.tournament_list td {
+  min-width: 70px;
+}
+/* line 28, /home/nico/Documents/fifa/app/assets/stylesheets/tournaments.scss */
+.tournament_list td:first-child {
+  padding-left: 3px;
+}
+/* line 31, /home/nico/Documents/fifa/app/assets/stylesheets/tournaments.scss */
+.tournament_list td:not(:first-child) {
+  text-align: center;
+}
+/* line 34, /home/nico/Documents/fifa/app/assets/stylesheets/tournaments.scss */
+.tournament_list a {
+  text-decoration: none;
+  color: #D61E00;
+}
+/* line 38, /home/nico/Documents/fifa/app/assets/stylesheets/tournaments.scss */
+.tournament_list .add_tournament {
+  background-color: grey;
+}
+/* line 40, /home/nico/Documents/fifa/app/assets/stylesheets/tournaments.scss */
+.tournament_list .add_tournament a {
+  text-decoration: none;
+  color: white;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
