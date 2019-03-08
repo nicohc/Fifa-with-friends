@@ -1,4 +1,5 @@
 class MatchesController < ApplicationController
+  include Pagy::Backend
 
   def new
     @match = Match.new

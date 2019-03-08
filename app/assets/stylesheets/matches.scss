@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.pagy-bootstrap-nav{
+  position: relative !important;
+}
+
 /* Entete profil match */
 .match_entete{
   font-size: 10px;

@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  include Pagy::Backend
 
   def reset_points
     @players = Player.all
@@ -44,7 +45,7 @@ class HomeController < ApplicationController
 
 
   def all_matches
-    @matches = Match.all
+    @pagy, @matches = pagy(Match.all)
     @players = Player.all
   end
 
