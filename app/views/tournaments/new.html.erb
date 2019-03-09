@@ -6,9 +6,13 @@
     <%= t.label :"Nom du tournoi" %>
     <%= t.text_field :name %>
   </div>
+  <div class="field">
+    <%= t.label :"Type de compétition" %>
+    <%= t.select :format, [['Championnat', 'Championnat'], ['Coupe', 'Coupe']], prompt: "Choisir un format" %>
+  </div>
   <br><br>
   <div class="title_w_bg">Joueurs</div>
-  <br>Ajoutez au moins deux joueurs pour lancer une nouvelle compétition : 
+  <br>Ajoutez au moins deux joueurs pour lancer une nouvelle compétition :
   <div class="field">
     <%= t.fields_for :seasons do |pls| %>
       <%= pls.label :"Joueur" %>

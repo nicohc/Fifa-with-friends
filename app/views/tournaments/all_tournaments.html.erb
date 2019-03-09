@@ -5,6 +5,7 @@
 <table class="tournament_list">
   <tr>
     <th>Tournoi</th>
+    <th>Format</th>
     <th>Statut</th>
     <th>Joueurs</th>
     <th>Matchs</th>
@@ -14,6 +15,7 @@
   <br>
   <tr>
     <td><%= link_to tournament.name, tournament_path(tournament) %></td>
+    <td><%= tournament.format %></td>
     <td><%= tournament.finished ? "Terminé" : "En cours" %></td>
     <td><%= tournament.players.count %></td>
     <td><%= tournament.matches.count %></td>

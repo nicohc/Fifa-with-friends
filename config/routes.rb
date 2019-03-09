@@ -19,13 +19,16 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tournaments
+  resources :tournaments 
   get '/competitions', to: 'tournaments#all_tournaments', as: 'all_tournaments'
   get '/tournaments/:id/closed', to: 'tournaments#close_tournament', as: 'close_tournament'
   get '/tournaments/:id/opened', to: 'tournaments#open_tournament', as: 'open_tournament'
   get '/all_matches/maj', to: 'matches#maj_tournament_for_matches', as: 'maj_tournament'
+
+=begin
   get '/competitions/maj', to: 'tournaments#migrate_all_existing_matches_to_last_season', as: 'maj_teams_season'
   get '/competitions/maj_stats', to: 'tournaments#migrate_all_player_stats_to_last_season_stats', as: 'maj_seasons_stats'
+=end
 
   resources :teams
   resources :players

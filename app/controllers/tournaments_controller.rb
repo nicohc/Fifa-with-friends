@@ -10,6 +10,15 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.new(tournament_params)
 
     @tournament.finished = false
+    if @tournament.format == "Coupe"
+        i=1
+        @tournament.seasons.each { |s|
+          s.init_seat = i
+          s.save
+          i += 1
+        }
+    end
+
     if @tournament.save
       redirect_to all_tournaments_path
     else
@@ -19,13 +28,16 @@ class TournamentsController < ApplicationController
 
   def edit
     @tournament = Tournament.find(params[:id])
-    season = @tournament.seasons.build
   end
 
   def update
     @tournament = Tournament.find(params[:id])
+
     if @tournament.update(tournament_params)
-      flash[:success] = "Votre tournament a bien été mis à jour !"
+      if @tournament.format == "Coupe"
+        @tournament.seasons.last.init_seat = @tournament.seasons.count + 1
+      end
+      flash[:success] = "Votre compétition #{@tournament.name} a bien été mis à jour !"
       redirect_to all_tournaments_path
     else
       render :action => 'edit'
@@ -52,6 +64,14 @@ class TournamentsController < ApplicationController
   def all_tournaments
     @tournaments = Tournament.all
   end
+
+  def detach_season
+    @tournament = Tournament.find(params[:id])
+    season = Season.find(params[:season_id])
+    @tournament.seasons.delete(season)
+    redirect_to edit_tournament_path
+  end
+
 
   def destroy
     @tournament = Tournament.find(params[:id])
@@ -106,11 +126,11 @@ class TournamentsController < ApplicationController
 
   private
   def tournament_params
-      params.require(:tournament).permit(:name,
+      params.require(:tournament).permit(:name, :format,
         :win_regular_points, :win_prol_points, :win_peno_points,
         :lose_regular_points, :lose_prol_points, :lose_peno_points,
         :draw_regular_points,
-        seasons_attributes: [:id, :player_id],
+        seasons_attributes: [:id, :init_seat, :seat, :status, :player_id, :_destroy],
       )
   end
 

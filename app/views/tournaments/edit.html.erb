@@ -6,32 +6,46 @@
     <%= t.label :"Nom du tournoi" %>
     <%= t.text_field :name %>
   </div>
+  <div class="field">
+    <%= t.label :"Format" %> :<%= @tournament.format %>
+  </div>
   <br><br>
   <div class="title_w_bg">Joueurs</div>
-  <div class="field">
+  <table>
+    <tr>
+      <th>Joueurs</th>
+      <th>Supprimer</th>
+    </tr>
+    <br>
     <%= t.fields_for :seasons do |pls| %>
-      <%= pls.label :"Joueur" %>
-      <%= pls.collection_select :player_id, Player.all, :id, :pseudo, class: 'form-control', include_blank: "Choisir un joueur" %>
-      <br>
+      <%= render 'season_fields', s: pls %>
     <% end %>
-  </div>
-  <br><br>
-  <div class="title_w_bg">Règles de la compétition</div>
-  <div class="tab_tournament_rules">
-      Points pour une victoire (90mn) : <%= @tournament.win_regular_points %>
-      <br>Points pour une victoire après prolongations : <%= @tournament.win_prol_points %>
-      <br>Points pour une victoire aux pénalties <%= @tournament.win_peno_points %>
-
-      <br>
-      <br>Points pour une défaite(90mn) : <%= @tournament.lose_regular_points %>
-      <br>Points pour une défaite après prolongations : <%= @tournament.lose_prol_points %>
-      <br>Points pour une défaite(90mn) : <%= @tournament.lose_peno_points %>
-
-      <br>
-      <br>Points pour un match nul : <%= @tournament.draw_regular_points %>
-  </div>
+  </table>
   <br>
+  <%= link_to_add_fields "Ajouter un joueur", t, :seasons %>
+
+  <br><br>
+  <% if @tournament.format == "Championnat" %>
+    <div class="title_w_bg">Règles de la compétition</div>
+    <div class="tab_tournament_rules">
+        Points pour une victoire (90mn) : <%= @tournament.win_regular_points %>
+        <br>Points pour une victoire après prolongations : <%= @tournament.win_prol_points %>
+        <br>Points pour une victoire aux pénalties <%= @tournament.win_peno_points %>
+
+        <br>
+        <br>Points pour une défaite(90mn) : <%= @tournament.lose_regular_points %>
+        <br>Points pour une défaite après prolongations : <%= @tournament.lose_prol_points %>
+        <br>Points pour une défaite(90mn) : <%= @tournament.lose_peno_points %>
+
+        <br>
+        <br>Points pour un match nul : <%= @tournament.draw_regular_points %>
+    </div>
+    <br>
+  <% end %>
+
   <div class="actions">
     <%= t.submit "Mettre à jour la compétition" %>
   </div>
 <% end %>
+<br>
+<%= link_to "Retour à la compétition", tournament_path %>

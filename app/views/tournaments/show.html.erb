@@ -1,7 +1,10 @@
 <h1>Compétition : <%= @tournament.name %></h1>
 
-<div class="title_w_bg">Statut</div>
+<div class="title_w_bg">Format</div>
+<%= @tournament.format %>
 <br>
+
+<div class="title_w_bg">Statut</div>
 <%= @tournament.finished ? "Terminé" : "En cours"%></td>
 <% if user_signed_in? && current_user.admin %>
   <% if @tournament.finished? %>
@@ -12,104 +15,119 @@
 <% end %>
 
 <br><br>
+<% if @tournament.format == "Championnat" %>
+  <div class="title_w_bg">Classement</div>
 
-<div class="title_w_bg">Classement</div>
-
-<table class="leaderboard">
-  <tr>
-    <th> </th>
-    <th> </th>
-    <th>Pts</th>
-    <th>J.</th>
-    <th>G.</th>
-    <th>G.pr</th>
-    <th>G.pn.</th>
-    <th>N.</th>
-    <th>D.</th>
-    <th>D.pr</th>
-    <th>D.pn.</th>
-    <th>bp.</th>
-    <th>bc.</th>
-    <th class="lb_br">Diff.</th>
-  </tr>
-  <br>
-
-
-  <% i = 0
-    @tournament.seasons.order(points: :desc).each { |ts|
-    i = i+1.to_i
-  %>
-  <tr>
-    <td><%= i %></td>
-    <td><%= ts.player.pseudo %></td>
-    <td><b><%= ts.points %></b></td>
-    <td class="lb_br"><%= ts.teams.count %></td>
-    <td><%= ts.win %> </td>
-    <td><%= ts.win_prol %> </td>
-    <td class="lb_br"><%= ts.win_peno %> </td>
-    <td class="lb_br"><%= ts.draw %> </td>
-    <td><%= ts.lose %> </td>
-    <td><%= ts.lose_prol %> </td>
-    <td class="lb_br"><%= ts.lose_peno %> </td>
-    <td><%= @bp = Team.all.where("season_id= '#{ts.id}'").sum(:score) %></td>
-    <td><%= @bc = (Team.where("season_id= '#{ts.id}'").collect{|a| a.match.teams.collect{|b| b.score}.sum }.sum)-(Team.all.where("season_id= '#{ts.id}'").sum(:score)) %></td>
-    <td class="lb_br"><%= @bp-@bc %> </td>
-
-  </tr>
-  <% } %>
-</table>
-
-<div class="title_w_bg">Statistiques : Ratios par match </div>
-
-<table class="leaderboard">
-  <tr>
-    <th> </th>
-    <th> </th>
-    <th>Pts / match</th>
-    <th>Matchs<br>joués</th>
-    <th>G.</th>
-    <th>G.pr</th>
-    <th>G.pn.</th>
-    <th>N.</th>
-    <th>D.</th>
-    <th>D.pr</th>
-    <th>D.pn.</th>
-    <th class="lb_br">Buts /<br>match</th>
-    <th class="lb_br">Bc./<br>match</th>
-  </tr>
-  <br>
-
-  <% i = 0
-    @tournament.seasons.order(points: :desc).each do |ts|
-    i = i+1.to_i
-  %>
+  <table class="leaderboard">
     <tr>
-      <% if @tournament.matches.count != 0 %>
-      <td><%= i %></td>
-      <td class="lead_team"><%= ts.player.pseudo %></td>
-      <td class="lb_br"><b><%= (ts.points.to_f/ ts.teams.count).round(2)%></b></td>
-      <td class="lb_br"><%= ts.teams.count %> </td>
-        <% if ts.teams.count != 0 %>
-        <td>              <%= number_to_percentage(((100 * ts.win) / ts.teams.count), precision: 0) %> </td>
-        <td>              <%= number_to_percentage(((100 * ts.win_prol)/ ts.teams.count), precision: 0) %> </td>
-        <td class="lb_br"><%= number_to_percentage(((100 * ts.win_peno) / ts.teams.count), precision: 0) %> </td>
-        <td class="lb_br"><%= number_to_percentage(((100 * ts.draw) / ts.teams.count), precision: 0) %> </td>
-        <td>              <%= number_to_percentage(((100 * ts.lose) / ts.teams.count), precision: 0) %> </td>
-        <td>              <%= number_to_percentage(((100 * ts.lose_prol) / ts.teams.count), precision: 0) %> </td>
-        <td class="lb_br"><%= number_to_percentage(((100 * ts.lose_peno) / ts.teams.count), precision: 0) %> </td>
-        <td><%= (Team.all.where("season_id= '#{ts.id}'").sum(:score).to_f / ts.teams.count).round(2) %></td>
-        <td class="lb_br"><%= (((Team.where("season_id= '#{ts.id}'").collect{|a| a.match.teams.collect{|b| b.score}.sum }.sum)-(Team.all.where("season_id= '#{ts.id}'").sum(:score))).to_f / ts.teams.count).round(2) %></td>
-        <% end %>
-      <% end %>
+      <th> </th>
+      <th> </th>
+      <th>Pts</th>
+      <th>J.</th>
+      <th>G.</th>
+      <th>G.pr</th>
+      <th>G.pn.</th>
+      <th>N.</th>
+      <th>D.</th>
+      <th>D.pr</th>
+      <th>D.pn.</th>
+      <th>bp.</th>
+      <th>bc.</th>
+      <th class="lb_br">Diff.</th>
+    </tr>
+    <br>
 
+
+    <% i = 0
+      @tournament.seasons.order(points: :desc).each { |ts|
+      i = i+1.to_i
+    %>
+    <tr>
+      <td><%= i %></td>
+      <td><%= ts.player.pseudo %></td>
+      <td><b><%= ts.points %></b></td>
+      <td class="lb_br"><%= ts.teams.count %></td>
+      <td><%= ts.win %> </td>
+      <td><%= ts.win_prol %> </td>
+      <td class="lb_br"><%= ts.win_peno %> </td>
+      <td class="lb_br"><%= ts.draw %> </td>
+      <td><%= ts.lose %> </td>
+      <td><%= ts.lose_prol %> </td>
+      <td class="lb_br"><%= ts.lose_peno %> </td>
+      <td><%= @bp = Team.all.where("season_id= '#{ts.id}'").sum(:score) %></td>
+      <td><%= @bc = (Team.where("season_id= '#{ts.id}'").collect{|a| a.match.teams.collect{|b| b.score}.sum }.sum)-(Team.all.where("season_id= '#{ts.id}'").sum(:score)) %></td>
+      <td class="lb_br"><%= @bp-@bc %> </td>
 
     </tr>
-  <% end %>
+    <% } %>
+  </table>
 
-</table>
+  <div class="title_w_bg">Statistiques : Ratios par match </div>
+
+  <table class="leaderboard">
+    <tr>
+      <th> </th>
+      <th> </th>
+      <th>Pts / match</th>
+      <th>Matchs<br>joués</th>
+      <th>G.</th>
+      <th>G.pr</th>
+      <th>G.pn.</th>
+      <th>N.</th>
+      <th>D.</th>
+      <th>D.pr</th>
+      <th>D.pn.</th>
+      <th class="lb_br">Buts /<br>match</th>
+      <th class="lb_br">Bc./<br>match</th>
+    </tr>
+    <br>
+
+    <% i = 0
+      @tournament.seasons.order(points: :desc).each do |ts|
+      i = i+1.to_i
+    %>
+      <tr>
+        <% if @tournament.matches.count != 0 %>
+        <td><%= i %></td>
+        <td class="lead_team"><%= ts.player.pseudo %></td>
+        <td class="lb_br"><b><%= (ts.points.to_f/ ts.teams.count).round(2)%></b></td>
+        <td class="lb_br"><%= ts.teams.count %> </td>
+          <% if ts.teams.count != 0 %>
+          <td>              <%= number_to_percentage(((100 * ts.win) / ts.teams.count), precision: 0) %> </td>
+          <td>              <%= number_to_percentage(((100 * ts.win_prol)/ ts.teams.count), precision: 0) %> </td>
+          <td class="lb_br"><%= number_to_percentage(((100 * ts.win_peno) / ts.teams.count), precision: 0) %> </td>
+          <td class="lb_br"><%= number_to_percentage(((100 * ts.draw) / ts.teams.count), precision: 0) %> </td>
+          <td>              <%= number_to_percentage(((100 * ts.lose) / ts.teams.count), precision: 0) %> </td>
+          <td>              <%= number_to_percentage(((100 * ts.lose_prol) / ts.teams.count), precision: 0) %> </td>
+          <td class="lb_br"><%= number_to_percentage(((100 * ts.lose_peno) / ts.teams.count), precision: 0) %> </td>
+          <td><%= (Team.all.where("season_id= '#{ts.id}'").sum(:score).to_f / ts.teams.count).round(2) %></td>
+          <td class="lb_br"><%= (((Team.where("season_id= '#{ts.id}'").collect{|a| a.match.teams.collect{|b| b.score}.sum }.sum)-(Team.all.where("season_id= '#{ts.id}'").sum(:score))).to_f / ts.teams.count).round(2) %></td>
+          <% end %>
+        <% end %>
 
 
+      </tr>
+    <% end %>
 
+  </table>
+<% end %>
+
+<% if @tournament.format == "Coupe" %>
+  <div class="title_w_bg">Liste des joueurs</div>
+  <br>
+  <% @tournament.players.all.each{ |p| %>
+    <%= p.pseudo %>
+    <br>
+  <% } %>
+
+  <div class="title_w_bg">Tableau</div>
+  <% @tournament.seasons.all.each{ |s| %>
+    <div class="cup_team"><%= s.init_seat.nil? ? "Pas de siège défini" :  "Siège #{s.init_seat} #{s.player.try(:pseudo)}" %></div>
+  <% } %>
+
+<% end %>
+
+<br><br>
 <div class="title_w_bg">Matchs</div>
 <br>
 <table class="scoreboard">
@@ -155,18 +173,23 @@
 
 </table>
 <br>
-<div class="title_w_bg">Règles</div>
-<br>Points pour une victoire :
-<br>Sur 90mn : <%= @tournament.win_regular_points %>
-<br>Après prolongations : <%= @tournament.win_prol_points %>
-<br>Aux pénalties : <%= @tournament.win_peno_points %>
-<br><br>
-Points pour une défaite
-<br>90mn : <%= @tournament.lose_regular_points %>
-<br>Après prolongations : <%= @tournament.lose_prol_points %>
-<br>Aux pénaltys : <%= @tournament.lose_peno_points %>
 
-<br><br>Points pour un match nul : <%= @tournament.draw_regular_points %>
+<% if @tournament.format == "Championnat" %>
+
+  <div class="title_w_bg">Règles</div>
+  <br>Points pour une victoire :
+  <br>Sur 90mn : <%= @tournament.win_regular_points %>
+  <br>Après prolongations : <%= @tournament.win_prol_points %>
+  <br>Aux pénalties : <%= @tournament.win_peno_points %>
+  <br><br>
+  Points pour une défaite
+  <br>90mn : <%= @tournament.lose_regular_points %>
+  <br>Après prolongations : <%= @tournament.lose_prol_points %>
+  <br>Aux pénaltys : <%= @tournament.lose_peno_points %>
+
+  <br><br>Points pour un match nul : <%= @tournament.draw_regular_points %>
+
+<% end %>
 
 <br><br>
 <% if user_signed_in? %>

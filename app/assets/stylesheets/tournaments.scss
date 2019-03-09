@@ -42,3 +42,14 @@
     }
   }
 }
+
+
+.cup_team {
+    padding: 5px;
+    border: 1px grey solid;
+    width: 100px;
+    margin-bottom: 5px;
+}
+.cup_team:nth-child(2n+0) {
+    margin-bottom: 30px;
+}
