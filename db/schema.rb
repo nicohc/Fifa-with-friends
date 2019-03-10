@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190309094039) do
+ActiveRecord::Schema.define(version: 20190310130331) do
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20190309094039) do
     t.integer "draw_regular_points"
     t.boolean "finished"
     t.string "format"
+    t.string "status"
   end
 
   create_table "users", force: :cascade do |t|

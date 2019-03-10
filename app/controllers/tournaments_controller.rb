@@ -35,13 +35,36 @@ class TournamentsController < ApplicationController
 
     if @tournament.update(tournament_params)
       if @tournament.format == "Coupe"
-        @tournament.seasons.last.init_seat = @tournament.seasons.count + 1
+          i=1
+          @tournament.seasons.each { |s|
+          s.init_seat = i
+          s.save
+          i += 1
+        }
       end
       flash[:success] = "Votre compétition #{@tournament.name} a bien été mis à jour !"
       redirect_to all_tournaments_path
     else
       render :action => 'edit'
     end
+  end
+
+  def close_inscriptions
+    @tournament = Tournament.find(params[:id])
+    @tournament.status = "launched"
+    c = @tournament.seasons.count
+    a = [*1..c]
+    p a
+    @tournament.seasons.all.each{ |s|
+      u = a.sample
+      p u
+      s.seat = u
+      a.delete(u)
+      p a
+      s.save
+    }
+    @tournament.save
+    redirect_to tournament_path(@tournament)
   end
 
   def show
@@ -54,6 +77,7 @@ class TournamentsController < ApplicationController
     @tournament.save
     redirect_to tournament_path(@tournament)
   end
+
   def open_tournament
     @tournament = Tournament.find(params[:id])
     @tournament.finished = false

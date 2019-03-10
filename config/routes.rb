@@ -19,8 +19,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tournaments 
+  resources :tournaments
   get '/competitions', to: 'tournaments#all_tournaments', as: 'all_tournaments'
+  get '/tournaments/:id/launched', to: 'tournaments#close_inscriptions', as: 'close_inscriptions'
   get '/tournaments/:id/closed', to: 'tournaments#close_tournament', as: 'close_tournament'
   get '/tournaments/:id/opened', to: 'tournaments#open_tournament', as: 'open_tournament'
   get '/all_matches/maj', to: 'matches#maj_tournament_for_matches', as: 'maj_tournament'
