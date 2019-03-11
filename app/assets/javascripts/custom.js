@@ -91,8 +91,8 @@ $(document).on("change", "#match_teams_attributes_0_club_id", function() {
         // Ajax call
         success: function(response) {
             var club = response["selected_club"];
-            $(".new_match_team_bloc_club_star").empty();
-            $(".new_match_team_bloc_club_star").append(club[0]["level"]);
+            $(".new_match_team_bloc_club_star_0").empty();
+            $(".new_match_team_bloc_club_star_0").append(club[0]["level"]);
 
         }
 
@@ -100,6 +100,32 @@ $(document).on("change", "#match_teams_attributes_0_club_id", function() {
 
 });
 
+
+$(document).on("change", "#match_teams_attributes_1_club_id", function() {
+
+    console.log("Club selectionné " + $(this).val());
+    $.ajax({
+        url: '/matches/new',
+        type: "GET",
+        dataType: "json",
+        data: {
+            club_id: $(this).val()
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX Error: ' + status + error);
+        },
+        // Callbacks that will be explained
+        // Ajax call
+        success: function(response) {
+            var club = response["selected_club"];
+            $(".new_match_team_bloc_club_star_1").empty();
+            $(".new_match_team_bloc_club_star_1").append(club[0]["level"]);
+
+        }
+
+    });
+
+});
 
 // When the user scrolls down 50px from the top of the document, resize the header's font size
 /* window.onscroll = function() {scrollFunction()};

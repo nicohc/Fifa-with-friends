@@ -14,6 +14,7 @@
   </div>
 
   <div class="new_match_team">
+  <% i = 0 %>
   <%= f.fields_for :teams do |t| %>
     <div class="new_match_team_bloc">
       <div>
@@ -24,8 +25,8 @@
       <div class="new_match_team_bloc_club">
         <%= t.collection_select :club_id, Club.all.order(:name), :id, :name, class: 'form-control', include_blank: "Choisir une équipe"%>
       </div>
-      <div class="new_match_team_bloc_club_star">
-        <%= %>
+      <div class="new_match_team_bloc_club_star_<%=i%>">
+        <% i+=1 %>
       </div>
       <br>
       <div class="new_match_team_bloc_score">
