@@ -16,17 +16,16 @@
     <%= link_to "Cloturer", close_tournament_path %>
   <% end %>
 <% end %>
-<br>
 <% if user_signed_in? && current_user.admin %>
   <% if @tournament.status != "lauched" %>
+    <br>
     <%= link_to "Lancer le tournoi", close_inscriptions_path %>
   <% end %>
 <% end %>
 
-<br><br>
 <% if @tournament.format == "Championnat" %>
+  <br><br>
   <div class="title_w_bg">Classement</div>
-
   <table class="leaderboard">
     <tr>
       <th> </th>
@@ -45,7 +44,6 @@
       <th class="lb_br">Diff.</th>
     </tr>
     <br>
-
 
     <% i = 0
       @tournament.seasons.order(points: :desc).each { |ts|
@@ -121,6 +119,7 @@
   </table>
 <% end %>
 
+<br>
 <% if @tournament.format == "Coupe" %>
   <div class="title_w_bg">Liste des joueurs</div>
   <br>
@@ -131,9 +130,19 @@
 
   <div class="title_w_bg">Tableau</div>
   <% if @tournament.status == "launched" %>
-    <% @tournament.seasons.order(:seat).all.each{ |s| %>
-      <div class="cup_team"><%= "Siège #{s.seat} #{s.player.try(:pseudo)}" %></div>
+    <div class="cup_round">
+      <div><%= @tournament.seasons.count %></div>
+      <br><br>
+      <% @tournament.seasons.order(:seat).all.each_slice(2){ |ss| %>
+        <div class="cup_match">
+          <% ss.each { |s| %>
+          <div class="cup_team"><%= "Siège #{s.seat} #{s.player.try(:pseudo)}" %></div>
+          <% } %>
+          <div class="match_link">Match
+          </div>
+        </div>
       <% } %>
+    </div>
   <% else %>
     <% @tournament.seasons.all.each{ |s| %>
       <div class="cup_team"><%= s.init_seat.nil? ? "Pas de siège défini" :  "Siège #{s.init_seat} #{s.player.try(:pseudo)}" %></div>

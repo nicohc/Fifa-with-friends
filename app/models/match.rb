@@ -14,4 +14,5 @@ class Match < ApplicationRecord
   accepts_nested_attributes_for :clubs
 
   belongs_to :tournament, foreign_key: "tournament_id"
+  belongs_to :round, optional: true, foreign_key: "round_id"
 end

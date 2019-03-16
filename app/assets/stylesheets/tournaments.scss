@@ -51,5 +51,15 @@
     margin-bottom: 5px;
 }
 .cup_team:nth-child(2n+0) {
+}
+
+.cup_match{
     margin-bottom: 30px;
+}
+.cup_round{
+  width: 20%;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

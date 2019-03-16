@@ -4,6 +4,7 @@ class TournamentsController < ApplicationController
     2.times do
       season = @tournament.seasons.build
     end
+    @tournament.status = "opened"
   end
 
   def create
@@ -13,6 +14,7 @@ class TournamentsController < ApplicationController
     if @tournament.format == "Coupe"
         i=1
         @tournament.seasons.each { |s|
+          s.status = "alive"
           s.init_seat = i
           s.save
           i += 1
@@ -34,10 +36,11 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.find(params[:id])
 
     if @tournament.update(tournament_params)
-      if @tournament.format == "Coupe"
+      if @tournament.format == "Coupe" && @tournament.status = "opened"
           i=1
           @tournament.seasons.each { |s|
           s.init_seat = i
+          s.status = "alive"
           s.save
           i += 1
         }
@@ -96,6 +99,10 @@ class TournamentsController < ApplicationController
     redirect_to edit_tournament_path
   end
 
+
+  def find_round
+    eq_en_lice = @tournament.seasons.where(["status=?", "alive"]).count
+  end
 
   def destroy
     @tournament = Tournament.find(params[:id])

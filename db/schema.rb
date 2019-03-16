@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190310130331) do
+ActiveRecord::Schema.define(version: 20190316130528) do
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20190310130331) do
     t.string "image_une_url"
     t.integer "tournament_id"
     t.string "mode"
+    t.integer "round_id"
+    t.index ["round_id"], name: "index_matches_on_round_id"
     t.index ["tournament_id"], name: "index_matches_on_tournament_id"
   end
 
@@ -52,6 +54,14 @@ ActiveRecord::Schema.define(version: 20190310130331) do
     t.integer "lose", default: 0
     t.integer "lose_prol", default: 0
     t.integer "lose_peno", default: 0
+  end
+
+  create_table "rounds", force: :cascade do |t|
+    t.string "step"
+    t.integer "tournament_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tournament_id"], name: "index_rounds_on_tournament_id"
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -70,7 +80,9 @@ ActiveRecord::Schema.define(version: 20190310130331) do
     t.integer "seat"
     t.integer "init_seat"
     t.string "status"
+    t.integer "round_id"
     t.index ["player_id"], name: "index_seasons_on_player_id"
+    t.index ["round_id"], name: "index_seasons_on_round_id"
     t.index ["tournament_id"], name: "index_seasons_on_tournament_id"
   end
 
