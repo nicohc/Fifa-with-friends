@@ -12,7 +12,6 @@
     <% if user_signed_in? && current_user.admin %><th>-</th><% end %>
   </tr>
   <% @tournaments.each do |tournament| %>
-  <br>
   <tr>
     <td><%= link_to tournament.name, tournament_path(tournament) %></td>
     <td><%= tournament.format %></td>

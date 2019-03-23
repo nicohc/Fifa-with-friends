@@ -9,11 +9,15 @@ class TournamentsController < ApplicationController
 
   def create
     @tournament = Tournament.new(tournament_params)
-
     @tournament.finished = false
     if @tournament.format == "Coupe"
+      @first_round = @tournament.rounds.build
+      @first_round.step = "Premier Tour"
+      @first_round.save
         i=1
         @tournament.seasons.each { |s|
+          r = Roundteam.create(:round_id => @first_round.id, :season_id => s.id)
+          p r
           s.status = "alive"
           s.init_seat = i
           s.save
@@ -37,11 +41,20 @@ class TournamentsController < ApplicationController
 
     if @tournament.update(tournament_params)
       if @tournament.format == "Coupe" && @tournament.status = "opened"
+          @first_round = @tournament.rounds.first
           i=1
           @tournament.seasons.each { |s|
-          s.init_seat = i
-          s.status = "alive"
-          s.save
+            s.init_seat = i
+            s.status = "alive"
+            s.save
+            p "Hello #{i}"
+            p Roundteam.where(["round_id=? and season_id=?", @first_round, s.id])
+          if Roundteam.where(["round_id=? and season_id=?", @first_round, s.id]).empty?
+            r = Roundteam.create(:round_id => @first_round.id, :season_id => s.id)
+            p "Hi #{r}"
+          else
+            p s.id
+          end
           i += 1
         }
       end
@@ -72,6 +85,7 @@ class TournamentsController < ApplicationController
 
   def show
     @tournament = Tournament.find(params[:id])
+
   end
 
   def close_tournament
@@ -162,6 +176,8 @@ class TournamentsController < ApplicationController
         :lose_regular_points, :lose_prol_points, :lose_peno_points,
         :draw_regular_points,
         seasons_attributes: [:id, :init_seat, :seat, :status, :player_id, :_destroy],
+        roundteams_attributes: [:id, :round_id, :season_id, :_destroy],
+        rounds_attributes: [:id, :step],
       )
   end
 

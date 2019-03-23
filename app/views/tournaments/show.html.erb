@@ -131,6 +131,9 @@
   <div class="title_w_bg">Tableau</div>
   <% if @tournament.status == "launched" %>
     <div class="cup_round">
+      <div><%= @tournament.rounds.first.step %></div>
+
+
       <div><%= @tournament.seasons.count %></div>
       <br><br>
       <% @tournament.seasons.order(:seat).all.each_slice(2){ |ss| %>
@@ -144,8 +147,14 @@
       <% } %>
     </div>
   <% else %>
+    <div><%= @tournament.rounds.first.step %></div>
+    <div><% @tournament.rounds.first.seasons.each { |rs| %>
+      <%= rs.id %>
+    <% } %>
+    </div>
+    <br>
     <% @tournament.seasons.all.each{ |s| %>
-      <div class="cup_team"><%= s.init_seat.nil? ? "Pas de siège défini" :  "Siège #{s.init_seat} #{s.player.try(:pseudo)}" %></div>
+      <div class="cup_team"><%= s.init_seat.nil? ? "Pas de siège défini" :  "Siège #{s.init_seat} #{s.player.try(:pseudo)} #{s.rounds.first.try(:step)}" %></div>
     <% } %>
   <% end %>
 <% end %>

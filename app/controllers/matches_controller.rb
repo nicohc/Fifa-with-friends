@@ -40,7 +40,6 @@ class MatchesController < ApplicationController
       end
     end
 
-
   end
 
 
@@ -83,11 +82,8 @@ class MatchesController < ApplicationController
       return false
     end
 
-
-
     return true
   end
-
 
   def winning_conditions
       if ((@match.teams.first.score > @match.teams.last.score) && !@match.prolongations)

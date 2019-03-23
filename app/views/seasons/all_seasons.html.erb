@@ -10,7 +10,7 @@
   <% @seasons.each do |season| %>
   <tr>
     <td><%= season.id %></td>
-    <td><%= season.tournament.name %></td>
+    <td><%= season.try(:tournament).try(:name) %></td>
     <td><%= season.player.nil? ? "Pas de joueur affecté" : season.player.pseudo %></td>
     <td><%= link_to 'Supprimer', season_path(season), method: :delete,
             data: { confirm: 'Etes vous sur ?' }%></td>

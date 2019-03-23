@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190316130528) do
+ActiveRecord::Schema.define(version: 20190323174925) do
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
@@ -64,6 +64,15 @@ ActiveRecord::Schema.define(version: 20190316130528) do
     t.index ["tournament_id"], name: "index_rounds_on_tournament_id"
   end
 
+  create_table "roundteams", force: :cascade do |t|
+    t.integer "round_id"
+    t.integer "season_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["round_id"], name: "index_roundteams_on_round_id"
+    t.index ["season_id"], name: "index_roundteams_on_season_id"
+  end
+
   create_table "seasons", force: :cascade do |t|
     t.integer "player_id"
     t.datetime "created_at", null: false
@@ -80,9 +89,7 @@ ActiveRecord::Schema.define(version: 20190316130528) do
     t.integer "seat"
     t.integer "init_seat"
     t.string "status"
-    t.integer "round_id"
     t.index ["player_id"], name: "index_seasons_on_player_id"
-    t.index ["round_id"], name: "index_seasons_on_round_id"
     t.index ["tournament_id"], name: "index_seasons_on_tournament_id"
   end
 
