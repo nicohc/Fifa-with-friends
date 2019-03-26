@@ -15,4 +15,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require custom.js
+//= require tournaments.coffee
 //= require_tree .

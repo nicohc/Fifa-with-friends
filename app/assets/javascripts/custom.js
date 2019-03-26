@@ -127,6 +127,17 @@ $(document).on("change", "#match_teams_attributes_1_club_id", function() {
 
 });
 
+
+// When Tournament Edition
+
+$(document).on("click", ".add_player_fields", function() {
+
+    console.log("Ajout d'un player");
+
+
+});
+
+
 // When the user scrolls down 50px from the top of the document, resize the header's font size
 /* window.onscroll = function() {scrollFunction()};
 

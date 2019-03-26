@@ -34,6 +34,15 @@ class TournamentsController < ApplicationController
 
   def edit
     @tournament = Tournament.find(params[:id])
+
+    @tournament_seasons = Season.where(["tournament_id = ?", @tournament.id]).pluck(:player_id)
+    @tournament_players = Array.new
+    @tournament_seasons.each{|ts|
+      @tournament_players << Player.find(ts)
+    }
+    p @tournament_players
+    @available_players = (Player.all - @tournament_players)
+    p @available_players
   end
 
   def update

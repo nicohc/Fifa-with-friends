@@ -21,8 +21,8 @@
       <%= render 'season_fields', s: pls %>
     <% end %>
   </table>
+  <%= link_to_add_player_fields "Ajouter un joueur", t, :seasons %>
   <br>
-  <%= link_to_add_fields "Ajouter un joueur", t, :seasons %>
 
   <br><br>
   <% if @tournament.format == "Championnat" %>
