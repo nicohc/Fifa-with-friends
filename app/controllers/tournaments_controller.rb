@@ -10,17 +10,19 @@ class TournamentsController < ApplicationController
   def create
     @tournament = Tournament.new(tournament_params)
     @tournament.finished = false
+    @tournament.save
     if @tournament.format == "Coupe"
-      @first_round = @tournament.rounds.build
-      @first_round.step = "Premier Tour"
+      @first_round = Round.create(:tournament_id => @tournament.id, :step => "Premier Tour")
       @first_round.save
+      p @first_round
         i=1
         @tournament.seasons.each { |s|
+          s.init_seat = i
+          s.status = "alive"
+          s.save
+          p s
           r = Roundteam.create(:round_id => @first_round.id, :season_id => s.id)
           p r
-          s.status = "alive"
-          s.init_seat = i
-          s.save
           i += 1
         }
     end
@@ -183,10 +185,9 @@ class TournamentsController < ApplicationController
       params.require(:tournament).permit(:name, :format,
         :win_regular_points, :win_prol_points, :win_peno_points,
         :lose_regular_points, :lose_prol_points, :lose_peno_points,
-        :draw_regular_points,
-        seasons_attributes: [:id, :init_seat, :seat, :status, :player_id, :_destroy],
-        roundteams_attributes: [:id, :round_id, :season_id, :_destroy],
+        :draw_regular_points, seasons_attributes: [:id, :init_seat, :seat, :status, :player_id, :_destroy],
         rounds_attributes: [:id, :step],
+        roundteams_attributes: [:id, :round_id, :season_id, :_destroy],
       )
   end
 
