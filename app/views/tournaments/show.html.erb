@@ -23,7 +23,7 @@
   <% end %>
 <% end %>
 
-<% if @tournament.format == "Championnat" %>
+<% if (@tournament.format == "Championnat" || @tournament.format.nil?) %>
   <br><br>
   <div class="title_w_bg">Classement</div>
   <table class="leaderboard">
@@ -206,7 +206,7 @@
 </table>
 <br>
 
-<% if @tournament.format == "Championnat" %>
+<% if (@tournament.format == "Championnat" || @tournament.format.nil?) %>
 
   <div class="title_w_bg">Règles</div>
   <br>Points pour une victoire :

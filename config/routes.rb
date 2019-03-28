@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get '/allseasons', to: 'seasons#all_seasons', as: 'all_seasons'
   get '/admin', to: 'home#administration', as: 'admin'
 
+  get '/admin/maj_mode', to: 'home#maj_mode_for_matches', as: 'admin_maj_mode'
+
   get '/classement', to: 'home#leaderboard', as: 'leaderboard'
   get '/randomiser', to: 'matches#randomiser', as: 'alea_match'
 

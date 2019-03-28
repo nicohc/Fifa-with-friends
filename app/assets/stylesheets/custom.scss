@@ -537,8 +537,9 @@ footer a{
 @media only screen and (min-width: 601px) {
   .leaderboard td{ min-width: 30px; }
 
-  .leaderboard td:nth-child(2){ width: 100px; }
-  .leaderboard td:nth-child(3){ width: 50px; }
+  .leaderboard td:nth-child(2){ width: 80px; }
+  .leaderboard td:nth-child(3){ width: 100px; }
+  .leaderboard td:nth-child(4){ width: 50px; }
 }
 
 .leaderboard .lb_br {

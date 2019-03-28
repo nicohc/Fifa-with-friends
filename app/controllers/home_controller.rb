@@ -153,6 +153,15 @@ class HomeController < ApplicationController
   end
 
 
+  def maj_mode_for_matches
+    Match.all.where(mode: nil).each { |m|
+      m.mode = "Normal"
+      m.save
+    }
+    redirect_to all_matches_path
+  end
+
+
 =begin
 
   def goal_count

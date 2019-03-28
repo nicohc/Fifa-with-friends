@@ -334,6 +334,8 @@ class MatchesController < ApplicationController
 
           image_illustration()
           points_conditions()
+          if (@match.tournament.format == "Championnat" || @match.tournament.format.nil?)
+          end
           flash[:success] = "Votre match a bien été créé !"
           redirect_to @match
         end

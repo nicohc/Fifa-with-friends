@@ -9,6 +9,15 @@ class TournamentsController < ApplicationController
 
   def create
     @tournament = Tournament.new(tournament_params)
+    if (params[:win_regular_points].nil? && params[:lose_regular_points].nil?)
+      @tournament.win_regular_points = 0
+      @tournament.win_prol_points = 0
+      @tournament.win_peno_points = 0
+      @tournament.lose_regular_points = 0
+      @tournament.lose_prol_points = 0
+      @tournament.lose_peno_points = 0
+      @tournament.draw_regular_points = 0
+    end
     @tournament.finished = false
     @tournament.save
     if @tournament.format == "Coupe"
@@ -51,6 +60,7 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.find(params[:id])
 
     if @tournament.update(tournament_params)
+
       if @tournament.format == "Coupe" && @tournament.status = "opened"
           @first_round = @tournament.rounds.first
           i=1
@@ -93,6 +103,21 @@ class TournamentsController < ApplicationController
     @tournament.save
     redirect_to tournament_path(@tournament)
   end
+
+=begin
+  def crea_match_premier_tour
+    @tournament.rounds.first.seasons.order(:seat).each_slice(2){ |frspair|
+      @match = Match.create(:tournament_id => @tournament.id, :round_id => @tournament.rounds.first.id)
+      frspair.each { |frs|
+        @match.teams.first
+        2.times do
+          team = @match.teams.build
+        end
+      }
+    }
+
+  end
+=end
 
   def show
     @tournament = Tournament.find(params[:id])

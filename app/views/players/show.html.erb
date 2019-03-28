@@ -12,6 +12,7 @@
       <% else %>
       <th></th>
       <% end %>
+      <th>Format</th>
       <th>Comp.</th>
       <th>Pts</th>
       <th>J.</th>
@@ -34,7 +35,11 @@
       <% else %>
       <td>-</td>
       <% end %>
+      <td><%= pls.tournament.try(:format) %></td>
+      <% if !pls.tournament.nil? %>
       <td class="lead_team"><%= link_to pls.tournament.name, tournament_path(pls.tournament) %></td>
+      <% else %> <td>Nom tournoi manquant</td>
+      <% end %>
       <td><b><%= pls.points %></b></td>
       <td class="lb_br"><%= pls.teams.count %> </td>
       <td><%= pls.win %> </td>
@@ -49,7 +54,7 @@
       <td class="lb_br"><%= @bp-@bc %> </td>
     </tr>
     <tr>
-      <td colspan = 4></td>
+      <td colspan = 5></td>
       <td colspan = 3><%= pls.win + pls.win_peno + pls.win_prol %> Victoires </td>
       <td><%= pls.draw %> Nuls </td>
       <td colspan = 3><%= pls.lose + pls.lose_prol + pls.lose_peno %> Défaites </td>
@@ -109,7 +114,8 @@
 
   <tr>
     <td colspan = 2>Rencontres directes</td>
-    <td colspan = 11>... à partir du match n°82</td>
+
+    <td colspan = 13>... à partir du match n°82</td>
   </tr>
 
   <% @players.ids.each { |pl|  %>
@@ -136,6 +142,37 @@
     <% end %>
   <% } %>
 
+  <tr>
+    <td colspan = 2>Rencontres par type de matchs :</td>
+    <td></td>
+    <td>J.</td>
+    <td colspan = 10></td>
+  </tr>
+  <tr>
+      <td colspan = 2>Mode Normal :</td>
+      <td></td>
+      <td><%= (Match.joins(:players).where(["mode=? and players.id=?",'Normal', @player.id]).count) %></td>
+  </tr>
+  <tr>
+      <td colspan = 2>Mode Survie :</td>
+      <td></td>
+      <td><%= (Match.joins(:players).where(["mode=? and players.id=?",'Survie', @player.id]).count) %></td>
+  </tr>
+  <tr>
+      <td colspan = 2>Mode Sans règle :</td>
+      <td></td>
+      <td><%= (Match.joins(:players).where(["mode=? and players.id=?",'Sans règle', @player.id]).count) %></td>
+  </tr>
+  <tr>
+      <td colspan = 2>Mode Distance :</td>
+      <td></td>
+      <td><%= (Match.joins(:players).where(["mode=? and players.id=?",'Distance', @player.id]).count) %></td>
+  </tr>
+  <tr>
+      <td colspan = 2>Mode Têtes et volées :</td>
+      <td></td>
+      <td><%= (Match.joins(:players).where(["mode=? and players.id=?",'Têtes et volées', @player.id]).count) %></td>
+  </tr>
 </table>
 
 <!--
