@@ -9,7 +9,7 @@ class TournamentsController < ApplicationController
 
   def create
     @tournament = Tournament.new(tournament_params)
-    if (params[:win_regular_points].nil? && params[:lose_regular_points].nil?)
+    if (tournament_params[:win_regular_points].nil? && tournament_params[:lose_regular_points].nil?)
       @tournament.win_regular_points = 0
       @tournament.win_prol_points = 0
       @tournament.win_peno_points = 0
