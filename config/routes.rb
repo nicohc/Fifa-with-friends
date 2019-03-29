@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/admin', to: 'home#administration', as: 'admin'
 
   get '/admin/maj_mode', to: 'home#maj_mode_for_matches', as: 'admin_maj_mode'
-  get '/admin/maj_tounament_format', to: 'home#maj_tourn_format', as: 'admin_maj_tournament_format'
+  get '/admin/maj_tournament_format', to: 'home#maj_tourn_format', as: 'admin_maj_tournament_format'
 
   get '/classement', to: 'home#leaderboard', as: 'leaderboard'
   get '/randomiser', to: 'matches#randomiser', as: 'alea_match'
