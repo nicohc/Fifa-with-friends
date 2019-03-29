@@ -1,7 +1,7 @@
 <h1>Compétition : <%= @tournament.name %></h1>
 
 <div class="title_w_bg">Format</div>
-<%= @tournament.format %>
+<%= @tournament.try(:format) %>
 <br>
 
 <div class="title_w_bg">Statut</div>
