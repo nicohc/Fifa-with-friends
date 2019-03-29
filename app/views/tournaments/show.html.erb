@@ -6,7 +6,7 @@
 
 <div class="title_w_bg">Statut</div>
 <%= @tournament.finished ? "Terminé" : "Ouvert" %></td>
-<%= @tournament.status == "launched" ? " - En cours" : " - Non commencé"%></td>
+<%= @tournament.try(:status) == "launched" ? " - En cours" : " - Non commencé"%></td>
 
 <br>
 <% if user_signed_in? && current_user.admin %>
@@ -17,7 +17,7 @@
   <% end %>
 <% end %>
 <% if user_signed_in? && current_user.admin %>
-  <% if @tournament.status != "lauched" %>
+  <% if @tournament.try(:status) != "lauched" %>
     <br>
     <%= link_to "Lancer le tournoi", close_inscriptions_path %>
   <% end %>
