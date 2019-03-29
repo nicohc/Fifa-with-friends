@@ -161,6 +161,13 @@ class HomeController < ApplicationController
     redirect_to all_matches_path
   end
 
+  def maj_tourn_format
+    Tournament.all.each { |trn|
+      trn.format = "Championnat"
+      trn.save
+    }
+    redirect_to root_path
+  end
 
 =begin
 
