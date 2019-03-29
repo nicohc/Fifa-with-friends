@@ -7,7 +7,8 @@ end
 ruby "2.3.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails',        '5.1.4'
+gem 'rails',        '5.1.7'
+
 gem 'puma',         '3.9.1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier',     '3.2.0'
@@ -33,7 +34,6 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 gem 'pagy'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
