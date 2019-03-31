@@ -149,8 +149,8 @@
     <td colspan = 10></td>
   </tr>
   <tr>
-      <td colspan = 2>Mode Normal :</td>
       <td></td>
+      <td class="lead_team" colspan = 2 >Mode Normal :</td>
       <td><%= (Match.joins(:players).where(["mode=? and players.id=?",'Normal', @player.id]).count) %></td>
       <td colspan = 3><%= (Team.joins(:player).joins(:match).where(["matches.mode=? and players.id=? and status=?",'Normal', @player.id, "winner"]).count) %> Victoire(s) </td>
       <td><%= (Team.joins(:player).joins(:match).where(["matches.mode=? and players.id=? and status=?",'Normal', @player.id, "draw"]).count) %> Nul(s)</td>
@@ -158,8 +158,8 @@
       <td colspan = 3></td>
   </tr>
   <tr>
-      <td colspan = 2>Mode Survie :</td>
       <td></td>
+      <td class="lead_team" colspan = 2 >Mode Survie :</td>
       <td><%= (Match.joins(:players).where(["mode=? and players.id=?",'Survie', @player.id]).count) %></td>
       <td colspan = 3><%= (Team.joins(:player).joins(:match).where(["matches.mode=? and players.id=? and status=?",'Survie', @player.id, "winner"]).count) %> Victoire(s) </td>
       <td><%= (Team.joins(:player).joins(:match).where(["matches.mode=? and players.id=? and status=?",'Survie', @player.id, "draw"]).count) %> Nul(s)</td>
@@ -167,8 +167,8 @@
       <td colspan = 3></td>
   </tr>
   <tr>
-      <td colspan = 2>Mode Sans règle :</td>
       <td></td>
+      <td class="lead_team" colspan = 2 >Mode Sans règle :</td>
       <td><%= (Match.joins(:players).where(["mode=? and players.id=?",'Sans règle', @player.id]).count) %></td>
       <td colspan = 3><%= (Team.joins(:player).joins(:match).where(["matches.mode=? and players.id=? and status=?",'Sans règle', @player.id, "winner"]).count) %> Victoire(s) </td>
       <td><%= (Team.joins(:player).joins(:match).where(["matches.mode=? and players.id=? and status=?",'Sans règle', @player.id, "draw"]).count) %> Nul(s)</td>
@@ -177,8 +177,8 @@
   </tr>
   </tr>
   <tr>
-      <td colspan = 2>Mode Distance :</td>
       <td></td>
+      <td class="lead_team" colspan = 2 >Mode Distance :</td>
       <td><%= (Match.joins(:players).where(["mode=? and players.id=?",'Distance', @player.id]).count) %></td>
       <td colspan = 3><%= (Team.joins(:player).joins(:match).where(["matches.mode=? and players.id=? and status=?",'Distance', @player.id, "winner"]).count) %> Victoire(s) </td>
       <td><%= (Team.joins(:player).joins(:match).where(["matches.mode=? and players.id=? and status=?",'Distance', @player.id, "draw"]).count) %> Nul(s)</td>
@@ -186,8 +186,8 @@
       <td colspan = 3></td>
   </tr>
   <tr>
-      <td colspan = 2>Mode Têtes et volées :</td>
       <td></td>
+      <td class="lead_team" colspan = 2 >Mode Têtes et volées :</td>
       <td><%= (Match.joins(:players).where(["mode=? and players.id=?",'Têtes et volées', @player.id]).count) %></td>
       <td colspan = 3><%= (Team.joins(:player).joins(:match).where(["matches.mode=? and players.id=? and status=?",'Têtes et volées', @player.id, "winner"]).count) %> Victoire(s) </td>
       <td><%= (Team.joins(:player).joins(:match).where(["matches.mode=? and players.id=? and status=?",'Têtes et volées', @player.id, "draw"]).count) %> Nul(s)</td>
