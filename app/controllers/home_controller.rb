@@ -169,6 +169,51 @@ class HomeController < ApplicationController
     redirect_to root_path
   end
 
+  def maj_teams_status
+    @matchacorriger = Array.new
+    Team.all.where(status: nil).each { |t|
+      @matchacorriger << t.match
+    }
+    p @matchacorriger
+    @matchacorriger.each { |match|
+
+      if ((match.teams.first.score > match.teams.last.score) && !match.prolongations)
+          match.teams.first.update_columns(status: "winner")
+          match.teams.last.update_columns(status: "loser")
+      elsif ((match.teams.first.score < match.teams.last.score) && !match.prolongations)
+          match.teams.first.update_columns(status: "loser")
+          match.teams.last.update_columns(status: "winner")
+
+      elsif match.prolongations && (match.teams.first.score > match.teams.last.score)
+          match.teams.first.update_columns(status: "winner")
+          match.teams.last.update_columns(status: "loser")
+      elsif match.prolongations && (match.teams.first.score < match.teams.last.score)
+          match.teams.first.update_columns(status: "loser")
+          match.teams.last.update_columns(status: "winner")
+      elsif (match.teams.first.score == match.teams.last.score) && (match.teams.first.prol_score > match.teams.last.prol_score)
+          match.prolongations = true
+          match.teams.first.update_columns(status: "winner")
+          match.teams.last.update_columns(status: "loser")
+      elsif (match.teams.first.score == match.teams.last.score) && (match.teams.first.prol_score < match.teams.last.prol_score)
+          match.prolongations = true
+          match.teams.first.update_columns(status: "loser")
+          match.teams.last.update_columns(status: "winner")
+
+      elsif ((match.teams.first.score == match.teams.last.score) && (match.teams.first.prol_score.nil))
+          match.teams.first[:status] = "draw"
+          match.teams.last[:status] = "draw"
+
+      end
+      match.save
+      p match.id
+      p match.teams.first[:status]
+      p match.teams.last[:status]
+
+
+    }
+    redirect_to root_path
+  end
+
 =begin
 
   def goal_count
