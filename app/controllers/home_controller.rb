@@ -175,8 +175,8 @@ class HomeController < ApplicationController
       @matchacorriger << t.match
     }
     p @matchacorriger
-    @matchacorriger.each { |match|
-
+    @matchacorriger.each { |id|
+      match = Match.find(id)
       if ((match.teams.first.score > match.teams.last.score) && !match.prolongations)
           match.teams.first.update_columns(status: "winner")
           match.teams.last.update_columns(status: "loser")
