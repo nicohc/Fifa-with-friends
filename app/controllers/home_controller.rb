@@ -174,8 +174,8 @@ class HomeController < ApplicationController
     Team.all.where(status: nil).each { |t|
       @matchacorriger << t.match
     }
-    p @matchacorriger
-    @matchacorriger.each { |id|
+    p @matchacorriger.uniq
+    @matchacorriger.uniq.each { |id|
       match = Match.find(id)
       if ((match.teams.first.score > match.teams.last.score) && !match.prolongations)
           match.teams.first.update_columns(status: "winner")
